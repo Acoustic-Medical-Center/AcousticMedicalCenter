@@ -4,6 +4,8 @@ using Core.Utilities.Encryption;
 using Core.Utilities.JWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Persistence;
+using System.Runtime.CompilerServices;
+using Core.CrossCuttingConcerns.Exceptions.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +46,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.ConfigureExceptionMiddlewareExtensions();
 
 app.UseHttpsRedirection();
 

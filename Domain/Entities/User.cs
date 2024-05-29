@@ -11,5 +11,13 @@ namespace Domain.Entities
     {
         public string PhoneNumber { get; set; }
 
+        public UserType UserType { get; set; }
+    }
+
+    public enum UserType
+    {
+        Patient,
+        Doctor,
+        Admin
     }
 }

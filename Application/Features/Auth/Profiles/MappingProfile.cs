@@ -13,7 +13,7 @@ namespace Application.Features.Auth.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<User, RegisterCommand>().ReverseMap();
+            CreateMap<Domain.Entities.User, RegisterCommand>().ReverseMap();
         }
     }
 }

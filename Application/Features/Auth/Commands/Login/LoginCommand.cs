@@ -30,7 +30,7 @@ namespace Application.Features.Auth.Commands.Login
 
             public async Task<AccessToken> Handle(LoginCommand request, CancellationToken cancellationToken)
             {
-                User? user = await _userRepository.GetAsync(
+                Domain.Entities.User? user = await _userRepository.GetAsync(
                     i => i.Email == request.Email);
 
                 if (user is null)

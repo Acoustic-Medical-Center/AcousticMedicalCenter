@@ -36,8 +36,9 @@ namespace Application.Features.Auth.Commands.Register
 
             public async Task Handle(RegisterCommand request, CancellationToken cancellationToken)
             {
-                User user = _mapper.Map<User>(request);
-
+                Domain.Entities.User user = _mapper.Map<Domain.Entities.User>(request);
+                user.UserType = UserType.Patient;
+                
                 byte[] passwordHash, passwordSalt;
 
                 HashingHelper.CreatePasswordHash(request.Password, out passwordHash, out passwordSalt);
