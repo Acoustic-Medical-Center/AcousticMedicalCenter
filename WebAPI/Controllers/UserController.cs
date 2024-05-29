@@ -1,5 +1,6 @@
 ﻿using Application.Features.Auth.Commands.Login;
 using Application.Features.User.Commands.Delete;
+using Application.Features.User.Commands.Update;
 using Application.Features.User.Queries.GetAll;
 using Application.Features.User.Queries.GetById;
 using MediatR;
@@ -40,6 +41,12 @@ namespace WebAPI.Controllers
             return Ok(response);
         }
 
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Update(UserUpdateCommand userUpdateCommand)
+        {
+            var response = await _mediator.Send(userUpdateCommand);
+            return Ok(response);
+        }
 
     }
 }
