@@ -17,7 +17,7 @@ namespace Persistence
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services)
         {
 
-            services.AddDbContext<AcousticDbContext>(options => options.UseSqlServer("Data Source = localhost, 1433; Initial Catalog = AcousticDbTest; User ID = sa; Password = yourStrong(!)Password;TrustServerCertificate = True"));
+            services.AddDbContext<AcousticDbContext>(options => options.UseSqlServer("Server=localhost; Database=AMC.Test; Trusted_Connection=True; TrustServerCertificate=True;"));
             services.AddScoped<IUserRepository, EfUserRepository>();
             services.AddScoped<IUserOperationClaimRepository, EfUserOperationClaimRepository>();
             services.AddScoped<IOperationClaimRepository, EfOperationClaimRepository>();

@@ -12,8 +12,8 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AcousticDbContext))]
-    [Migration("20240529144213_mig3")]
-    partial class mig3
+    [Migration("20240530101414_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
