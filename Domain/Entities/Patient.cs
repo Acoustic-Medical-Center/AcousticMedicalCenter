@@ -9,8 +9,13 @@ namespace Domain.Entities
 {
     public class Patient : Entity
     {
-        public DateTime DateTime { get; set; }
-        public string Gender { get; set; }
-        public string Address { get; set; }
+        public string? Address { get; set; }
+        public string? BloodType { get; set; }
+
+        public User User { get; set; }
+
+        public int AppointmentId { get; set; }
+        public virtual ICollection<Appointment> Appointment { get; set; }
+
     }
 }

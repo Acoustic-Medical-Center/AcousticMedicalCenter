@@ -10,6 +10,9 @@ namespace Domain.Entities
     public class User : BaseUser
     {
         public string PhoneNumber { get; set; }
+        public string Gender { get; set; }
+
+        public Patient Patient { get; set; }
 
         public UserType UserType { get; set; }
     }

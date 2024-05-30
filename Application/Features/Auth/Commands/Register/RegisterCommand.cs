@@ -18,6 +18,7 @@ namespace Application.Features.Auth.Commands.Register
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
+        public string Gender { get; set; }
 
 
         public class RegisterCommandHandler : IRequestHandler<RegisterCommand>
@@ -26,19 +27,21 @@ namespace Application.Features.Auth.Commands.Register
             private readonly IMapper _mapper;
             private readonly IUserRepository _userRepository;
             private readonly IUserOperationClaimRepository _userOperationClaimRepository;
+            private readonly IPatientRepository _patientRepository;
 
-            public RegisterCommandHandler(IMapper mapper, IUserRepository userRepository, IUserOperationClaimRepository userOperationClaimRepository)
+            public RegisterCommandHandler(IMapper mapper, IUserRepository userRepository, IUserOperationClaimRepository userOperationClaimRepository, IPatientRepository patientRepository)
             {
                 _mapper = mapper;
                 _userRepository = userRepository;
                 _userOperationClaimRepository = userOperationClaimRepository;
+                _patientRepository = patientRepository;
             }
 
             public async Task Handle(RegisterCommand request, CancellationToken cancellationToken)
             {
                 Domain.Entities.User user = _mapper.Map<Domain.Entities.User>(request);
                 user.UserType = UserType.Patient;
-                
+
                 byte[] passwordHash, passwordSalt;
 
                 HashingHelper.CreatePasswordHash(request.Password, out passwordHash, out passwordSalt);
@@ -48,7 +51,11 @@ namespace Application.Features.Auth.Commands.Register
                 //user.UserOperationClaims = new List<UserOperationClaim>() {
                 //    new UserOperationClaim() { OperationClaimId = 6, UserId = user.Id }
                 //};
+
+                //user.Id = 10;
                 await _userRepository.AddAsync(user);
+                await _patientRepository.AddAsync(new() { Id = user.Id });
+
 
             }
         }
