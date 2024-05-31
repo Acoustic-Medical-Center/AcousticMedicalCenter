@@ -39,22 +39,71 @@ namespace Persistence.Context
             .HasForeignKey<Patient>(p => p.Id)
             .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Doctor>()
+            .HasOne(d => d.User)
+            .WithOne(u => u.Doctor)
+            .HasForeignKey<Doctor>(d => d.Id)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Doctor>()
+            .HasMany(d => d.Appointment)
+            .WithOne(a => a.Doctor)
+            .HasForeignKey(a => a.DoctorId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Patient>()
+            .HasMany(p => p.Appointment)
+            .WithOne(a => a.Patient)
+            .HasForeignKey(a => a.PatientId)
+            .OnDelete(DeleteBehavior.Restrict);
+
 
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>().HasQueryFilter(e => !e.IsDeleted);
         }
+        //{
+        //    modelBuilder.Entity<User>()
+        //        .HasOne(u => u.Doctor)
+        //        .WithOne(d => d.User)
+        //        .HasForeignKey<Doctor>(d => d.Id);
 
+        //    modelBuilder.Entity<User>()
+        //        .HasOne(u => u.Patient)
+        //        .WithOne(p => p.User)
+        //        .HasForeignKey<Patient>(p => p.Id);
+
+        //    modelBuilder.Entity<Doctor>()
+        //        .HasMany(d => d.Appointment)
+        //        .WithOne(a => a.Doctor)
+        //        .HasForeignKey(a => a.DoctorId);
+
+        //    modelBuilder.Entity<Patient>()
+        //        .HasMany(p => p.Appointment)
+        //        .WithOne(a => a.Patient)
+        //        .HasForeignKey(a => a.PatientId);
+        //}
         public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var datas = ChangeTracker.Entries<Entity>();
 
             foreach (var item in datas)
             {
-                var result = item.State switch
+                if (item.Entity is User userEntity && item.State == EntityState.Deleted)
                 {
-                    EntityState.Added => item.Entity.CreatedDate = DateTime.UtcNow,
-                    EntityState.Modified => item.Entity.UpdatedDate = DateTime.UtcNow,
-                    _ => DateTime.UtcNow,
-                };
+                    item.State = EntityState.Modified;
+                    userEntity.IsDeleted = true;
+                }
+                switch (item.State)
+                {
+                    case EntityState.Added:
+                        item.Entity.CreatedDate = DateTime.UtcNow;
+                        break;
+                    case EntityState.Modified:
+                        item.Entity.UpdatedDate = DateTime.UtcNow;
+                        break;
+                    default:
+                        break;
+                }
             }
 
             return await base.SaveChangesAsync(cancellationToken);
