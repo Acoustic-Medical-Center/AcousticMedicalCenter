@@ -9,14 +9,15 @@ using Core.CrossCuttingConcerns.Exceptions.Extensions;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
+    options.AddPolicy(name: "AllowAllOrigins",
                       policy =>
                       {
-                          policy.WithOrigins("http://example.com",
-                                              "http://www.contoso.com");
+                          policy.AllowAnyOrigin()
+                                .AllowAnyMethod()
+                                .AllowAnyHeader();
                       });
 });
 
@@ -93,9 +94,11 @@ if (app.Environment.IsDevelopment())
 
 app.ConfigureExceptionMiddlewareExtensions();
 
+app.UseCors("AllowAllOrigins");
+
 app.UseHttpsRedirection();
 
-app.UseCors();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
