@@ -15,8 +15,7 @@ namespace Persistence.Migrations
                 name: "Doctors",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     Specialization = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Experience = table.Column<int>(type: "int", nullable: false),
                     AppointmentId = table.Column<int>(type: "int", nullable: false),

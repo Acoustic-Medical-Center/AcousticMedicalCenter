@@ -12,7 +12,7 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AcousticDbContext))]
-    [Migration("20240530194327_mig2")]
+    [Migration("20240531135632_mig2")]
     partial class mig2
     {
         /// <inheritdoc />
@@ -66,10 +66,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Doctor", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AppointmentId")
                         .HasColumnType("int");

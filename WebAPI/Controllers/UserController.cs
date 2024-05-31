@@ -1,4 +1,5 @@
 ﻿using Application.Features.Auth.Commands.Login;
+using Application.Features.User.Commands.CreateDoctorRole;
 using Application.Features.User.Commands.Delete;
 using Application.Features.User.Commands.Update;
 using Application.Features.User.Queries.GetAll;
@@ -45,6 +46,13 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Update(UserUpdateCommand userUpdateCommand)
         {
             var response = await _mediator.Send(userUpdateCommand);
+            return Ok(response);
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> CreateDoctorRole(CreateDoctorRoleCommand createDoctorRoleCommand)
+        {
+            var response = await _mediator.Send(createDoctorRoleCommand);
             return Ok(response);
         }
 

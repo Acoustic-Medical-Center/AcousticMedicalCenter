@@ -29,6 +29,10 @@ namespace Persistence.Context
             .Property(p => p.Id)
             .ValueGeneratedNever();
 
+            modelBuilder.Entity<Doctor>()
+            .Property(d => d.Id)
+            .ValueGeneratedNever();
+
             modelBuilder.Entity<Patient>()
             .HasOne(p => p.User)
             .WithOne(u => u.Patient)
