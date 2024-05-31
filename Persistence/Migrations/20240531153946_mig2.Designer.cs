@@ -12,7 +12,7 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AcousticDbContext))]
-    [Migration("20240531135632_mig2")]
+    [Migration("20240531153946_mig2")]
     partial class mig2
     {
         /// <inheritdoc />
@@ -172,6 +172,9 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -236,18 +239,29 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Entities.Doctor", "Doctor")
                         .WithMany("Appointment")
                         .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.Patient", "Patient")
                         .WithMany("Appointment")
                         .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Doctor");
 
                     b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Doctor", b =>
+                {
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithOne("Doctor")
+                        .HasForeignKey("Domain.Entities.Doctor", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Patient", b =>
@@ -297,6 +311,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
+                    b.Navigation("Doctor")
+                        .IsRequired();
+
                     b.Navigation("Patient")
                         .IsRequired();
                 });

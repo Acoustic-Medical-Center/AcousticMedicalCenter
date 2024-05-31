@@ -12,6 +12,8 @@ namespace Domain.Entities
         public string Specialization { get; set; }
         public int Experience { get; set; }
 
+        public User User { get; set; }
+
         public int AppointmentId { get; set; }
         public virtual ICollection<Appointment> Appointment { get; set; }
 
