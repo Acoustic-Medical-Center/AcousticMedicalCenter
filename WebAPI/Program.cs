@@ -10,6 +10,17 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "AllowAllOrigins",
+                      policy =>
+                      {
+                          policy.AllowAnyOrigin()
+                                .AllowAnyMethod()
+                                .AllowAnyHeader();
+                      });
+});
+
 // Add services to the container.
 
 builder.Services.AddPersistenceServices();
@@ -83,7 +94,10 @@ if (app.Environment.IsDevelopment())
 
 app.ConfigureExceptionMiddlewareExtensions();
 
+app.UseCors("AllowAllOrigins");
+
 app.UseHttpsRedirection();
+
 
 app.UseAuthentication();
 app.UseAuthorization();
