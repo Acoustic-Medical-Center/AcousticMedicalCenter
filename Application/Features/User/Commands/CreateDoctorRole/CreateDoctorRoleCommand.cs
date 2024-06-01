@@ -36,7 +36,8 @@ namespace Application.Features.User.Commands.CreateDoctorRole
             {
                 var patientToDelete = await _patientRepository.GetAsync(p => p.Id == request.UserId);
                 await _patientRepository.DeleteAsync(patientToDelete);
-
+                var userToChangeRole = await _userRepository.GetAsync(u => u.Id == request.UserId);
+                userToChangeRole.UserType = Domain.Entities.UserType.Doctor;
                 await _doctorRepository.AddAsync(new() { Id = request.UserId, Specialization = request.Specialization, Experience = request.Experience });
                 return new() { };
 
