@@ -1,4 +1,5 @@
 ﻿using Application.Features.Appointment.Commands.Create;
+using Application.Features.Appointment.Queries.GetAllByUser;
 using Application.Features.Auth.Commands.Login;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -22,6 +23,13 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> CreateAppointmentByPatient(CreateAppointmentCommand createAppointmentCommand)
         {
             var response = await _mediator.Send(createAppointmentCommand);
+            return Ok(response);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllAppointmentsByUser([FromQuery] GetAllAppointmentsByUserQuery getAllAppointmentsByUserQuery)
+        {
+            var response = await _mediator.Send(getAllAppointmentsByUserQuery);
             return Ok(response);
         }
 
