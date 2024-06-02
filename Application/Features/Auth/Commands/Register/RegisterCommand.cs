@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Utilities.Hashing;
 using Domain.Entities;
 using MediatR;
@@ -39,6 +40,11 @@ namespace Application.Features.Auth.Commands.Register
 
             public async Task Handle(RegisterCommand request, CancellationToken cancellationToken)
             {
+                var isUserExist = await _userRepository.GetAsync(u => u.Email == request.Email);
+                if (isUserExist != null)
+                {
+                    throw new BusinessException("Bu e-posta adresi kullanılıyor");
+                }
                 Domain.Entities.User user = _mapper.Map<Domain.Entities.User>(request);
                 user.UserType = UserType.Patient;
 
