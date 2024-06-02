@@ -13,7 +13,6 @@ namespace Application.Features.User.Queries.GetAll
 {
     public class GetAllUserQuery : IRequest<GetAllUserResponse>
     {
-
         public int Page { get; set; } = 0;
         public int PageSize { get; set; } = 0;
 
@@ -38,7 +37,7 @@ namespace Application.Features.User.Queries.GetAll
                     request.PageSize = totalCount;
                 }
                 var users = _userRepository.GetList()
-                     .Skip(request.Page - 1 * request.PageSize)
+                     .Skip((request.Page - 1) * request.PageSize)
                      .Take(request.PageSize)
                      .Select(u => new
                      {
@@ -54,9 +53,6 @@ namespace Application.Features.User.Queries.GetAll
                     Users = users,
                     TotalCount = totalCount
                 };
-
-                //List<Domain.Entities.User> paginatedUsers = _mapper.Map<List<Domain.Entities.User>>(users);
-
 
             }
         }
