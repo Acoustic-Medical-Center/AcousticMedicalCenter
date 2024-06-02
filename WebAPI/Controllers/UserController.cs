@@ -29,14 +29,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> GetAll([FromQuery] UserGetAllQuery userGetAllQuery)
+        public async Task<IActionResult> GetAll([FromQuery] GetAllUserQuery userGetAllQuery)
         {
             var response = await _mediator.Send(userGetAllQuery);
             return Ok(response);
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> Delete([FromQuery] UserDeleteCommand userDeleteCommand)
+        public async Task<IActionResult> Delete([FromQuery] DeleteUserCommand userDeleteCommand)
         {
             var response = await _mediator.Send(userDeleteCommand);
             return Ok(response);

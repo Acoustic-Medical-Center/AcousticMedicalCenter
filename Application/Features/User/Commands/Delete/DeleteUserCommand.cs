@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Application.Features.User.Commands.Delete
 {
-    public class UserDeleteCommand : IRequest<UserDeleteCommandResponse>
+    public class DeleteUserCommand : IRequest<DeleteUserCommandResponse>
     {
         public int UserId { get; set; }
 
-        public class UserDeleteCommandHandler : IRequestHandler<UserDeleteCommand, UserDeleteCommandResponse>
+        public class UserDeleteCommandHandler : IRequestHandler<DeleteUserCommand, DeleteUserCommandResponse>
         {
 
             private readonly IUserRepository _userRepository;
@@ -25,7 +25,7 @@ namespace Application.Features.User.Commands.Delete
                 _userRepository = userRepository;
                 _mapper = mapper;
             }
-            public async Task<UserDeleteCommandResponse> Handle(UserDeleteCommand request, CancellationToken cancellationToken)
+            public async Task<DeleteUserCommandResponse> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
             {
                 var userToDelete = await _userRepository.GetAsync(u => u.Id == request.UserId);
                 await _userRepository.DeleteAsync(userToDelete);

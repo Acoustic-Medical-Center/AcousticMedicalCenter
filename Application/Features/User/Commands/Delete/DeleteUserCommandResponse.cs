@@ -1,6 +1,6 @@
 ﻿namespace Application.Features.User.Commands.Delete
 {
-    public class UserDeleteCommandResponse
+    public class DeleteUserCommandResponse
     {
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Application.Features.User.Queries.GetAll
 {
-    public class UserGetAllResponse
+    public class GetAllUserResponse
     {
         public int TotalCount { get; set; }
         public object Users { get; set; }
