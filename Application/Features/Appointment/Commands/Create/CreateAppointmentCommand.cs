@@ -15,7 +15,7 @@ namespace Application.Features.Appointment.Commands.Create
     public class CreateAppointmentCommand : IRequest<CreateAppointmentCommandResponse>
     {
         public int DoctorId { get; set; }
-
+        public DateTime AppointmentTime { get; set; }
 
 
         public class CreateAppointmentCommandHandler : IRequestHandler<CreateAppointmentCommand, CreateAppointmentCommandResponse>
@@ -37,7 +37,7 @@ namespace Application.Features.Appointment.Commands.Create
             {
                 var userId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                await _appointmentRepository.AddAsync(new() { DoctorId = request.DoctorId, PatientId = userId, Status = AppointmentStatus.Scheduled });
+                await _appointmentRepository.AddAsync(new() { DoctorId = request.DoctorId, PatientId = userId, Status = AppointmentStatus.Scheduled, AppointmentTime = request.AppointmentTime });
 
                 return new() { };
             }
