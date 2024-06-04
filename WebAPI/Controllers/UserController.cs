@@ -1,5 +1,5 @@
 ﻿using Application.Features.Auth.Commands.Login;
-using Application.Features.User.Commands.CreateDoctorRole;
+using Application.Features.Doctor.Commands.CreateDoctorRole;
 using Application.Features.User.Commands.Delete;
 using Application.Features.User.Commands.Update;
 using Application.Features.User.Queries.GetAll;

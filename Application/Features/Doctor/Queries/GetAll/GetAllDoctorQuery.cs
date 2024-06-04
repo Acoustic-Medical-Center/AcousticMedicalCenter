@@ -39,7 +39,7 @@ namespace Application.Features.Doctor.Queries.GetAll
                      .Select(d => new
                      {
                          d.Id,
-                         d.Specialization,
+                         d.DoctorSpecializationId,
                          d.Experience,
                          d.User.FirstName,
                          d.User.LastName,

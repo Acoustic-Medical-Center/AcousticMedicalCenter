@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.User.Commands.CreateDoctorRole
+namespace Application.Features.Doctor.Commands.CreateDoctorRole
 {
     public class CreateDoctorRoleCommand : IRequest<CreateDoctorRoleResponse>
     {
         public int UserId { get; set; }
-        public string Specialization { get; set; }
+        public int SpecializationId { get; set; }
         public int Experience { get; set; }
 
 
@@ -38,7 +38,7 @@ namespace Application.Features.User.Commands.CreateDoctorRole
                 await _patientRepository.DeleteAsync(patientToDelete);
                 var userToChangeRole = await _userRepository.GetAsync(u => u.Id == request.UserId);
                 userToChangeRole.UserType = Domain.Entities.UserType.Doctor;
-                await _doctorRepository.AddAsync(new() { Id = request.UserId, Specialization = request.Specialization, Experience = request.Experience });
+                await _doctorRepository.AddAsync(new() { Id = request.UserId, DoctorSpecializationId = request.SpecializationId, Experience = request.Experience });
                 return new() { };
 
             }

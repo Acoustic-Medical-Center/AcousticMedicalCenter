@@ -12,8 +12,8 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AcousticDbContext))]
-    [Migration("20240531155351_init")]
-    partial class init
+    [Migration("20240604213603_mig2")]
+    partial class mig2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,10 +77,37 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DoctorSpecializationId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Experience")
                         .HasColumnType("int");
 
-                    b.Property<string>("Specialization")
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorSpecializationId");
+
+                    b.ToTable("Doctors");
+                });
+
+            modelBuilder.Entity("Domain.Entities.DoctorSpecialization", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -89,7 +116,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Doctors");
+                    b.ToTable("DoctorSpecializations");
                 });
 
             modelBuilder.Entity("Domain.Entities.OperationClaim", b =>
@@ -255,11 +282,19 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Doctor", b =>
                 {
+                    b.HasOne("Domain.Entities.DoctorSpecialization", "DoctorSpecialization")
+                        .WithMany()
+                        .HasForeignKey("DoctorSpecializationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.User", "User")
                         .WithOne("Doctor")
                         .HasForeignKey("Domain.Entities.Doctor", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("DoctorSpecialization");
 
                     b.Navigation("User");
                 });
