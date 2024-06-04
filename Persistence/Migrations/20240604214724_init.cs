@@ -72,8 +72,8 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
-                    DoctorSpecializationId = table.Column<int>(type: "int", nullable: false),
                     Experience = table.Column<int>(type: "int", nullable: false),
+                    DoctorSpecializationId = table.Column<int>(type: "int", nullable: false),
                     AppointmentId = table.Column<int>(type: "int", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -82,6 +82,12 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Doctors", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Doctors_DoctorSpecializations_DoctorSpecializationId",
+                        column: x => x.DoctorSpecializationId,
+                        principalTable: "DoctorSpecializations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Doctors_Users_Id",
                         column: x => x.Id,
@@ -184,6 +190,11 @@ namespace Persistence.Migrations
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Doctors_DoctorSpecializationId",
+                table: "Doctors",
+                column: "DoctorSpecializationId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserOperationClaims_OperationClaimId",
                 table: "UserOperationClaims",
                 column: "OperationClaimId");
@@ -201,9 +212,6 @@ namespace Persistence.Migrations
                 name: "Appointments");
 
             migrationBuilder.DropTable(
-                name: "DoctorSpecializations");
-
-            migrationBuilder.DropTable(
                 name: "UserOperationClaims");
 
             migrationBuilder.DropTable(
@@ -214,6 +222,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "OperationClaims");
+
+            migrationBuilder.DropTable(
+                name: "DoctorSpecializations");
 
             migrationBuilder.DropTable(
                 name: "Users");
