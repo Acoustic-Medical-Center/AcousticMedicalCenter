@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Extentions;
 using Core.Utilities.Encryption;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -51,13 +52,13 @@ namespace Core.Utilities.JWT
             claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
             claims.Add(new Claim(ClaimTypes.Name, user.FirstName));
             claims.Add(new Claim(ClaimTypes.Email, user.Email));
-            
+
             foreach (var operationClaim in operationClaims)
             {
                 claims.Add(new Claim(ClaimTypes.Role, operationClaim));
             }
-
-            claims.Add(new Claim("Tobeto", "abc"));
+            //claims.Add(new Claim("Tobeto", "abc"));
+            claims.Add(new Claim("UserType", UserTypeExtensions.ToDescriptionString(user.UserType)));
 
             return claims;
         }
