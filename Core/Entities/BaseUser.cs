@@ -14,5 +14,12 @@ namespace Core.Entities
         public byte[] PasswordSalt { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public UserType UserType { get; set; }
+    }
+    public enum UserType
+    {
+        Patient,
+        Doctor,
+        Admin
     }
 }

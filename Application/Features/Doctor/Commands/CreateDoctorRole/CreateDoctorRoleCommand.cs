@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace Application.Features.Doctor.Commands.CreateDoctorRole
                 var patientToDelete = await _patientRepository.GetAsync(p => p.Id == request.UserId);
                 await _patientRepository.DeleteAsync(patientToDelete);
                 var userToChangeRole = await _userRepository.GetAsync(u => u.Id == request.UserId);
-                userToChangeRole.UserType = Domain.Entities.UserType.Doctor;
+                userToChangeRole.UserType = UserType.Doctor;
                 await _doctorRepository.AddAsync(new() { Id = request.UserId, DoctorSpecializationId = request.SpecializationId, Experience = request.Experience });
                 return new() { };
 

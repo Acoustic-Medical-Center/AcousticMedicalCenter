@@ -15,14 +15,5 @@ namespace Domain.Entities
 
         public Patient Patient { get; set; }
         public Doctor Doctor { get; set; }
-
-        public UserType UserType { get; set; }
-    }
-
-    public enum UserType
-    {
-        Patient,
-        Doctor,
-        Admin
     }
 }

@@ -1,14 +1,9 @@
 ﻿using Application.Repositories;
 using AutoMapper;
 using Core.CrossCuttingConcerns.Exceptions.Types;
+using Core.Entities;
 using Core.Utilities.Hashing;
-using Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Auth.Commands.Register
 {
