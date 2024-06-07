@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class User : BaseUser
+    public class User : BaseUser, ISoftDeletable
     {
         public string PhoneNumber { get; set; }
         public string Gender { get; set; }
