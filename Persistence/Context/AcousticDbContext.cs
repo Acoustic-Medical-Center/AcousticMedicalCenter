@@ -62,6 +62,7 @@ namespace Persistence.Context
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>().HasQueryFilter(e => !e.IsDeleted);
+            modelBuilder.Entity<Appointment>().HasQueryFilter(e => !e.IsDeleted);
         }
         //{
         //    modelBuilder.Entity<User>()

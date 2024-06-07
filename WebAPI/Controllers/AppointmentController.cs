@@ -1,6 +1,8 @@
 ﻿using Application.Features.Appointment.Commands.Create;
+using Application.Features.Appointment.Commands.Delete;
 using Application.Features.Appointment.Queries.GetAllByPatient;
 using Application.Features.Auth.Commands.Login;
+using Application.Features.User.Commands.Delete;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,5 +35,11 @@ namespace WebAPI.Controllers
             return Ok(response);
         }
 
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Delete([FromQuery] DeleteAppointmentByUserCommand deleteAppointmentByUserCommand)
+        {
+            var response = await _mediator.Send(deleteAppointmentByUserCommand);
+            return Ok(response);
+        }
     }
 }
