@@ -1,5 +1,6 @@
 ﻿using Core.DataAccess;
 using Domain.Entities;
+using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -89,10 +90,10 @@ namespace Persistence.Context
 
             foreach (var item in datas)
             {
-                if (item.Entity is User userEntity && item.State == EntityState.Deleted)
+                if (item.Entity is ISoftDeletable entity && item.State == EntityState.Deleted)
                 {
                     item.State = EntityState.Modified;
-                    userEntity.IsDeleted = true;
+                    entity.IsDeleted = true;
                 }
                 switch (item.State)
                 {
