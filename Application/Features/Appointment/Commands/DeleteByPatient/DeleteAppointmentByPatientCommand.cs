@@ -11,21 +11,21 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Appointment.Commands.Delete
 {
-    public class DeleteAppointmentByUserCommand : IRequest<DeleteAppointmentByUserResponse>
+    public class DeleteAppointmentByPatientCommand : IRequest<DeleteAppointmentByPatientResponse>
     {
         public int AppointmentId { get; set; }
 
-        public class DeleteAppointmentByUserCommandHandler : IRequestHandler<DeleteAppointmentByUserCommand, DeleteAppointmentByUserResponse>
+        public class DeleteAppointmentByPatientCommandHandler : IRequestHandler<DeleteAppointmentByPatientCommand, DeleteAppointmentByPatientResponse>
         {
             private readonly IAppointmentRepository _appointmentRepository;
             private readonly IHttpContextAccessor _httpContextAccessor;
 
-            public DeleteAppointmentByUserCommandHandler(IAppointmentRepository appointmentRepository, IHttpContextAccessor httpContextAccessor)
+            public DeleteAppointmentByPatientCommandHandler(IAppointmentRepository appointmentRepository, IHttpContextAccessor httpContextAccessor)
             {
                 _appointmentRepository = appointmentRepository;
                 _httpContextAccessor = httpContextAccessor;
             }
-            public async Task<DeleteAppointmentByUserResponse> Handle(DeleteAppointmentByUserCommand request, CancellationToken cancellationToken)
+            public async Task<DeleteAppointmentByPatientResponse> Handle(DeleteAppointmentByPatientCommand request, CancellationToken cancellationToken)
             {
                 var userId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 

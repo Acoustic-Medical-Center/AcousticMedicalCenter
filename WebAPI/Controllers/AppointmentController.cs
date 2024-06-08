@@ -1,5 +1,6 @@
 ﻿using Application.Features.Appointment.Commands.Create;
 using Application.Features.Appointment.Commands.Delete;
+using Application.Features.Appointment.Commands.DeleteByClaim;
 using Application.Features.Appointment.Queries.GetAllByPatient;
 using Application.Features.Auth.Commands.Login;
 using Application.Features.User.Commands.Delete;
@@ -36,10 +37,18 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> Delete([FromQuery] DeleteAppointmentByUserCommand deleteAppointmentByUserCommand)
+        public async Task<IActionResult> Delete([FromQuery] DeleteAppointmentByPatientCommand deleteAppointmentByUserCommand)
         {
             var response = await _mediator.Send(deleteAppointmentByUserCommand);
             return Ok(response);
         }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> DeleteByClaim([FromQuery] DeleteAppointmentByClaimCommand deleteAppointmentByClaimCommand)
+        {
+            var response = await _mediator.Send(deleteAppointmentByClaimCommand);
+            return Ok(response);
+        }
+
     }
 }

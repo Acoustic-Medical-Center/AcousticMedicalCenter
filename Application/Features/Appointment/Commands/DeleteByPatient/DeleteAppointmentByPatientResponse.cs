@@ -1,6 +1,6 @@
 ﻿namespace Application.Features.Appointment.Commands.Delete
 {
-    public class DeleteAppointmentByUserResponse
+    public class DeleteAppointmentByPatientResponse
     {
     }
 }
