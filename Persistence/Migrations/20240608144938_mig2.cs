@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class mig2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -52,7 +52,6 @@ namespace Persistence.Migrations
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    UserType = table.Column<int>(type: "int", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -60,7 +59,8 @@ namespace Persistence.Migrations
                     PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -156,6 +156,7 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AppointmentTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     PatientId = table.Column<int>(type: "int", nullable: false),
                     DoctorId = table.Column<int>(type: "int", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -178,6 +179,16 @@ namespace Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "CreatedDate", "DeletedDate", "Email", "FirstName", "Gender", "IsDeleted", "LastName", "PasswordHash", "PasswordSalt", "PhoneNumber", "UpdatedDate", "UserType" },
+                values: new object[] { 20, new DateTime(2024, 6, 8, 14, 49, 38, 392, DateTimeKind.Utc).AddTicks(1742), null, "john.doe@example.com", "John", "Male", false, "Doe", new byte[] { 224, 219, 242, 146, 94, 183, 72, 147, 28, 238, 23, 65, 52, 177, 1, 63, 98, 4, 111, 81, 208, 244, 219, 245, 26, 149, 227, 136, 86, 214, 139, 208, 164, 133, 116, 136, 74, 107, 101, 11, 169, 18, 209, 218, 218, 246, 232, 249, 28, 115, 182, 248, 222, 91, 229, 148, 73, 70, 193, 121, 90, 239, 252, 196 }, new byte[] { 86, 183, 254, 240, 252, 184, 37, 97, 23, 60, 64, 62, 45, 243, 225, 164, 255, 61, 145, 28, 186, 106, 24, 128, 82, 76, 10, 239, 147, 13, 137, 140, 89, 162, 68, 101, 34, 8, 131, 154, 251, 197, 130, 94, 248, 243, 250, 33, 226, 68, 124, 50, 35, 53, 174, 103, 144, 194, 46, 55, 127, 67, 8, 95, 56, 28, 118, 43, 168, 122, 74, 251, 4, 33, 91, 19, 177, 246, 197, 62, 207, 200, 205, 187, 191, 79, 48, 214, 81, 233, 161, 231, 238, 137, 137, 120, 30, 219, 216, 174, 110, 228, 88, 5, 219, 167, 176, 16, 233, 154, 80, 48, 226, 101, 57, 44, 148, 1, 66, 45, 41, 81, 43, 100, 89, 70, 88, 55 }, "1234567890", null, 0 });
+
+            migrationBuilder.InsertData(
+                table: "Patients",
+                columns: new[] { "Id", "Address", "AppointmentId", "BloodType", "CreatedDate", "DeletedDate", "UpdatedDate" },
+                values: new object[] { 20, "1234 Main St", 0, "A+", new DateTime(2024, 6, 8, 14, 49, 38, 392, DateTimeKind.Utc).AddTicks(1930), null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_DoctorId",

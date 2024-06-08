@@ -1,12 +1,12 @@
 ﻿using Core.DataAccess;
+using Core.Utilities.Hashing;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Persistence.SeedData.Appointment;
+using Persistence.SeedData.DoctorSpecialization;
+using Persistence.SeedData.OperationClaim;
+using Persistence.SeedData.Patient;
 
 namespace Persistence.Context
 {
@@ -59,32 +59,21 @@ namespace Persistence.Context
             .HasForeignKey(a => a.PatientId)
             .OnDelete(DeleteBehavior.Restrict);
 
-
+            modelBuilder.ApplyConfiguration(new DoctorSpecializationConfiguration());
+            modelBuilder.ApplyConfiguration(new OperationClaimConfiguration());
+            modelBuilder.ApplyConfiguration(new UserOperationClaimConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new PatientConfiguration());
+            modelBuilder.ApplyConfiguration(new DoctorConfiguration());
+            modelBuilder.ApplyConfiguration(new AppointmentConfiguration());
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>().HasQueryFilter(e => !e.IsDeleted);
             modelBuilder.Entity<Appointment>().HasQueryFilter(e => !e.IsDeleted);
+
+            byte[] passwordHash, passwordSalt;
+            HashingHelper.CreatePasswordHash("string", out passwordHash, out passwordSalt);
+
         }
-        //{
-        //    modelBuilder.Entity<User>()
-        //        .HasOne(u => u.Doctor)
-        //        .WithOne(d => d.User)
-        //        .HasForeignKey<Doctor>(d => d.Id);
-
-        //    modelBuilder.Entity<User>()
-        //        .HasOne(u => u.Patient)
-        //        .WithOne(p => p.User)
-        //        .HasForeignKey<Patient>(p => p.Id);
-
-        //    modelBuilder.Entity<Doctor>()
-        //        .HasMany(d => d.Appointment)
-        //        .WithOne(a => a.Doctor)
-        //        .HasForeignKey(a => a.DoctorId);
-
-        //    modelBuilder.Entity<Patient>()
-        //        .HasMany(p => p.Appointment)
-        //        .WithOne(a => a.Patient)
-        //        .HasForeignKey(a => a.PatientId);
-        //}
         public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var datas = ChangeTracker.Entries<Entity>();
