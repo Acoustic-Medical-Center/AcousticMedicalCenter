@@ -12,8 +12,8 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AcousticDbContext))]
-    [Migration("20240604214724_init")]
-    partial class init
+    [Migration("20240608145453_mig3")]
+    partial class mig3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,9 @@ namespace Persistence.Migrations
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
@@ -171,6 +174,16 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Patients");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 16,
+                            Address = "Varsak",
+                            AppointmentId = 0,
+                            BloodType = "A Rh+",
+                            CreatedDate = new DateTime(2024, 6, 8, 17, 54, 53, 650, DateTimeKind.Local).AddTicks(9596)
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -227,6 +240,22 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 16,
+                            CreatedDate = new DateTime(2024, 6, 8, 14, 54, 53, 650, DateTimeKind.Utc).AddTicks(9449),
+                            Email = "Jonathancorwin@hotmail.com",
+                            FirstName = "Jonathan",
+                            Gender = "male",
+                            IsDeleted = false,
+                            LastName = "Corwin",
+                            PasswordHash = new byte[] { 210, 92, 132, 160, 56, 248, 72, 112, 237, 43, 232, 54, 106, 1, 53, 54, 221, 170, 172, 89, 250, 74, 117, 96, 227, 130, 139, 239, 70, 148, 63, 138, 27, 189, 100, 73, 74, 88, 249, 44, 210, 115, 149, 38, 215, 200, 249, 41, 38, 106, 4, 246, 24, 146, 26, 26, 74, 178, 116, 160, 49, 178, 187, 250 },
+                            PasswordSalt = new byte[] { 77, 26, 136, 74, 243, 8, 238, 108, 212, 195, 44, 231, 91, 245, 158, 52, 190, 103, 54, 88, 55, 201, 231, 103, 218, 131, 38, 150, 88, 46, 58, 2, 39, 188, 171, 211, 124, 150, 226, 81, 209, 155, 91, 203, 124, 211, 174, 144, 58, 207, 88, 186, 40, 206, 3, 167, 215, 146, 159, 13, 134, 54, 193, 112, 160, 202, 52, 135, 136, 72, 156, 197, 16, 190, 68, 106, 17, 163, 248, 32, 50, 50, 178, 108, 38, 217, 21, 215, 244, 85, 66, 218, 255, 52, 136, 50, 46, 24, 98, 136, 197, 35, 176, 88, 173, 42, 46, 101, 144, 90, 203, 221, 165, 141, 52, 47, 107, 148, 162, 238, 233, 148, 85, 193, 81, 98, 225, 200 },
+                            PhoneNumber = "123123",
+                            UserType = 0
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.UserOperationClaim", b =>
