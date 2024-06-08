@@ -30,7 +30,6 @@ namespace Application.Features.Appointment.Commands.Delete
                 var userId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
                 var appointmentToDelete = await _appointmentRepository.GetAsync(app => app.Id == request.AppointmentId);
-
                 if (appointmentToDelete != null && appointmentToDelete.PatientId == userId)
                 {
                     await _appointmentRepository.DeleteAsync(appointmentToDelete);
