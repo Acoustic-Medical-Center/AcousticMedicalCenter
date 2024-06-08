@@ -49,12 +49,7 @@ namespace WebAPI.Controllers
             return Ok(response);
         }
 
-        [HttpPost("[action]")]
-        public async Task<IActionResult> CreateDoctorRole(CreateDoctorRoleCommand createDoctorRoleCommand)
-        {
-            var response = await _mediator.Send(createDoctorRoleCommand);
-            return Ok(response);
-        }
+        
 
     }
 }
