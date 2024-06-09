@@ -4,6 +4,8 @@ using Application.Features.Appointment.Commands.DeleteByClaim;
 using Application.Features.Appointment.Queries.GetAllByPatient;
 using Application.Features.Auth.Commands.Login;
 using Application.Features.User.Commands.Delete;
+using Application.Services;
+using Infrastructure.Services.EmailService;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +18,12 @@ namespace WebAPI.Controllers
     {
 
         private readonly IMediator _mediator;
+        private readonly IMailService _mailService;
 
-        public AppointmentController(IMediator mediator)
+        public AppointmentController(IMediator mediator, IMailService mailService)
         {
             _mediator = mediator;
+            _mailService = mailService;
         }
 
         [HttpPost("[action]")]

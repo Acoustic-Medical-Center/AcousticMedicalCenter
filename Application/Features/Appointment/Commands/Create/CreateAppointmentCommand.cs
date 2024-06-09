@@ -1,4 +1,5 @@
 ﻿using Application.Repositories;
+using Application.Services;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
@@ -25,10 +26,12 @@ namespace Application.Features.Appointment.Commands.Create
             private readonly IPatientRepository _patientRepository;
             private readonly IHttpContextAccessor _httpContextAccessor;
             private readonly IAppointmentRepository _appointmentRepository;
+            private readonly IMailService _mailService;
 
-            public CreateAppointmentCommandHandler(IMapper mapper, IPatientRepository patientRepository, IHttpContextAccessor httpContextAccessor, IAppointmentRepository appointmentRepository)
+            public CreateAppointmentCommandHandler(IMapper mapper, IMailService mailService, IPatientRepository patientRepository, IHttpContextAccessor httpContextAccessor, IAppointmentRepository appointmentRepository)
             {
                 _mapper = mapper;
+                _mailService = mailService;
                 _patientRepository = patientRepository;
                 _httpContextAccessor = httpContextAccessor;
                 _appointmentRepository = appointmentRepository;
@@ -36,8 +39,10 @@ namespace Application.Features.Appointment.Commands.Create
             public async Task<CreateAppointmentCommandResponse> Handle(CreateAppointmentCommand request, CancellationToken cancellationToken)
             {
                 var userId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                var userMail = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
 
                 await _appointmentRepository.AddAsync(new() { DoctorId = request.DoctorId, PatientId = userId, Status = AppointmentStatus.Scheduled, AppointmentTime = request.AppointmentTime });
+                await _mailService.SendEmailAsync(userMail, "Randevu Onayı", "Randevunuz Başarıyla Oluşturulmuştur.");
 
                 return new() { };
             }
