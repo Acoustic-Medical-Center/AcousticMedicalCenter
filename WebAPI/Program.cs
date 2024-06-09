@@ -7,6 +7,7 @@ using Persistence;
 using System.Runtime.CompilerServices;
 using Core.CrossCuttingConcerns.Exceptions.Extensions;
 using Microsoft.OpenApi.Models;
+using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddPersistenceServices();
 builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices();
 
 builder.Services.AddSwaggerGen(c =>
 {

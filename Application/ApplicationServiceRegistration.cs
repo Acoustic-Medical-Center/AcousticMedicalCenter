@@ -1,9 +1,12 @@
-﻿using Core.Application.Pipelines.Authorization;
+﻿using Application.Services;
+using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+//using  Infrastructure.Services.EmailService;
+
 
 namespace Application
 {
@@ -20,6 +23,8 @@ namespace Application
             });
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            //services.AddTransient<IMailService, MailService>();
+
             return services;
         }
     }
