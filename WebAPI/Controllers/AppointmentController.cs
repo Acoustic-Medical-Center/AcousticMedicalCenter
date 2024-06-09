@@ -30,17 +30,6 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> CreateAppointmentByPatient(CreateAppointmentCommand createAppointmentCommand)
         {
             var response = await _mediator.Send(createAppointmentCommand);
-            if (response != null) // Randevu oluşturulduktan sonra e-posta gönder
-            {
-                string doctorEmailSubject = "Yeni Randevu Bilgisi";
-                string doctorEmailBody = $"Sayın Dr. {createAppointmentCommand.DoctorName},<br>Yeni bir randevu oluşturuldu.<br><br>Hasta: {createAppointmentCommand.PatientName}<br>Randevu Tarihi: {createAppointmentCommand.AppointmentTime}";
-
-                string patientEmailSubject = "Randevu Bilgisi";
-                string patientEmailBody = $"Sayın {createAppointmentCommand.PatientName},<br>Randevu bilgileriniz aşağıdadır.<br><br>Doktor: Dr. {createAppointmentCommand.DoctorName}<br>Randevu Tarihi: {createAppointmentCommand.AppointmentTime}";
-
-                await _mailService.SendEmailAsync(createAppointmentCommand.DoctorEmail, doctorEmailSubject, doctorEmailBody);
-                await _mailService.SendEmailAsync(createAppointmentCommand.PatientEmail, patientEmailSubject, patientEmailBody);
-            }
             return Ok(response);
         }
 

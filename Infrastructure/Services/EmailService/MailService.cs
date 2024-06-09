@@ -26,7 +26,8 @@ namespace Infrastructure.Services.EmailService
             {
                 Port = int.Parse(smtpSettings["Port"]),
                 Credentials = new NetworkCredential(smtpSettings["Username"], smtpSettings["Password"]),
-                EnableSsl = true
+                EnableSsl = true,
+                Host = smtpSettings["Host"]
             };
 
             var mailMsg = new MailMessage
