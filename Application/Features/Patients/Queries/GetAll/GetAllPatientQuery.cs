@@ -1,13 +1,9 @@
 ﻿using Application.Repositories;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Patients.Queries.GetAll
 {
@@ -17,16 +13,16 @@ namespace Application.Features.Patients.Queries.GetAll
         public class GetAllPatientQueryHandler : IRequestHandler<GetAllPatientQuery, GetAllPatientResponse>
         {
             private readonly IPatientRepository _patientRepository;
-            private readonly IDoctorRepository _doctorRepository;
             private readonly IAppointmentRepository _appointmentRepository;
             private readonly IHttpContextAccessor _httpContextAccessor;
+            private readonly IMapper _mapper;
 
-            public GetAllPatientQueryHandler(IPatientRepository patientRepository, IDoctorRepository doctorRepository, IAppointmentRepository appointmentRepository, IHttpContextAccessor httpContextAccessor)
+            public GetAllPatientQueryHandler(IPatientRepository patientRepository, IAppointmentRepository appointmentRepository, IHttpContextAccessor httpContextAccessor, IMapper mapper)
             {
                 _patientRepository = patientRepository;
-                _doctorRepository = doctorRepository;
                 _appointmentRepository = appointmentRepository;
                 _httpContextAccessor = httpContextAccessor;
+                _mapper = mapper;
             }
 
             public async Task<GetAllPatientResponse> Handle(GetAllPatientQuery request, CancellationToken cancellationToken)
@@ -39,8 +35,9 @@ namespace Application.Features.Patients.Queries.GetAll
                     patientIds.Add(appointment.PatientId);
                 }
                 var patients = await _patientRepository.GetListAsync(predicate: p => patientIds.Contains(p.Id), include: p => p.Include(d => d.User));
-                var response = new GetAllPatientResponse() { Patient = patients };
-                return response;    
+
+                var response = _mapper.Map<List<GetAllPatientDto>>(patients);
+                return new() { Patients = response };
             }
         }
     }
