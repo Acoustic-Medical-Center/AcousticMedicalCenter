@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/admin")]
     [ApiController]
     public class AdminController : ControllerBase
     {
@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("doctor/[action]")]
+        [HttpPost("assign-doctor")]
         public async Task<IActionResult> CreateDoctorRole(CreateDoctorRoleCommand createDoctorRoleCommand)
         {
             var response = await _mediator.Send(createDoctorRoleCommand);
