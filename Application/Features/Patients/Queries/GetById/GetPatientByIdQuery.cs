@@ -32,7 +32,14 @@ namespace Application.Features.Patients.Queries.GetById
 
             public async Task<GetPatientByIdResponse> Handle(GetPatientByIdQuery request, CancellationToken cancellationToken)
             {
-                var doctorId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                var userIdClaim = _httpContextAccessor?.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                if (string.IsNullOrEmpty(userIdClaim))
+                {
+                    throw new BusinessException("Yetkisiz erişim.");
+                }
+
+                var doctorId = int.Parse(userIdClaim);
 
                 var appointment = await _appointmentRepository.GetAsync(predicate: app => app.DoctorId == doctorId && app.PatientId == request.PatientId);
                 if (appointment != null)
