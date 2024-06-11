@@ -18,6 +18,7 @@ namespace Persistence.SeedData.Appointment
                    Id = 1,
                    PatientId = 1,
                    DoctorId = 3,
+
                    Status = Domain.Entities.AppointmentStatus.Scheduled,
                    AppointmentTime = DateTime.Now,
                    IsDeleted = false,
@@ -31,6 +32,7 @@ namespace Persistence.SeedData.Appointment
                    Id = 2,
                    PatientId = 1,
                    DoctorId = 4,
+
                    Status = Domain.Entities.AppointmentStatus.Scheduled,
                    AppointmentTime = DateTime.Now,
                    IsDeleted = false,
@@ -44,6 +46,7 @@ namespace Persistence.SeedData.Appointment
                    Id = 3,
                    PatientId = 2,
                    DoctorId = 3,
+
                    Status = Domain.Entities.AppointmentStatus.Scheduled,
                    AppointmentTime = DateTime.Now,
                    IsDeleted = false,
@@ -57,6 +60,7 @@ namespace Persistence.SeedData.Appointment
                    Id = 4,
                    PatientId = 2,
                    DoctorId = 4,
+
                    Status = Domain.Entities.AppointmentStatus.Scheduled,
                    AppointmentTime = DateTime.Now,
                    IsDeleted = false,

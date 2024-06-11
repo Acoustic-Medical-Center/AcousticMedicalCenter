@@ -19,6 +19,11 @@ namespace Domain.Entities
 
         public int DoctorId { get; set; }
         public Doctor Doctor { get; set; }
+
+
+
+        public virtual Report Report { get; set; }
+        public virtual ICollection<Prescription> Prescriptions { get; set; }
     }
 
 
