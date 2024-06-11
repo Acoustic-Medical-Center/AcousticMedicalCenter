@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class AppointmentController : ControllerBase
     {
@@ -27,35 +27,35 @@ namespace WebAPI.Controllers
             _mailService = mailService;
         }
 
-        [HttpPost("[action]")]
+        [HttpPost("patient/appointment")]
         public async Task<IActionResult> CreateAppointmentByPatient(CreateAppointmentCommand createAppointmentCommand)
         {
             var response = await _mediator.Send(createAppointmentCommand);
             return Ok(response);
         }
 
-        [HttpGet("[action]")]
+        [HttpGet("patient/appointment")]
         public async Task<IActionResult> GetAllAppointmentsByPatient([FromQuery] GetAllAppointmensByPatientQuery getAllAppointmentsByUserQuery)
         {
             var response = await _mediator.Send(getAllAppointmentsByUserQuery);
             return Ok(response);
         }
 
-        [HttpGet("[action]")]
+        [HttpGet("admin/appointment")]
         public async Task<IActionResult> GetAllAppointmentsByClaim([FromQuery] GetAllAppointmentsByClaimQuery getAllAppointmentsByClaimQuery)
         {
             var response = await _mediator.Send(getAllAppointmentsByClaimQuery);
             return Ok(response);
         }
 
-        [HttpGet("[action]")]
+        [HttpDelete("patient/appointment")]
         public async Task<IActionResult> Delete([FromQuery] DeleteAppointmentByPatientCommand deleteAppointmentByUserCommand)
         {
             var response = await _mediator.Send(deleteAppointmentByUserCommand);
             return Ok(response);
         }
 
-        [HttpGet("[action]")]
+        [HttpDelete("admin/appointment")]
         public async Task<IActionResult> DeleteByClaim([FromQuery] DeleteAppointmentByClaimCommand deleteAppointmentByClaimCommand)
         {
             var response = await _mediator.Send(deleteAppointmentByClaimCommand);
