@@ -8,5 +8,11 @@ namespace Application.Features.Reports.Commands.Create
 {
     public class CreateReportCommandResponse
     {
+
+        public int Id { get; set; }
+        public int AppointmentId { get; set; }
+
+        public string ExaminationFindings { get; set; }
+        public string Diagnosis { get; set; }
     }
 }

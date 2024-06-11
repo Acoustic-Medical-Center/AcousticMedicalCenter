@@ -20,7 +20,6 @@
   <ItemGroup>
     <Folder Include="Features\Appointment\Queries\GelAllByDoctor\" />
     <Folder Include="Features\Reports\Queries\" />
-    <Folder Include="Features\Reports\Profiles\" />
   </ItemGroup>
 
 </Project>

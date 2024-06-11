@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,9 @@ namespace Application.Features.Reports.Commands.Create
 {
     public class CreateReportCommand : IRequest<CreateReportCommandResponse>
     {
-        public string AppointmentId { get; set; }
+
+
+        public int AppointmentId { get; set; }
         public string ExaminationFindings { get; set; }
         public string Diagnosis { get; set; }
 
@@ -23,12 +26,23 @@ namespace Application.Features.Reports.Commands.Create
             private readonly IAppointmentRepository _appointmentRepository;
 
 
-            public Task<CreateReportCommandResponse> Handle(CreateReportCommand request, CancellationToken cancellationToken)
+            public CreateReportCommandHandler(IReportRepository reportRepository, IMapper mapper, IAppointmentRepository appointmentRepository)
+            {
+                _reportRepository = reportRepository;
+                _mapper = mapper;
+                _appointmentRepository = appointmentRepository;
+            }
+
+            public async Task<CreateReportCommandResponse> Handle(CreateReportCommand request, CancellationToken cancellationToken)
             {
 
+                Report report = _mapper.Map<Report>(request);
+                await _reportRepository.AddAsync(report);
 
-                throw new NotImplementedException();
+                CreateReportCommandResponse response = _mapper.Map<CreateReportCommandResponse>(report);
+                return response;
             }
         }
+
     }
 }
