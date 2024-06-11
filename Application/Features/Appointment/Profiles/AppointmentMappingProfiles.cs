@@ -34,7 +34,7 @@ namespace Application.Features.Appointment.Profiles
             .ForMember(dest => dest.AppointmentTime, opt => opt.MapFrom(src => src.AppointmentTime))
             .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
             .ForMember(dest => dest.Diagnosis, opt => opt.MapFrom(src => src.Report.Diagnosis))
-            .ForMember(dest => dest.ExaminationFindings, opt => opt.MapFrom(src => src.Report.ExaminationFindings));
+            .ForMember(dest => dest.PatientGender, opt => opt.MapFrom(src => src.Patient.User.Gender));
         }
     }
 }

@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("admin/appointment")]
-        public async Task<IActionResult> GetAllAppointmentsByClaim([FromQuery] GetAllAppointmentsByClaimQuery getAllAppointmentsByClaimQuery)
+        public async Task<IActionResult> GetAllAppointmentsByClaim([FromRoute]GetAllAppointmentsByClaimQuery getAllAppointmentsByClaimQuery)
         {
             var response = await _mediator.Send(getAllAppointmentsByClaimQuery);
             return Ok(response);
