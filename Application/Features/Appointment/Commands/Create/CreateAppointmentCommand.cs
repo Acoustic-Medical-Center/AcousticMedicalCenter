@@ -40,9 +40,26 @@ namespace Application.Features.Appointment.Commands.Create
             {
                 var userId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 var userMail = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+                Domain.Entities.Appointment appointmentToAdd = new() { DoctorId = request.DoctorId, PatientId = userId, Status = AppointmentStatus.Scheduled, AppointmentTime = request.AppointmentTime };
+                try
+                {
+                    await _appointmentRepository.AddAsync(appointmentToAdd);
+                    try
+                    {
+                        await _mailService.SendEmailAsync(userMail, "Randevu Onayı", "Randevunuz Başarıyla Oluşturulmuştur.");
 
-                await _appointmentRepository.AddAsync(new() { DoctorId = request.DoctorId, PatientId = userId, Status = AppointmentStatus.Scheduled, AppointmentTime = request.AppointmentTime });
-                await _mailService.SendEmailAsync(userMail, "Randevu Onayı", "Randevunuz Başarıyla Oluşturulmuştur.");
+                    }
+                    catch (Exception)
+                    {
+                        await _appointmentRepository.DeleteAsync(appointmentToAdd);
+                        throw new Exception("Mail göndermede bir sorun oldu");
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Veritabanına bağlantıda sorun oldu");
+                }
+
 
                 return new() { };
             }
