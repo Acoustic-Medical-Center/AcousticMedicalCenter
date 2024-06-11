@@ -6,6 +6,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Domain.Interfaces;
 
 namespace Core.DataAccess
 {
@@ -104,6 +106,27 @@ namespace Core.DataAccess
         public async Task DeleteAsync(TEntity entity)
         {
             Context.Remove(entity);
+            await Context.SaveChangesAsync();
+        }
+
+        public async Task SoftDeleteAsync(TEntity entity)
+        {
+            // entity'nin durumunu silinmiş olarak işaretleyin
+            //Context.Update(entity);
+
+            // ChangeTracker'da izlenen tüm değişiklikleri alın
+            var datas = Context.ChangeTracker.Entries<TEntity>();
+
+            foreach (var item in datas)
+            {
+                if (item.Entity is ISoftDeletable e && item.State == EntityState.Deleted)
+                {
+                    item.State = EntityState.Modified;
+                    e.IsDeleted = true;
+                }
+                
+            }
+
             await Context.SaveChangesAsync();
         }
     }

@@ -36,7 +36,7 @@ namespace Application.Features.User.Commands.Delete
                 if (userId == request.UserId)
                 {
                     var userToDelete = await _userRepository.GetAsync(u => u.Id == request.UserId);
-                    await _userRepository.DeleteAsync(userToDelete);
+                    await _userRepository.SoftDeleteAsync(userToDelete);
                 }
                 throw new BusinessException("İşlem başarısız");
             }

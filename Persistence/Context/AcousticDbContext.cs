@@ -103,11 +103,6 @@ namespace Persistence.Context
 
             foreach (var item in datas)
             {
-                if (item.Entity is ISoftDeletable entity && item.State == EntityState.Deleted)
-                {
-                    item.State = EntityState.Modified;
-                    entity.IsDeleted = true;
-                }
                 switch (item.State)
                 {
                     case EntityState.Added:
