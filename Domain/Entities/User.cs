@@ -11,6 +11,7 @@ namespace Domain.Entities
     public class User : BaseUser, ISoftDeletable
     {
         public string PhoneNumber { get; set; }
+
         public string Gender { get; set; }
         public bool IsDeleted { get; set; }
 

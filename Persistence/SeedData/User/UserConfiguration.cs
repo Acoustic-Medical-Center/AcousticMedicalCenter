@@ -135,6 +135,7 @@ namespace Persistence.SeedData.Patient
                 {
                     Id = 3,
                     DoctorSpecializationId = 1,
+                    Biography = "Id 3 olan Doktor Özgeçmiş Example",
                     Experience = 10,
                     CreatedDate = DateTime.UtcNow
                 }
@@ -145,6 +146,7 @@ namespace Persistence.SeedData.Patient
                 {
                     Id = 4,
                     DoctorSpecializationId = 2,
+                    Biography = "Kalp Doktoru Özgeçmiş Example",
                     Experience = 5,
                     CreatedDate = DateTime.UtcNow
                 }
