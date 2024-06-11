@@ -1,4 +1,5 @@
 ﻿using Application.Repositories;
+using AutoMapper;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -22,12 +23,14 @@ namespace Application.Features.Patients.Queries.GetById
             private readonly IAppointmentRepository _appointmentRepository;
             private readonly IHttpContextAccessor _httpContextAccessor;
             private readonly IPatientRepository _patientRepository;
+            private readonly IMapper _mapper;
 
-            public GetPatientByIdQueryHandler(IAppointmentRepository appointmentRepository, IHttpContextAccessor httpContextAccessor, IPatientRepository patientRepository)
+            public GetPatientByIdQueryHandler(IAppointmentRepository appointmentRepository, IHttpContextAccessor httpContextAccessor, IPatientRepository patientRepository, IMapper mapper)
             {
                 _appointmentRepository = appointmentRepository;
                 _httpContextAccessor = httpContextAccessor;
                 _patientRepository = patientRepository;
+                _mapper = mapper;
             }
 
             public async Task<GetPatientByIdResponse> Handle(GetPatientByIdQuery request, CancellationToken cancellationToken)
@@ -45,8 +48,8 @@ namespace Application.Features.Patients.Queries.GetById
                 if (appointment != null)
                 {
                     var patient = await _patientRepository.GetAsync(p => p.Id == request.PatientId, include: p => p.Include(p => p.User));
-                    //return new() { Patient = patient };
-                    return new() { Patient = patient };
+                    var response = _mapper.Map<GetPatientByIdResponse>(patient);
+                    return response;
                 }
                 throw new BusinessException("Bu hastanın bilgilerine erişemezsiniz");
             }
