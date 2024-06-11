@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
         {
             _mediator = mediator;
         }
-        [HttpGet("[action]")]
+        [HttpGet()]
         public async Task<IActionResult> GetAll([FromQuery] GetAllSpecializationQuery GetAllSpecializationQuery)
         {
             var response = await _mediator.Send(GetAllSpecializationQuery);

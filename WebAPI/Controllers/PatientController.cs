@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class PatientController : ControllerBase
     {
@@ -16,15 +16,15 @@ namespace WebAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("[action]")]
+        [HttpGet("doctor/mypatients")]
         public async Task<IActionResult> GetAll([FromQuery] GetAllPatientQuery getAllPatientQuery)
         {
             var response = await _mediator.Send(getAllPatientQuery);
             return Ok(response);
         }
 
-        [HttpGet("[action]")]
-        public async Task<IActionResult> GetById([FromQuery] GetPatientByIdQuery getPatientByIdQuery)
+        [HttpGet("doctor/mypatients/{PatientId}")]
+        public async Task<IActionResult> GetById([FromRoute] GetPatientByIdQuery getPatientByIdQuery)
         {
             var response = await _mediator.Send(getPatientByIdQuery);
             return Ok(response);
