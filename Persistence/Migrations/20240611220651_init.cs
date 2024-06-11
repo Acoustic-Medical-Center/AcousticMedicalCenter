@@ -274,8 +274,8 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "CreatedDate", "DeletedDate", "Name", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 6, 11, 23, 30, 9, 585, DateTimeKind.Local).AddTicks(9734), null, "Cerrah", null },
-                    { 2, new DateTime(2024, 6, 11, 23, 30, 9, 585, DateTimeKind.Local).AddTicks(9769), null, "Kalp", null }
+                    { 1, new DateTime(2024, 6, 12, 1, 6, 50, 588, DateTimeKind.Local).AddTicks(9920), null, "Cerrah", null },
+                    { 2, new DateTime(2024, 6, 12, 1, 6, 50, 588, DateTimeKind.Local).AddTicks(9950), null, "Kalp", null }
                 });
 
             migrationBuilder.InsertData(
@@ -283,16 +283,16 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "CreatedDate", "DeletedDate", "Name", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(957), null, "Kardiyoloji Araştırmaları", null },
-                    { 2, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(964), null, "Çocuk Sağlığı", null },
-                    { 3, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(968), null, "Onkoloji Tedavi", null },
-                    { 4, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(971), null, "Nöroloji ve Beyin Cerrahisi", null },
-                    { 5, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(974), null, "Endokrinoloji ve Metabolizma", null },
-                    { 6, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(978), null, "Gastroenteroloji ve Sindirim Sistemi", null },
-                    { 7, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(981), null, "Psikiyatri ve Mental Sağlık", null },
-                    { 8, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(984), null, "Aile Hekimliği ve Birinci Basamak Sağlık Hizmetleri", null },
-                    { 9, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(987), null, "Parkinson Hastalığı", null },
-                    { 10, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(990), null, "Bunama", null }
+                    { 1, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1241), null, "Kardiyoloji Araştırmaları", null },
+                    { 2, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1252), null, "Çocuk Sağlığı", null },
+                    { 3, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1256), null, "Onkoloji Tedavi", null },
+                    { 4, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1260), null, "Nöroloji ve Beyin Cerrahisi", null },
+                    { 5, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1263), null, "Endokrinoloji ve Metabolizma", null },
+                    { 6, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1269), null, "Gastroenteroloji ve Sindirim Sistemi", null },
+                    { 7, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1272), null, "Psikiyatri ve Mental Sağlık", null },
+                    { 8, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1276), null, "Aile Hekimliği ve Birinci Basamak Sağlık Hizmetleri", null },
+                    { 9, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1280), null, "Parkinson Hastalığı", null },
+                    { 10, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1284), null, "Bunama", null }
                 });
 
             migrationBuilder.InsertData(
@@ -300,8 +300,8 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "CreatedDate", "DeletedDate", "Name", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 6, 11, 23, 30, 9, 585, DateTimeKind.Local).AddTicks(9893), null, "Admin", null },
-                    { 2, new DateTime(2024, 6, 11, 23, 30, 9, 585, DateTimeKind.Local).AddTicks(9903), null, "Appointment.Delete", null }
+                    { 1, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(73), null, "Admin", null },
+                    { 2, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(80), null, "Appointment.Delete", null }
                 });
 
             migrationBuilder.InsertData(
@@ -309,11 +309,11 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "CreatedDate", "DeletedDate", "Email", "FirstName", "Gender", "IsDeleted", "LastName", "PasswordHash", "PasswordSalt", "PhoneNumber", "UpdatedDate", "UserType" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 6, 11, 20, 30, 9, 586, DateTimeKind.Utc).AddTicks(401), null, "hasta1@example.com", "John", "Male", false, "Doe", new byte[] { 52, 160, 214, 5, 204, 125, 141, 102, 54, 97, 3, 19, 120, 168, 219, 66, 235, 106, 75, 33, 86, 60, 213, 28, 150, 253, 139, 63, 232, 135, 144, 210, 62, 195, 64, 212, 10, 188, 177, 63, 244, 228, 226, 153, 243, 95, 161, 80, 166, 213, 230, 68, 27, 118, 55, 200, 69, 102, 44, 139, 88, 15, 16, 197 }, new byte[] { 229, 0, 21, 252, 2, 35, 17, 139, 110, 182, 104, 6, 69, 98, 76, 219, 4, 26, 212, 45, 40, 68, 215, 96, 111, 194, 111, 58, 85, 253, 207, 233, 71, 217, 140, 42, 44, 237, 170, 150, 135, 229, 99, 10, 57, 129, 255, 209, 106, 32, 141, 91, 168, 63, 118, 199, 114, 163, 52, 114, 176, 209, 20, 127, 210, 152, 101, 121, 207, 224, 230, 30, 184, 196, 218, 169, 193, 170, 125, 53, 233, 120, 200, 27, 91, 116, 125, 101, 212, 48, 189, 152, 15, 235, 72, 45, 152, 175, 126, 108, 5, 186, 44, 114, 43, 26, 99, 65, 81, 204, 46, 97, 241, 148, 191, 230, 11, 220, 226, 21, 199, 144, 193, 237, 47, 207, 48, 70 }, "1234567890", null, 0 },
-                    { 2, new DateTime(2024, 6, 11, 20, 30, 9, 586, DateTimeKind.Utc).AddTicks(410), null, "hasta2@example.com", "Jonathan", "Male", false, "Corwin", new byte[] { 52, 160, 214, 5, 204, 125, 141, 102, 54, 97, 3, 19, 120, 168, 219, 66, 235, 106, 75, 33, 86, 60, 213, 28, 150, 253, 139, 63, 232, 135, 144, 210, 62, 195, 64, 212, 10, 188, 177, 63, 244, 228, 226, 153, 243, 95, 161, 80, 166, 213, 230, 68, 27, 118, 55, 200, 69, 102, 44, 139, 88, 15, 16, 197 }, new byte[] { 229, 0, 21, 252, 2, 35, 17, 139, 110, 182, 104, 6, 69, 98, 76, 219, 4, 26, 212, 45, 40, 68, 215, 96, 111, 194, 111, 58, 85, 253, 207, 233, 71, 217, 140, 42, 44, 237, 170, 150, 135, 229, 99, 10, 57, 129, 255, 209, 106, 32, 141, 91, 168, 63, 118, 199, 114, 163, 52, 114, 176, 209, 20, 127, 210, 152, 101, 121, 207, 224, 230, 30, 184, 196, 218, 169, 193, 170, 125, 53, 233, 120, 200, 27, 91, 116, 125, 101, 212, 48, 189, 152, 15, 235, 72, 45, 152, 175, 126, 108, 5, 186, 44, 114, 43, 26, 99, 65, 81, 204, 46, 97, 241, 148, 191, 230, 11, 220, 226, 21, 199, 144, 193, 237, 47, 207, 48, 70 }, "1234512345", null, 0 },
-                    { 3, new DateTime(2024, 6, 11, 20, 30, 9, 586, DateTimeKind.Utc).AddTicks(415), null, "doktor1@example.com", "batu", "Male", false, "cerrahlar", new byte[] { 52, 160, 214, 5, 204, 125, 141, 102, 54, 97, 3, 19, 120, 168, 219, 66, 235, 106, 75, 33, 86, 60, 213, 28, 150, 253, 139, 63, 232, 135, 144, 210, 62, 195, 64, 212, 10, 188, 177, 63, 244, 228, 226, 153, 243, 95, 161, 80, 166, 213, 230, 68, 27, 118, 55, 200, 69, 102, 44, 139, 88, 15, 16, 197 }, new byte[] { 229, 0, 21, 252, 2, 35, 17, 139, 110, 182, 104, 6, 69, 98, 76, 219, 4, 26, 212, 45, 40, 68, 215, 96, 111, 194, 111, 58, 85, 253, 207, 233, 71, 217, 140, 42, 44, 237, 170, 150, 135, 229, 99, 10, 57, 129, 255, 209, 106, 32, 141, 91, 168, 63, 118, 199, 114, 163, 52, 114, 176, 209, 20, 127, 210, 152, 101, 121, 207, 224, 230, 30, 184, 196, 218, 169, 193, 170, 125, 53, 233, 120, 200, 27, 91, 116, 125, 101, 212, 48, 189, 152, 15, 235, 72, 45, 152, 175, 126, 108, 5, 186, 44, 114, 43, 26, 99, 65, 81, 204, 46, 97, 241, 148, 191, 230, 11, 220, 226, 21, 199, 144, 193, 237, 47, 207, 48, 70 }, "1234512312", null, 1 },
-                    { 4, new DateTime(2024, 6, 11, 20, 30, 9, 586, DateTimeKind.Utc).AddTicks(418), null, "doktor2@example.com", "kalp", "Male", false, "doktoru", new byte[] { 52, 160, 214, 5, 204, 125, 141, 102, 54, 97, 3, 19, 120, 168, 219, 66, 235, 106, 75, 33, 86, 60, 213, 28, 150, 253, 139, 63, 232, 135, 144, 210, 62, 195, 64, 212, 10, 188, 177, 63, 244, 228, 226, 153, 243, 95, 161, 80, 166, 213, 230, 68, 27, 118, 55, 200, 69, 102, 44, 139, 88, 15, 16, 197 }, new byte[] { 229, 0, 21, 252, 2, 35, 17, 139, 110, 182, 104, 6, 69, 98, 76, 219, 4, 26, 212, 45, 40, 68, 215, 96, 111, 194, 111, 58, 85, 253, 207, 233, 71, 217, 140, 42, 44, 237, 170, 150, 135, 229, 99, 10, 57, 129, 255, 209, 106, 32, 141, 91, 168, 63, 118, 199, 114, 163, 52, 114, 176, 209, 20, 127, 210, 152, 101, 121, 207, 224, 230, 30, 184, 196, 218, 169, 193, 170, 125, 53, 233, 120, 200, 27, 91, 116, 125, 101, 212, 48, 189, 152, 15, 235, 72, 45, 152, 175, 126, 108, 5, 186, 44, 114, 43, 26, 99, 65, 81, 204, 46, 97, 241, 148, 191, 230, 11, 220, 226, 21, 199, 144, 193, 237, 47, 207, 48, 70 }, "1234512313", null, 1 },
-                    { 5, new DateTime(2024, 6, 11, 20, 30, 9, 586, DateTimeKind.Utc).AddTicks(422), null, "admin@example.com", "Admin", "Male", false, "Yöneticioğlu", new byte[] { 52, 160, 214, 5, 204, 125, 141, 102, 54, 97, 3, 19, 120, 168, 219, 66, 235, 106, 75, 33, 86, 60, 213, 28, 150, 253, 139, 63, 232, 135, 144, 210, 62, 195, 64, 212, 10, 188, 177, 63, 244, 228, 226, 153, 243, 95, 161, 80, 166, 213, 230, 68, 27, 118, 55, 200, 69, 102, 44, 139, 88, 15, 16, 197 }, new byte[] { 229, 0, 21, 252, 2, 35, 17, 139, 110, 182, 104, 6, 69, 98, 76, 219, 4, 26, 212, 45, 40, 68, 215, 96, 111, 194, 111, 58, 85, 253, 207, 233, 71, 217, 140, 42, 44, 237, 170, 150, 135, 229, 99, 10, 57, 129, 255, 209, 106, 32, 141, 91, 168, 63, 118, 199, 114, 163, 52, 114, 176, 209, 20, 127, 210, 152, 101, 121, 207, 224, 230, 30, 184, 196, 218, 169, 193, 170, 125, 53, 233, 120, 200, 27, 91, 116, 125, 101, 212, 48, 189, 152, 15, 235, 72, 45, 152, 175, 126, 108, 5, 186, 44, 114, 43, 26, 99, 65, 81, 204, 46, 97, 241, 148, 191, 230, 11, 220, 226, 21, 199, 144, 193, 237, 47, 207, 48, 70 }, "1234512345", null, 2 }
+                    { 1, new DateTime(2024, 6, 11, 22, 6, 50, 589, DateTimeKind.Utc).AddTicks(701), null, "hasta1@example.com", "John", "Male", false, "Doe", new byte[] { 233, 97, 61, 2, 125, 16, 232, 220, 225, 30, 23, 71, 255, 122, 95, 71, 219, 61, 243, 252, 168, 1, 232, 183, 72, 172, 196, 138, 39, 12, 42, 105, 240, 132, 41, 230, 59, 17, 83, 21, 141, 92, 68, 189, 252, 148, 39, 164, 133, 239, 115, 142, 177, 193, 215, 46, 214, 180, 222, 222, 200, 145, 203, 219 }, new byte[] { 186, 65, 135, 84, 235, 18, 151, 37, 46, 128, 228, 177, 50, 71, 208, 2, 227, 213, 225, 234, 200, 44, 199, 249, 61, 227, 178, 210, 58, 134, 186, 63, 60, 194, 229, 214, 222, 53, 35, 168, 102, 183, 56, 85, 85, 90, 172, 213, 248, 67, 203, 247, 190, 130, 143, 147, 227, 61, 181, 241, 205, 170, 251, 21, 184, 172, 72, 32, 153, 248, 216, 100, 6, 149, 51, 213, 151, 215, 102, 11, 221, 212, 161, 18, 234, 195, 29, 117, 248, 234, 149, 180, 69, 23, 193, 88, 53, 86, 154, 30, 109, 32, 249, 96, 95, 205, 40, 191, 42, 225, 248, 133, 31, 112, 247, 59, 111, 47, 107, 224, 57, 196, 64, 187, 93, 67, 45, 166 }, "1234567890", null, 0 },
+                    { 2, new DateTime(2024, 6, 11, 22, 6, 50, 589, DateTimeKind.Utc).AddTicks(713), null, "hasta2@example.com", "Jonathan", "Male", false, "Corwin", new byte[] { 233, 97, 61, 2, 125, 16, 232, 220, 225, 30, 23, 71, 255, 122, 95, 71, 219, 61, 243, 252, 168, 1, 232, 183, 72, 172, 196, 138, 39, 12, 42, 105, 240, 132, 41, 230, 59, 17, 83, 21, 141, 92, 68, 189, 252, 148, 39, 164, 133, 239, 115, 142, 177, 193, 215, 46, 214, 180, 222, 222, 200, 145, 203, 219 }, new byte[] { 186, 65, 135, 84, 235, 18, 151, 37, 46, 128, 228, 177, 50, 71, 208, 2, 227, 213, 225, 234, 200, 44, 199, 249, 61, 227, 178, 210, 58, 134, 186, 63, 60, 194, 229, 214, 222, 53, 35, 168, 102, 183, 56, 85, 85, 90, 172, 213, 248, 67, 203, 247, 190, 130, 143, 147, 227, 61, 181, 241, 205, 170, 251, 21, 184, 172, 72, 32, 153, 248, 216, 100, 6, 149, 51, 213, 151, 215, 102, 11, 221, 212, 161, 18, 234, 195, 29, 117, 248, 234, 149, 180, 69, 23, 193, 88, 53, 86, 154, 30, 109, 32, 249, 96, 95, 205, 40, 191, 42, 225, 248, 133, 31, 112, 247, 59, 111, 47, 107, 224, 57, 196, 64, 187, 93, 67, 45, 166 }, "1234512345", null, 0 },
+                    { 3, new DateTime(2024, 6, 11, 22, 6, 50, 589, DateTimeKind.Utc).AddTicks(717), null, "doktor1@example.com", "batu", "Male", false, "cerrahlar", new byte[] { 233, 97, 61, 2, 125, 16, 232, 220, 225, 30, 23, 71, 255, 122, 95, 71, 219, 61, 243, 252, 168, 1, 232, 183, 72, 172, 196, 138, 39, 12, 42, 105, 240, 132, 41, 230, 59, 17, 83, 21, 141, 92, 68, 189, 252, 148, 39, 164, 133, 239, 115, 142, 177, 193, 215, 46, 214, 180, 222, 222, 200, 145, 203, 219 }, new byte[] { 186, 65, 135, 84, 235, 18, 151, 37, 46, 128, 228, 177, 50, 71, 208, 2, 227, 213, 225, 234, 200, 44, 199, 249, 61, 227, 178, 210, 58, 134, 186, 63, 60, 194, 229, 214, 222, 53, 35, 168, 102, 183, 56, 85, 85, 90, 172, 213, 248, 67, 203, 247, 190, 130, 143, 147, 227, 61, 181, 241, 205, 170, 251, 21, 184, 172, 72, 32, 153, 248, 216, 100, 6, 149, 51, 213, 151, 215, 102, 11, 221, 212, 161, 18, 234, 195, 29, 117, 248, 234, 149, 180, 69, 23, 193, 88, 53, 86, 154, 30, 109, 32, 249, 96, 95, 205, 40, 191, 42, 225, 248, 133, 31, 112, 247, 59, 111, 47, 107, 224, 57, 196, 64, 187, 93, 67, 45, 166 }, "1234512312", null, 1 },
+                    { 4, new DateTime(2024, 6, 11, 22, 6, 50, 589, DateTimeKind.Utc).AddTicks(721), null, "doktor2@example.com", "kalp", "Male", false, "doktoru", new byte[] { 233, 97, 61, 2, 125, 16, 232, 220, 225, 30, 23, 71, 255, 122, 95, 71, 219, 61, 243, 252, 168, 1, 232, 183, 72, 172, 196, 138, 39, 12, 42, 105, 240, 132, 41, 230, 59, 17, 83, 21, 141, 92, 68, 189, 252, 148, 39, 164, 133, 239, 115, 142, 177, 193, 215, 46, 214, 180, 222, 222, 200, 145, 203, 219 }, new byte[] { 186, 65, 135, 84, 235, 18, 151, 37, 46, 128, 228, 177, 50, 71, 208, 2, 227, 213, 225, 234, 200, 44, 199, 249, 61, 227, 178, 210, 58, 134, 186, 63, 60, 194, 229, 214, 222, 53, 35, 168, 102, 183, 56, 85, 85, 90, 172, 213, 248, 67, 203, 247, 190, 130, 143, 147, 227, 61, 181, 241, 205, 170, 251, 21, 184, 172, 72, 32, 153, 248, 216, 100, 6, 149, 51, 213, 151, 215, 102, 11, 221, 212, 161, 18, 234, 195, 29, 117, 248, 234, 149, 180, 69, 23, 193, 88, 53, 86, 154, 30, 109, 32, 249, 96, 95, 205, 40, 191, 42, 225, 248, 133, 31, 112, 247, 59, 111, 47, 107, 224, 57, 196, 64, 187, 93, 67, 45, 166 }, "1234512313", null, 1 },
+                    { 5, new DateTime(2024, 6, 11, 22, 6, 50, 589, DateTimeKind.Utc).AddTicks(725), null, "admin@example.com", "Admin", "Male", false, "Yöneticioğlu", new byte[] { 233, 97, 61, 2, 125, 16, 232, 220, 225, 30, 23, 71, 255, 122, 95, 71, 219, 61, 243, 252, 168, 1, 232, 183, 72, 172, 196, 138, 39, 12, 42, 105, 240, 132, 41, 230, 59, 17, 83, 21, 141, 92, 68, 189, 252, 148, 39, 164, 133, 239, 115, 142, 177, 193, 215, 46, 214, 180, 222, 222, 200, 145, 203, 219 }, new byte[] { 186, 65, 135, 84, 235, 18, 151, 37, 46, 128, 228, 177, 50, 71, 208, 2, 227, 213, 225, 234, 200, 44, 199, 249, 61, 227, 178, 210, 58, 134, 186, 63, 60, 194, 229, 214, 222, 53, 35, 168, 102, 183, 56, 85, 85, 90, 172, 213, 248, 67, 203, 247, 190, 130, 143, 147, 227, 61, 181, 241, 205, 170, 251, 21, 184, 172, 72, 32, 153, 248, 216, 100, 6, 149, 51, 213, 151, 215, 102, 11, 221, 212, 161, 18, 234, 195, 29, 117, 248, 234, 149, 180, 69, 23, 193, 88, 53, 86, 154, 30, 109, 32, 249, 96, 95, 205, 40, 191, 42, 225, 248, 133, 31, 112, 247, 59, 111, 47, 107, 224, 57, 196, 64, 187, 93, 67, 45, 166 }, "1234512345", null, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -321,8 +321,8 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "Biography", "CreatedDate", "DeletedDate", "DoctorSpecializationId", "Experience", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 3, "Id 3 olan Doktor Özgeçmiş Example", new DateTime(2024, 6, 11, 20, 30, 9, 586, DateTimeKind.Utc).AddTicks(702), null, 1, 10, null },
-                    { 4, "Kalp Doktoru Özgeçmiş Example", new DateTime(2024, 6, 11, 20, 30, 9, 586, DateTimeKind.Utc).AddTicks(710), null, 2, 5, null }
+                    { 3, "Id 3 olan Doktor Özgeçmiş Example", new DateTime(2024, 6, 11, 22, 6, 50, 589, DateTimeKind.Utc).AddTicks(932), null, 1, 10, null },
+                    { 4, "Kalp Doktoru Özgeçmiş Example", new DateTime(2024, 6, 11, 22, 6, 50, 589, DateTimeKind.Utc).AddTicks(942), null, 2, 5, null }
                 });
 
             migrationBuilder.InsertData(
@@ -330,8 +330,8 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "Address", "AppointmentId", "BloodType", "CreatedDate", "DeletedDate", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, "1234 Main St", 0, "A+", new DateTime(2024, 6, 11, 20, 30, 9, 586, DateTimeKind.Utc).AddTicks(519), null, null },
-                    { 2, "1233 Main St", 0, "B+", new DateTime(2024, 6, 11, 20, 30, 9, 586, DateTimeKind.Utc).AddTicks(528), null, null }
+                    { 1, "1234 Main St", 0, "A+", new DateTime(2024, 6, 11, 22, 6, 50, 589, DateTimeKind.Utc).AddTicks(831), null, null },
+                    { 2, "1233 Main St", 0, "B+", new DateTime(2024, 6, 11, 22, 6, 50, 589, DateTimeKind.Utc).AddTicks(839), null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -339,8 +339,8 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "CreatedDate", "DeletedDate", "OperationClaimId", "UpdatedDate", "UserId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(7), null, 1, null, 5 },
-                    { 2, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(15), null, 2, null, 3 }
+                    { 1, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(189), null, 1, null, 5 },
+                    { 2, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(199), null, 2, null, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -348,10 +348,10 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "AppointmentTime", "CreatedDate", "DeletedDate", "DoctorId", "IsDeleted", "PatientId", "Status", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(849), new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(850), null, 3, false, 1, 0, null },
-                    { 2, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(859), new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(860), null, 4, false, 1, 0, null },
-                    { 3, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(864), new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(864), null, 3, false, 2, 0, null },
-                    { 4, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(867), new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(868), null, 4, false, 2, 0, null }
+                    { 1, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1081), new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1083), null, 3, false, 1, 0, null },
+                    { 2, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1095), new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1095), null, 4, false, 1, 0, null },
+                    { 3, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1100), new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1101), null, 3, false, 2, 0, null },
+                    { 4, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1105), new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1106), null, 4, false, 2, 0, null }
                 });
 
             migrationBuilder.InsertData(
@@ -370,10 +370,10 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "AppointmentId", "CreatedDate", "DeletedDate", "Diagnosis", "ExaminationFindings", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(1172), null, " Hipertansiyon", "Yüksek kan basıncı", null },
-                    { 2, 2, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(1180), null, " Hipertansiyon", "Yüksek kan basıncı", null },
-                    { 3, 3, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(1184), null, "Diabetes Mellitus", "Fasting blood sugar level of 140 mg/dL", null },
-                    { 4, 4, new DateTime(2024, 6, 11, 23, 30, 9, 586, DateTimeKind.Local).AddTicks(1188), null, "Chronic Obstructive Pulmonary Disease (COPD)", "Reduced lung function on spirometry", null }
+                    { 1, 1, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1629), null, " Hipertansiyon", "Yüksek kan basıncı", null },
+                    { 2, 2, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1645), null, " Hipertansiyon", "Yüksek kan basıncı", null },
+                    { 3, 3, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1650), null, "Diabetes Mellitus", "Fasting blood sugar level of 140 mg/dL", null },
+                    { 4, 4, new DateTime(2024, 6, 12, 1, 6, 50, 589, DateTimeKind.Local).AddTicks(1654), null, "Chronic Obstructive Pulmonary Disease (COPD)", "Reduced lung function on spirometry", null }
                 });
 
             migrationBuilder.CreateIndex(
