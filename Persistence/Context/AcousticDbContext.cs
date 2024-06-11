@@ -45,6 +45,10 @@ namespace Persistence.Context
             .Property(p => p.Id)
             .ValueGeneratedNever();
 
+            modelBuilder.Entity<Report>()
+            .Property(p => p.Id)
+            .ValueGeneratedNever();
+
             modelBuilder.Entity<Appointment>()
             .HasOne(a => a.Report)
              .WithOne(r => r.Appointment)

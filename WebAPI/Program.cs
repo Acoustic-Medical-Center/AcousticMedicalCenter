@@ -94,7 +94,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.ConfigureExceptionMiddlewareExtensions();
+/*app.ConfigureExceptionMiddlewareExtensions();*/
 
 app.UseCors("AllowAllOrigins");
 
