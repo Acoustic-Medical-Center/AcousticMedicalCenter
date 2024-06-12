@@ -17,7 +17,7 @@ namespace Application.Features.User.Commands.Update
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? PhoneNumber { get; set; }
-
+        public string? Gender { get; set; }
 
         public class UserUpdateCommandHandler : IRequestHandler<UserUpdateCommand, UserUpdateCommandResponse>
         {
@@ -43,6 +43,8 @@ namespace Application.Features.User.Commands.Update
                 userToUpdate.FirstName = request.FirstName != null ? request.FirstName : userToUpdate.FirstName;
                 userToUpdate.LastName = request.LastName != null ? request.LastName : userToUpdate.LastName;
                 userToUpdate.PhoneNumber = request.PhoneNumber != null ? request.PhoneNumber : userToUpdate.PhoneNumber;
+                userToUpdate.Gender = request.Gender != null ? request.Gender : userToUpdate.Gender;
+
 
                 await _userRepository.UpdateAsync(userToUpdate);
                 return new();
