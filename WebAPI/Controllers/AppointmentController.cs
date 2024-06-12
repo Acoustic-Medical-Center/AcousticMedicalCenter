@@ -28,42 +28,42 @@ namespace WebAPI.Controllers
             _mailService = mailService;
         }
 
-        [HttpPost("patient/appointment")]
+        [HttpPost("patient/appointments")]
         public async Task<IActionResult> CreateAppointmentByPatient(CreateAppointmentCommand createAppointmentCommand)
         {
             var response = await _mediator.Send(createAppointmentCommand);
             return Ok(response);
         }
 
-        [HttpGet("patient/appointment")]
+        [HttpGet("patient/appointments")]
         public async Task<IActionResult> GetAllAppointmentsByPatient([FromQuery] GetAllAppointmensByPatientQuery getAllAppointmentsByUserQuery)
         {
             var response = await _mediator.Send(getAllAppointmentsByUserQuery);
             return Ok(response);
         }
 
-        [HttpGet("admin/appointment")]
+        [HttpGet("admin/appointments")]
         public async Task<IActionResult> GetAllAppointmentsByClaim([FromRoute]GetAllAppointmentsByClaimQuery getAllAppointmentsByClaimQuery)
         {
             var response = await _mediator.Send(getAllAppointmentsByClaimQuery);
             return Ok(response);
         }
 
-        [HttpGet("admin/appointment/{AppointmentId}")]
+        [HttpGet("admin/appointments/{AppointmentId}")]
         public async Task<IActionResult> GetAllAppointmentsByIdAdmin([FromRoute] GetAppointmentByIdAdminQuery getAppointmentByIdAdminQuery)
         {
             var response = await _mediator.Send(getAppointmentByIdAdminQuery);
             return Ok(response);
         }
 
-        [HttpDelete("patient/appointment")]
+        [HttpDelete("patient/appointments/{AppointmentId}")]
         public async Task<IActionResult> Delete([FromQuery] DeleteAppointmentByPatientCommand deleteAppointmentByUserCommand)
         {
             var response = await _mediator.Send(deleteAppointmentByUserCommand);
             return Ok(response);
         }
 
-        [HttpDelete("admin/appointment")]
+        [HttpDelete("admin/appointments/{AppointmentId}")]
         public async Task<IActionResult> DeleteByClaim([FromQuery] DeleteAppointmentByClaimCommand deleteAppointmentByClaimCommand)
         {
             var response = await _mediator.Send(deleteAppointmentByClaimCommand);
