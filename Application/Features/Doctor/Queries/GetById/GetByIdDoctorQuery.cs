@@ -2,6 +2,7 @@
 using AutoMapper;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,11 +29,17 @@ namespace Application.Features.Doctor.Queries.GetById
 
             public async Task<GetByIdDoctorQueryResponse> Handle(GetByIdDoctorQuery request, CancellationToken cancellationToken)
             {
-                Domain.Entities.Doctor? doctor = await _doctorRepository.GetAsync(d => d.Id == request.Id);
+                Domain.Entities.Doctor? doctor = await _doctorRepository.GetAsync(d => d.Id == request.Id,
+                    include: dc => dc
+                       .Include(dctri => dctri.Interests)
+                       
+                );
+
 
                 if (doctor is null)
                     throw new BusinessException("Böyle bir veri bulunamadı.");
 
+               
                 GetByIdDoctorQueryResponse response = _mapper.Map<GetByIdDoctorQueryResponse>(doctor);
 
                 return response;
