@@ -12,7 +12,9 @@ namespace Application.Features.Doctor.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<Domain.Entities.Doctor, GetByIdDoctorQueryResponse>().ReverseMap();
+            CreateMap<Domain.Entities.Doctor, GetByIdDoctorQueryResponse>()
+               .ForMember(dest => dest.DoctorInterests, opt => opt.MapFrom(src => src.DoctorInterest.Select(di => di.Interest.Name).ToList()));
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,8 @@ namespace Application.Features.Doctor.Queries.GetById
 
         public string Experience { get; set; }
 
-
+        public string Biography  { get; set; }
+        public virtual ICollection<string> DoctorInterests { get; set; }
 
 
 

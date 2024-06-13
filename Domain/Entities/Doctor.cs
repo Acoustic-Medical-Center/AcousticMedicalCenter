@@ -17,7 +17,7 @@ namespace Domain.Entities
         public int DoctorSpecializationId { get; set; }
         public virtual ICollection<Appointment> Appointment { get; set; }
 
-        public virtual ICollection<DoctorInterest> Interests { get; set; }
+        public virtual ICollection<DoctorInterest> DoctorInterest { get; set; }
 
         public string Biography { get; set; }
 
