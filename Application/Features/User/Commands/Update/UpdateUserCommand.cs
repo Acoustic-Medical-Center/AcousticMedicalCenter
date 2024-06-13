@@ -37,6 +37,12 @@ namespace Application.Features.User.Commands.Update
             {
                 var currentUserId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
+                var isMailExist = await _userRepository.GetAsync(u => u.Email == request.Email);
+                if (isMailExist != null)
+                {
+                    throw new Exception("Bu mail adresi kullanılıyor");
+                }
+
                 var userToUpdate = await _userRepository.GetAsync(u => u.Id == currentUserId);
 
                 userToUpdate.Email = request.Email != null ? request.Email : userToUpdate.Email;
@@ -44,7 +50,6 @@ namespace Application.Features.User.Commands.Update
                 userToUpdate.LastName = request.LastName != null ? request.LastName : userToUpdate.LastName;
                 userToUpdate.PhoneNumber = request.PhoneNumber != null ? request.PhoneNumber : userToUpdate.PhoneNumber;
                 userToUpdate.Gender = request.Gender != null ? request.Gender : userToUpdate.Gender;
-
 
                 await _userRepository.UpdateAsync(userToUpdate);
                 return new();

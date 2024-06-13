@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -42,7 +42,7 @@ namespace WebAPI.Controllers
             return Ok(response);
         }
 
-        [HttpPost("[action]")]
+        [HttpPut()]  
         public async Task<IActionResult> Update(UserUpdateCommand userUpdateCommand)
         {
             var response = await _mediator.Send(userUpdateCommand);
