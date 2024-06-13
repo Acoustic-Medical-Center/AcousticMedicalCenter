@@ -32,6 +32,7 @@ namespace Persistence
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
             services.AddScoped<IDoctorSpecializationRepository, DoctorSpecializationRepository>();
             services.AddScoped<IReportRepository, ReportRepository>();
+            services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
 
             return services;
         }
