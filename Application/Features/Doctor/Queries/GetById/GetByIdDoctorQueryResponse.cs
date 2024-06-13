@@ -14,7 +14,7 @@ namespace Application.Features.Doctor.Queries.GetById
         public string Experience { get; set; }
 
         public string Biography  { get; set; }
-        public virtual ICollection<DoctorInterest> DoctorInterests { get; set; }
+        public virtual ICollection<string> DoctorInterests { get; set; }
 
 
 

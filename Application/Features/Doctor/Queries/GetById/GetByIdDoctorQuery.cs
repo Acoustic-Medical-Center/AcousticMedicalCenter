@@ -31,7 +31,8 @@ namespace Application.Features.Doctor.Queries.GetById
             {
                 Domain.Entities.Doctor? doctor = await _doctorRepository.GetAsync(d => d.Id == request.Id,
                     include: dc => dc
-                       .Include(dctri => dctri.Interests)
+                       .Include(dctri => dctri.DoctorInterest)
+                       .ThenInclude(intr => intr.Interest)
                        
                 );
 
