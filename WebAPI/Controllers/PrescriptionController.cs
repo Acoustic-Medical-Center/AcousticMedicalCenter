@@ -1,6 +1,7 @@
 ﻿using Application.Features.Appointment.Queries.GetAllByPatient;
 using Application.Features.Doctor.Queries.GetById;
 using Application.Features.Prescriptions.Commands.Create;
+using Application.Features.Prescriptions.Commands.Update;
 using Application.Features.Prescriptions.Queries.GetAllByAdmin;
 using Application.Features.Prescriptions.Queries.GetAllByDoctor;
 using Application.Features.Prescriptions.Queries.GetAllByPatient;
@@ -30,13 +31,14 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Add([FromBody] CreatePrescriptionCommand command)
         {
             var response = await _mediator.Send(command);
+            return Ok();
+        }
 
-            return Ok(new
-            {
-                Data = response,
-                Message = "Prescription created successfully"
-            });
-
+        [HttpPut()]
+        public async Task<IActionResult> Update([FromBody] UpdatePrescriptionCommand updatePrescriptionCommand)
+        {
+            var response = await _mediator.Send(updatePrescriptionCommand);
+            return Ok();
         }
 
         [HttpGet("/by-patient")]
