@@ -111,22 +111,17 @@ namespace Core.DataAccess
 
         public async Task SoftDeleteAsync(TEntity entity)
         {
-            // entity'nin durumunu silinmiş olarak işaretleyin
-            //Context.Update(entity);
-
-            // ChangeTracker'da izlenen tüm değişiklikleri alın
             var datas = Context.ChangeTracker.Entries<TEntity>();
 
             foreach (var item in datas)
             {
-                if (item.Entity is ISoftDeletable e && item.State == EntityState.Deleted)
+                if (item.Entity is ISoftDeletable e)
                 {
                     item.State = EntityState.Modified;
                     e.IsDeleted = true;
                 }
-                
-            }
 
+            }
             await Context.SaveChangesAsync();
         }
     }

@@ -17,8 +17,7 @@ namespace Application.Features.Prescriptions.Profiles
     {
         public PrescriptionMappingProfiles()
         {
-            CreateMap<Prescription, CreatePrescriptionCommand>().ReverseMap()
-            .ForMember(dest => dest.PrescriptionStatus, opt => opt.MapFrom(src => PrescriptionStatus.Active));
+            CreateMap<Prescription, CreatePrescriptionCommand>().ReverseMap();
             CreateMap<Prescription, CreatePrescriptionCommandResponse>().ReverseMap();
 
 
