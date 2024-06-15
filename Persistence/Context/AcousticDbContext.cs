@@ -28,6 +28,7 @@ namespace Persistence.Context
         public DbSet<DoctorSpecialization> DoctorSpecializations { get; set; }
         public DbSet<Interest> Interests { get; set; }
         public DbSet<DoctorInterest> DoctorInterests { get; set; }
+        public DbSet<Prescription> Prescriptions { get; set; }
 
 
 
