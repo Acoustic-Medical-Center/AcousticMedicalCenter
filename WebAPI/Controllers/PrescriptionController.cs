@@ -38,7 +38,7 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Update([FromBody] UpdatePrescriptionCommand updatePrescriptionCommand)
         {
             var response = await _mediator.Send(updatePrescriptionCommand);
-            return Ok();
+            return Ok(response);
         }
 
         [HttpGet("/by-patient")]

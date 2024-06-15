@@ -55,7 +55,8 @@ namespace Application.Features.Prescriptions.Commands.Update
                 {
                     throw new Exception("Bu randevuya reçete yazamazsınız");
                 }
-                return new();
+                var response = _prescriptionRepository.GetList().OrderByDescending(p => p.UpdatedDate).FirstOrDefault();
+                return new() { Id = response.Id, DosageInstructions = response.DosageInstructions, MedicationDetails = response.MedicationDetails };
             }
         }
     }
