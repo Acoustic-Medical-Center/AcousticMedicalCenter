@@ -1,4 +1,5 @@
 ﻿using Application.Features.Doctor.Commands.Update;
+using Application.Features.Doctor.Commands.UpdateByAdmin;
 using Application.Features.Doctor.Queries.GetAll;
 using Application.Features.Doctor.Queries.GetById;
 using Application.Features.User.Queries.GetAll;
@@ -8,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/doctors")]
+    [Route("api/")]
     [ApiController]
     public class DoctorController : ControllerBase
     {
@@ -19,14 +20,14 @@ namespace WebAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet()]
+        [HttpGet("doctors")]
         public async Task<IActionResult> GetAll([FromQuery] GetAllDoctorQuery getAllDoctorQuery)
         {
             var response = await _mediator.Send(getAllDoctorQuery);
             return Ok(response);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("doctors/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var query = new GetByIdDoctorQuery { Id = id };
@@ -34,21 +35,17 @@ namespace WebAPI.Controllers
             return Ok(response);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDoctor(int id, [FromBody] UpdateDoctorCommand command)
+        [HttpPut("doctors")]
+        public async Task<IActionResult> UpdateDoctor([FromBody] UpdateDoctorCommand command)
         {
-            if (id != command.DoctorId)
-            {
-                return BadRequest("Doktor ID'si eşleşmiyor.");
-            }
-
             var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
-            if (result == null)
-            {
-                return NotFound("Doktor bulunamadı.");
-            }
-
+        [HttpPut("admin/doctors")]
+        public async Task<IActionResult> UpdateDoctor([FromBody] UpdateDoctorByAdminCommand updateDoctorByAdminCommand)
+        {
+            var result = await _mediator.Send(updateDoctorByAdminCommand);
             return Ok(result);
         }
     }

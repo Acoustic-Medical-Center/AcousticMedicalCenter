@@ -1,6 +1,6 @@
-﻿namespace Application.Features.Doctor.Commands.Update
+﻿namespace Application.Features.Doctor.Commands.UpdateByAdmin
 {
-    public class UpdateDoctorResponse
+    public class UpdateDoctorByAdminCommandResponse
     {
         public int DoctorId { get; set; }
         public int Experience { get; set; }
