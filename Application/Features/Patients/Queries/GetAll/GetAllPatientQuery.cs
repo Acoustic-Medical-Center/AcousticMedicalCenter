@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -7,8 +8,9 @@ using System.Security.Claims;
 
 namespace Application.Features.Patients.Queries.GetAll
 {
-    public class GetAllPatientQuery : IRequest<GetAllPatientResponse>
+    public class GetAllPatientQuery : IRequest<GetAllPatientResponse>, ISecuredRequest
     {
+        public string[] RequiredRoles => ["Doctor"];
 
         public class GetAllPatientQueryHandler : IRequestHandler<GetAllPatientQuery, GetAllPatientResponse>
         {

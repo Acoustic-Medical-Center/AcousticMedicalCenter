@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -13,10 +14,11 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Patients.Queries.GetById
 {
-    public class GetPatientByIdQuery : IRequest<GetPatientByIdResponse>
+    public class GetPatientByIdQuery : IRequest<GetPatientByIdResponse>, ISecuredRequest
     {
         public int PatientId { get; set; }
 
+        public string[] RequiredRoles => ["Doctor"];
 
         public class GetPatientByIdQueryHandler : IRequestHandler<GetPatientByIdQuery, GetPatientByIdResponse>
         {

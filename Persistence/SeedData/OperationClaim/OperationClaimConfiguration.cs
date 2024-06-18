@@ -29,6 +29,15 @@ namespace Persistence.SeedData.OperationClaim
                     CreatedDate = DateTime.Now,
                 }
             );
+
+            builder.HasData(
+                new Domain.Entities.OperationClaim
+                {
+                    Id = 3,
+                    Name = "Doctor",
+                    CreatedDate = DateTime.Now,
+                }
+            );
         }
     }
 
@@ -52,6 +61,26 @@ namespace Persistence.SeedData.OperationClaim
                     Id = 2,
                     UserId = 3,
                     OperationClaimId = 2,
+                    CreatedDate = DateTime.Now,
+                }
+            );
+
+            builder.HasData(
+                new Domain.Entities.UserOperationClaim
+                {
+                    Id = 3,
+                    UserId = 3,
+                    OperationClaimId = 3,
+                    CreatedDate = DateTime.Now,
+                }
+            );
+
+            builder.HasData(
+                new Domain.Entities.UserOperationClaim
+                {
+                    Id = 4,
+                    UserId = 4,
+                    OperationClaimId = 3,
                     CreatedDate = DateTime.Now,
                 }
             );
