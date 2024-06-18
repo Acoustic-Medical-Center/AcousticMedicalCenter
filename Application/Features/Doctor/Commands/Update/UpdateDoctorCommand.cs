@@ -18,7 +18,7 @@ namespace Application.Features.Doctor.Commands.Update
         public int Experience { get; set; } = 0;
         public string? Biography { get; set; }
 
-        public string[] RequiredRoles => [];
+        public string[] RequiredRoles => ["Doctor"];
 
         public class UpdateDoctorCommanddHandler : IRequestHandler<UpdateDoctorCommand, UpdateDoctorResponse>
         {

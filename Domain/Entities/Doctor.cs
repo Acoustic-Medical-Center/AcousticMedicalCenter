@@ -19,7 +19,7 @@ namespace Domain.Entities
 
         public virtual ICollection<DoctorInterest> DoctorInterest { get; set; }
 
-        public string Biography { get; set; }
+        public string? Biography { get; set; }
 
 
 
