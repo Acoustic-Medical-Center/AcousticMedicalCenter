@@ -1,4 +1,5 @@
-﻿using Application.Features.Appointment.Queries.GetAllByClaim;
+﻿using Application.Features.Appointment.Queries.GelAllByDoctor;
+using Application.Features.Appointment.Queries.GetAllByClaim;
 using Application.Features.Appointment.Queries.GetAllByPatient;
 using Application.Features.Appointment.Queries.GetByIdAdmin;
 using AutoMapper;
@@ -17,6 +18,11 @@ namespace Application.Features.Appointment.Profiles
             CreateMap<Domain.Entities.Appointment, GetAllAppointmentsByPatientQueryResponse>()
            .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.Doctor.User.FirstName))
            .ForMember(dest => dest.DoctorSpecialization, opt => opt.MapFrom(src => src.Doctor.DoctorSpecialization.Name));
+
+            CreateMap<Domain.Entities.Appointment, GetAllAppointmentsByDoctorQueryResponse>()
+           .ForMember(dest => dest.PatientName, opt => opt.MapFrom(src => src.Patient.User.FirstName))
+           .ForMember(dest => dest.PatientLastName, opt => opt.MapFrom(src => src.Patient.User.LastName))
+           .ForMember(dest => dest.AppointmentTime, opt => opt.MapFrom(src => src.AppointmentTime));
 
             CreateMap<Domain.Entities.Appointment, GetAllAppointmentsByClaimQueryResponse>()
             .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Patient.User.FirstName))

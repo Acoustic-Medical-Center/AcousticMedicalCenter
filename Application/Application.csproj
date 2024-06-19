@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Appointment\Queries\GelAllByDoctor\" />
     <Folder Include="Features\Prescriptions\Queries\GetByIdDoctor\" />
     <Folder Include="Features\Prescriptions\Queries\GetByIdAdmin\" />
   </ItemGroup>
