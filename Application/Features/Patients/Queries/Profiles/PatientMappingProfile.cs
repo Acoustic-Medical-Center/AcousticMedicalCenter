@@ -1,6 +1,7 @@
 ﻿using Application.Features.Appointment.Queries.GetAllByPatient;
 using Application.Features.Patients.Queries.GetAll;
 using Application.Features.Patients.Queries.GetById;
+using Application.Features.Patients.Queries.GetPatientById;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,9 @@ namespace Application.Features.Patients.Queries.Profiles
            .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.User.PhoneNumber))
            .ForMember(dest => dest.BloodType, opt => opt.MapFrom(src => src.BloodType))
            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.User.Gender));
+
+            CreateMap<GetPatientIdResponse, Domain.Entities.Patient>().ReverseMap()
+            .ForMember(dest => dest.BloodType, opt => opt.MapFrom(src => src.BloodType));
         }
     }
 }
