@@ -1,4 +1,5 @@
 ﻿using Application.Repositories;
+using Application.Services;
 using AutoMapper;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Entities;
@@ -24,13 +25,15 @@ namespace Application.Features.Auth.Commands.Register
             private readonly IUserRepository _userRepository;
             private readonly IUserOperationClaimRepository _userOperationClaimRepository;
             private readonly IPatientRepository _patientRepository;
+            private readonly IMailService _mailService;
 
-            public RegisterCommandHandler(IMapper mapper, IUserRepository userRepository, IUserOperationClaimRepository userOperationClaimRepository, IPatientRepository patientRepository)
+            public RegisterCommandHandler(IMapper mapper, IUserRepository userRepository, IUserOperationClaimRepository userOperationClaimRepository, IPatientRepository patientRepository, IMailService mailService)
             {
                 _mapper = mapper;
                 _userRepository = userRepository;
                 _userOperationClaimRepository = userOperationClaimRepository;
                 _patientRepository = patientRepository;
+                _mailService = mailService;
             }
 
             public async Task Handle(RegisterCommand request, CancellationToken cancellationToken)
@@ -54,6 +57,7 @@ namespace Application.Features.Auth.Commands.Register
                 //};
 
                 //user.Id = 10;
+                await _mailService.SendEmailAsync(request.Email, "Hoşgeldiniz", "Hesabınız başarıyla oluşturuldu");
                 await _userRepository.AddAsync(user);
                 await _patientRepository.AddAsync(new() { Id = user.Id });
 
