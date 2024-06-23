@@ -7,6 +7,7 @@ using Application.Features.Prescriptions.Queries.GetAllByDoctor;
 using Application.Features.Prescriptions.Queries.GetAllByPatient;
 using Application.Features.Prescriptions.Queries.GetByIdPatient;
 using Application.Features.Reports.Commands.Create;
+using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -14,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/prescriptions")]
+    [Route("api/")]
     [ApiController]
     public class PrescriptionController : ControllerBase
     {
@@ -27,21 +28,21 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("/prescriptions")]
         public async Task<IActionResult> Add([FromBody] CreatePrescriptionCommand command)
         {
             var response = await _mediator.Send(command);
             return Ok();
         }
 
-        [HttpPut()]
+        [HttpPut("/prescriptions")]
         public async Task<IActionResult> Update([FromBody] UpdatePrescriptionCommand updatePrescriptionCommand)
         {
             var response = await _mediator.Send(updatePrescriptionCommand);
             return Ok(response);
         }
 
-        [HttpGet("/by-patient")]
+        [HttpGet("/patient/prescriptions")]
         public async Task<IActionResult> GetAllPrescriptionsByPatient([FromQuery] GetAllPrescriptionsByPatientQuery getAllPrescriptionsByPatientQuery)
         {
             var response = await _mediator.Send(getAllPrescriptionsByPatientQuery);
@@ -49,7 +50,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("/patient/prescriptions/{id}")]
         public async Task<IActionResult> GetPrescriptionById([FromRoute] int id)
         {
             var query = new GetPatientPrescriptionByIdQuery { PrescriptionId = id };
@@ -66,7 +67,7 @@ namespace WebAPI.Controllers
         //    return Ok(response);
         //}
 
-        [HttpGet("/by-doctor")]
+        [HttpGet("/doctor/prescriptions")]
         public async Task<IActionResult> GetAllPrescriptionsByDoctor([FromQuery] GetAllPrescriptionsByDoctorQuery getAllPrescriptionsByDoctorQuery)
         {
             var response = await _mediator.Send(getAllPrescriptionsByDoctorQuery);
@@ -76,7 +77,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet("/by-admin")]
+        [HttpGet("/admin/prescriptions")]
         public async Task<IActionResult> GetAllPrescriptsionByAdmin([FromQuery] GetAllPrescriptionsByAdminQuery getAllPrescriptionsByAdminQuery)
         {
             var response = await _mediator.Send(getAllPrescriptionsByAdminQuery);

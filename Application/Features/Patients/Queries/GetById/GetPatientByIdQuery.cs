@@ -14,13 +14,13 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Patients.Queries.GetById
 {
-    public class GetPatientByIdQuery : IRequest<GetPatientByIdResponse>, ISecuredRequest
+    public class GetPatientByIdQuery : IRequest<GetPatientByIdQueryResponse>, ISecuredRequest
     {
         public int PatientId { get; set; }
 
         public string[] RequiredRoles => ["Doctor"];
 
-        public class GetPatientByIdQueryHandler : IRequestHandler<GetPatientByIdQuery, GetPatientByIdResponse>
+        public class GetPatientByIdQueryHandler : IRequestHandler<GetPatientByIdQuery, GetPatientByIdQueryResponse>
         {
             private readonly IAppointmentRepository _appointmentRepository;
             private readonly IHttpContextAccessor _httpContextAccessor;
@@ -35,7 +35,7 @@ namespace Application.Features.Patients.Queries.GetById
                 _mapper = mapper;
             }
 
-            public async Task<GetPatientByIdResponse> Handle(GetPatientByIdQuery request, CancellationToken cancellationToken)
+            public async Task<GetPatientByIdQueryResponse> Handle(GetPatientByIdQuery request, CancellationToken cancellationToken)
             {
                 var userIdClaim = _httpContextAccessor?.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
@@ -50,7 +50,7 @@ namespace Application.Features.Patients.Queries.GetById
                 if (appointment != null)
                 {
                     var patient = await _patientRepository.GetAsync(p => p.Id == request.PatientId, include: p => p.Include(p => p.User));
-                    var response = _mapper.Map<GetPatientByIdResponse>(patient);
+                    var response = _mapper.Map<GetPatientByIdQueryResponse>(patient);
                     return response;
                 }
                 throw new BusinessException("Bu hastanın bilgilerine erişemezsiniz");

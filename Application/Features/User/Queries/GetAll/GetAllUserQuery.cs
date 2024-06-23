@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace Application.Features.User.Queries.GetAll
 {
-    public class GetAllUserQuery : IRequest<GetAllUserResponse>
+    public class GetAllUserQuery : IRequest<GetAllUserQueryResponse>
     {
         public int Page { get; set; } = 0;
         public int PageSize { get; set; } = 0;
 
-        public class UserGetAllQueryHandler : IRequestHandler<GetAllUserQuery, GetAllUserResponse>
+        public class UserGetAllQueryHandler : IRequestHandler<GetAllUserQuery, GetAllUserQueryResponse>
         {
 
             private readonly IUserRepository _userRepository;
@@ -28,7 +28,7 @@ namespace Application.Features.User.Queries.GetAll
                 _mapper = mapper;
             }
 
-            public async Task<GetAllUserResponse> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
+            public async Task<GetAllUserQueryResponse> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
             {
 
                 var totalCount = _userRepository.GetList().Count();

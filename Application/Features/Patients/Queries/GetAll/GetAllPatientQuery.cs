@@ -8,11 +8,11 @@ using System.Security.Claims;
 
 namespace Application.Features.Patients.Queries.GetAll
 {
-    public class GetAllPatientQuery : IRequest<GetAllPatientResponse>, ISecuredRequest
+    public class GetAllPatientQuery : IRequest<GetAllPatientQueryResponse>, ISecuredRequest
     {
         public string[] RequiredRoles => ["Doctor"];
 
-        public class GetAllPatientQueryHandler : IRequestHandler<GetAllPatientQuery, GetAllPatientResponse>
+        public class GetAllPatientQueryHandler : IRequestHandler<GetAllPatientQuery, GetAllPatientQueryResponse>
         {
             private readonly IPatientRepository _patientRepository;
             private readonly IAppointmentRepository _appointmentRepository;
@@ -27,7 +27,7 @@ namespace Application.Features.Patients.Queries.GetAll
                 _mapper = mapper;
             }
 
-            public async Task<GetAllPatientResponse> Handle(GetAllPatientQuery request, CancellationToken cancellationToken)
+            public async Task<GetAllPatientQueryResponse> Handle(GetAllPatientQuery request, CancellationToken cancellationToken)
             {
                 var doctorId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 var appointments = await _appointmentRepository.GetListAsync(d => d.DoctorId == doctorId);

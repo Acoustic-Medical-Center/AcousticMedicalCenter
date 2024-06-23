@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Doctor.Commands.CreateDoctorRole
 {
-    public class CreateDoctorRoleCommand : IRequest<CreateDoctorRoleResponse>
+    public class CreateDoctorRoleCommand : IRequest<CreateDoctorRoleCommandResponse>
     {
         public int UserId { get; set; }
         public int SpecializationId { get; set; }
         public int Experience { get; set; }
 
 
-        public class CreateDoctorRoleCommandHandler : IRequestHandler<CreateDoctorRoleCommand, CreateDoctorRoleResponse>
+        public class CreateDoctorRoleCommandHandler : IRequestHandler<CreateDoctorRoleCommand, CreateDoctorRoleCommandResponse>
         {
 
             private readonly IUserRepository _userRepository;
@@ -35,7 +35,7 @@ namespace Application.Features.Doctor.Commands.CreateDoctorRole
                 _userOperationClaimRepository = userOperationClaimRepository;
             }
 
-            public async Task<CreateDoctorRoleResponse> Handle(CreateDoctorRoleCommand request, CancellationToken cancellationToken)
+            public async Task<CreateDoctorRoleCommandResponse> Handle(CreateDoctorRoleCommand request, CancellationToken cancellationToken)
             {
                 var patientToDelete = await _patientRepository.GetAsync(p => p.Id == request.UserId);
                 await _patientRepository.DeleteAsync(patientToDelete);

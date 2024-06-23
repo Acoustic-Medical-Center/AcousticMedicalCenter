@@ -21,7 +21,7 @@ namespace Application.Features.Patients.Queries.Profiles
            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email))
            .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.User.PhoneNumber));
 
-            CreateMap<GetPatientByIdResponse, Domain.Entities.Patient>().ReverseMap()
+            CreateMap<GetPatientByIdQueryResponse, Domain.Entities.Patient>().ReverseMap()
            .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.User.FirstName))
            .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName))
            .ForMember(dest => dest.PatientId, opt => opt.MapFrom(src => src.User.Id))
@@ -29,7 +29,7 @@ namespace Application.Features.Patients.Queries.Profiles
            .ForMember(dest => dest.BloodType, opt => opt.MapFrom(src => src.BloodType))
            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.User.Gender));
 
-            CreateMap<GetPatientIdResponse, Domain.Entities.Patient>().ReverseMap()
+            CreateMap<GetPatientByIdSelfQueryResponse, Domain.Entities.Patient>().ReverseMap()
             .ForMember(dest => dest.BloodType, opt => opt.MapFrom(src => src.BloodType));
         }
     }

@@ -13,14 +13,14 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Doctor.Commands.Update
 {
-    public class UpdateDoctorCommand : IRequest<UpdateDoctorResponse>, ISecuredRequest
+    public class UpdateDoctorCommand : IRequest<UpdateDoctorCommandResponse>, ISecuredRequest
     {
         public int Experience { get; set; } = 0;
         public string? Biography { get; set; }
 
         public string[] RequiredRoles => ["Doctor"];
 
-        public class UpdateDoctorCommanddHandler : IRequestHandler<UpdateDoctorCommand, UpdateDoctorResponse>
+        public class UpdateDoctorCommanddHandler : IRequestHandler<UpdateDoctorCommand, UpdateDoctorCommandResponse>
         {
 
             private readonly IDoctorRepository _doctorRepository;
@@ -31,7 +31,7 @@ namespace Application.Features.Doctor.Commands.Update
                 _httpContextAccessor = httpContextAccessor;
             }
 
-            public async Task<UpdateDoctorResponse> Handle(UpdateDoctorCommand request, CancellationToken cancellationToken)
+            public async Task<UpdateDoctorCommandResponse> Handle(UpdateDoctorCommand request, CancellationToken cancellationToken)
             {
                 var currentUserId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
 

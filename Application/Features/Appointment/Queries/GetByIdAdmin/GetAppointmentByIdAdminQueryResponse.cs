@@ -2,7 +2,7 @@
 
 namespace Application.Features.Appointment.Queries.GetByIdAdmin
 {
-    public class GetAppointmentByIdAdminResponse
+    public class GetAppointmentByIdAdminQueryResponse
     {
 
         public DateTime AppointmentTime { get; set; }

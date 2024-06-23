@@ -2,7 +2,7 @@
 
 namespace Application.Features.User.Queries.GetById
 {
-    public class GetByIdUserResponse
+    public class GetByIdUserQueryResponse
     {
         public Domain.Entities.User User { get; set; }
     }

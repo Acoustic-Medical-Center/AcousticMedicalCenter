@@ -30,7 +30,7 @@ namespace Application.Features.Appointment.Profiles
             .ForMember(dest => dest.DoctorSpecialization, opt => opt.MapFrom(src => src.Doctor.DoctorSpecialization.Name))
             .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status));
 
-            CreateMap<Domain.Entities.Appointment, GetAppointmentByIdAdminResponse>()
+            CreateMap<Domain.Entities.Appointment, GetAppointmentByIdAdminQueryResponse>()
             .ForMember(dest => dest.PatientFirstName, opt => opt.MapFrom(src => src.Patient.User.FirstName))
             .ForMember(dest => dest.PatientLastName, opt => opt.MapFrom(src => src.Patient.User.LastName))
             .ForMember(dest => dest.PatientPhoneNumber, opt => opt.MapFrom(src => src.Patient.User.PhoneNumber))

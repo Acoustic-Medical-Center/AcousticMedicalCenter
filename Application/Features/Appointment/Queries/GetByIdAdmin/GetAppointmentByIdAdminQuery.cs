@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Appointment.Queries.GetByIdAdmin
 {
-    public class GetAppointmentByIdAdminQuery : IRequest<GetAppointmentByIdAdminResponse>, ISecuredRequest
+    public class GetAppointmentByIdAdminQuery : IRequest<GetAppointmentByIdAdminQueryResponse>, ISecuredRequest
     {
         public int AppointmentId { get; set; }
         public string[] RequiredRoles => ["Admin"];
 
-        public class GetAppointmentByIdAdminQueryHandler : IRequestHandler<GetAppointmentByIdAdminQuery, GetAppointmentByIdAdminResponse>
+        public class GetAppointmentByIdAdminQueryHandler : IRequestHandler<GetAppointmentByIdAdminQuery, GetAppointmentByIdAdminQueryResponse>
         {
             private readonly IAppointmentRepository _appointmentRepository;
             private readonly IMapper _mapper;
@@ -27,7 +27,7 @@ namespace Application.Features.Appointment.Queries.GetByIdAdmin
                 _mapper = mapper;
             }
 
-            public async Task<GetAppointmentByIdAdminResponse> Handle(GetAppointmentByIdAdminQuery request, CancellationToken cancellationToken)
+            public async Task<GetAppointmentByIdAdminQueryResponse> Handle(GetAppointmentByIdAdminQuery request, CancellationToken cancellationToken)
             {
                 var appointment = await _appointmentRepository.GetAsync
                     (predicate: app => app.Id == request.AppointmentId,
@@ -39,7 +39,7 @@ namespace Application.Features.Appointment.Queries.GetByIdAdmin
                     .Include(appt => appt.Report)
                     .Include(appt => appt.Prescriptions));
 
-                var result = _mapper.Map<GetAppointmentByIdAdminResponse>(appointment);
+                var result = _mapper.Map<GetAppointmentByIdAdminQueryResponse>(appointment);
 
                 return result;
 

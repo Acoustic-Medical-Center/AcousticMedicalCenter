@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Application.Features.User.Queries.GetById
 {
-    public class UserGetByIdQuery : IRequest<GetByIdUserResponse>
+    public class UserGetByIdQuery : IRequest<GetByIdUserQueryResponse>
     {
         public int UserId { get; set; }
 
-        public class UserGetByIdQueryHandler : IRequestHandler<UserGetByIdQuery, GetByIdUserResponse>
+        public class UserGetByIdQueryHandler : IRequestHandler<UserGetByIdQuery, GetByIdUserQueryResponse>
         {
             private readonly IUserRepository _userRepository;
             private readonly IMapper _mapper;
@@ -25,7 +25,7 @@ namespace Application.Features.User.Queries.GetById
                 _mapper = mapper;
             }
 
-            public async Task<GetByIdUserResponse> Handle(UserGetByIdQuery request, CancellationToken cancellationToken)
+            public async Task<GetByIdUserQueryResponse> Handle(UserGetByIdQuery request, CancellationToken cancellationToken)
             {
 
                 var resultUser = await _userRepository.GetAsync(u => u.Id == request.UserId);

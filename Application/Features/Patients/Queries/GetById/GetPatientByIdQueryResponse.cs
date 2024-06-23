@@ -2,7 +2,7 @@
 
 namespace Application.Features.Patients.Queries.GetById
 {
-    public class GetPatientByIdResponse
+    public class GetPatientByIdQueryResponse
     {
         public int PatientId { get; set; }
         public string FirstName { get; set; }

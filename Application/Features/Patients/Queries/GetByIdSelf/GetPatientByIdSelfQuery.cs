@@ -16,12 +16,11 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Patients.Queries.GetPatientById
 {
-    public class GetPatientIdQuery : IRequest<GetPatientIdResponse>
+    public class GetPatientByIdSelfQuery : IRequest<GetPatientByIdSelfQueryResponse>, ISecuredRequest
     {
-        public int PatientId { get; set; }
-       
+        public string[] RequiredRoles => [];
 
-        public class GetPatientByIdQueryHandler : IRequestHandler<GetPatientIdQuery, GetPatientIdResponse>
+        public class GetPatientByIdQueryHandler : IRequestHandler<GetPatientByIdSelfQuery, GetPatientByIdSelfQueryResponse>
         {
             private readonly IAppointmentRepository _appointmentRepository;
             private readonly IHttpContextAccessor _httpContextAccessor;
@@ -36,24 +35,18 @@ namespace Application.Features.Patients.Queries.GetPatientById
                 _mapper = mapper;
             }
 
-            public async Task<GetPatientIdResponse> Handle(GetPatientIdQuery request, CancellationToken cancellationToken)
+            public async Task<GetPatientByIdSelfQueryResponse> Handle(GetPatientByIdSelfQuery request, CancellationToken cancellationToken)
             {
-                 var userIdClaim = _httpContextAccessor?.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier);
-
-              
-
-                var patient = await _patientRepository.GetAsync(p=>p.Id == request.PatientId, include: p=> p.Include(p=>p.User)); // Include if necessary
-                if (patient == null)
+                var userIdClaim = int.Parse(_httpContextAccessor?.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier));
+                if (userIdClaim == 0)
                 {
-                    throw new BusinessException("Hasta bulunamadı");
+                    throw new Exception("Bu kullanıcının bilgilerine ulaşamazsınız");
                 }
+                var patient = await _patientRepository.GetAsync(p => p.Id == userIdClaim);
 
-                var response = _mapper.Map<GetPatientIdResponse>(patient);
-                response.BloodType = patient.BloodType;
+                var response = _mapper.Map<GetPatientByIdSelfQueryResponse>(patient);
                 return response;
 
-                // Kan grubunu ekleyin
-                
             }
         }
     }

@@ -20,26 +20,25 @@ namespace WebAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("doctor/mypatients")]
+        [HttpGet("doctor/myPatients")]
         public async Task<IActionResult> GetAll([FromQuery] GetAllPatientQuery getAllPatientQuery)
         {
             var response = await _mediator.Send(getAllPatientQuery);
             return Ok(response);
         }
 
-        [HttpGet("doctor/mypatients/{PatientId}")]
+        [HttpGet("doctor/myPatients/{id}")]
         public async Task<IActionResult> GetById([FromRoute] GetPatientByIdQuery getPatientByIdQuery)
         {
             var response = await _mediator.Send(getPatientByIdQuery);
             return Ok(response);
         }
 
-        //
-        [HttpGet("patient/{id}")]
-        public async Task<IActionResult> GetByPatientId(int id)
+
+        [HttpGet("patient/settings")]
+        public async Task<IActionResult> GetPatientByIdSelfQuery([FromQuery]GetPatientByIdSelfQuery getPatientByIdSelfQuery)
         {
-            var query = new GetPatientIdQuery { PatientId = id };
-            var response = await _mediator.Send(query);
+            var response = await _mediator.Send(getPatientByIdSelfQuery);
             return Ok(response);
         }
 

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Doctor.Queries.GetAllSpecialization
 {
-    public class GetAllSpecializationQuery : IRequest<GetAllSpecializationResponse>
+    public class GetAllSpecializationQuery : IRequest<GetAllSpecializationQueryResponse>
     {
 
 
-        public class GetAllSpecializationQueryHandler : IRequestHandler<GetAllSpecializationQuery, GetAllSpecializationResponse>
+        public class GetAllSpecializationQueryHandler : IRequestHandler<GetAllSpecializationQuery, GetAllSpecializationQueryResponse>
         {
             private readonly IDoctorSpecializationRepository _doctorSpecializationRepository;
 
@@ -21,7 +21,7 @@ namespace Application.Features.Doctor.Queries.GetAllSpecialization
                 _doctorSpecializationRepository = doctorSpecializationRepository;
             }
 
-            public async Task<GetAllSpecializationResponse> Handle(GetAllSpecializationQuery request, CancellationToken cancellationToken)
+            public async Task<GetAllSpecializationQueryResponse> Handle(GetAllSpecializationQuery request, CancellationToken cancellationToken)
             {
                 var response = await _doctorSpecializationRepository.GetListAsync();
                 return new() { DoctorSpecialization = response };

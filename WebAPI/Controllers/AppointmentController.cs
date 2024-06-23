@@ -57,21 +57,21 @@ namespace WebAPI.Controllers
             return Ok(response);
         }
 
-        [HttpGet("admin/appointments/{AppointmentId}")]
+        [HttpGet("admin/appointments/{id}")]
         public async Task<IActionResult> GetAllAppointmentsByIdAdmin([FromRoute] GetAppointmentByIdAdminQuery getAppointmentByIdAdminQuery)
         {
             var response = await _mediator.Send(getAppointmentByIdAdminQuery);
             return Ok(response);
         }
 
-        [HttpDelete("patient/appointments/{AppointmentId}")]
+        [HttpDelete("patient/appointments/{id}")]
         public async Task<IActionResult> Delete([FromQuery] DeleteAppointmentByPatientCommand deleteAppointmentByUserCommand)
         {
             var response = await _mediator.Send(deleteAppointmentByUserCommand);
             return Ok(response);
         }
 
-        [HttpDelete("admin/appointments/{AppointmentId}")]
+        [HttpDelete("admin/appointments/{id}")]
         public async Task<IActionResult> DeleteByClaim([FromQuery] DeleteAppointmentByClaimCommand deleteAppointmentByClaimCommand)
         {
             var response = await _mediator.Send(deleteAppointmentByClaimCommand);

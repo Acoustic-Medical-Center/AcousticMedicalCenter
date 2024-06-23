@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Patients.Queries.GetPatientById
 {
-    public class GetPatientIdResponse
+    public class GetPatientByIdSelfQueryResponse
     {
         public string BloodType { get; set; }
     }

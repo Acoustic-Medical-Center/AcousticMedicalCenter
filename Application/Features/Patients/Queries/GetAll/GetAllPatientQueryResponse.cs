@@ -2,7 +2,7 @@
 
 namespace Application.Features.Patients.Queries.GetAll
 {
-    public class GetAllPatientResponse
+    public class GetAllPatientQueryResponse
     {
         public List<GetAllPatientDto> Patients { get; set; }
     }

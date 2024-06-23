@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Appointment.Commands.DeleteByClaim
 {
-    public class DeleteAppointmentByClaimCommand : IRequest<DeleteAppointmentByClaimResponse>, ISecuredRequest
+    public class DeleteAppointmentByClaimCommand : IRequest<DeleteAppointmentByClaimCommandResponse>, ISecuredRequest
     {
         public int AppointmentId { get; set; }
 
         public string[] RequiredRoles => ["Admin", "DeleteAppointment"];
 
-        public class DeleteAppointmentByClaimCommandHandler : IRequestHandler<DeleteAppointmentByClaimCommand, DeleteAppointmentByClaimResponse>
+        public class DeleteAppointmentByClaimCommandHandler : IRequestHandler<DeleteAppointmentByClaimCommand, DeleteAppointmentByClaimCommandResponse>
         {
             private readonly IAppointmentRepository _appointmentRepository;
 
@@ -25,7 +25,7 @@ namespace Application.Features.Appointment.Commands.DeleteByClaim
                 _appointmentRepository = appointmentRepository;
             }
 
-            public async Task<DeleteAppointmentByClaimResponse> Handle(DeleteAppointmentByClaimCommand request, CancellationToken cancellationToken)
+            public async Task<DeleteAppointmentByClaimCommandResponse> Handle(DeleteAppointmentByClaimCommand request, CancellationToken cancellationToken)
             {
                 var appointmentToDelete = await _appointmentRepository.GetAsync(app => app.Id == request.AppointmentId);
                 await _appointmentRepository.DeleteAsync(appointmentToDelete);

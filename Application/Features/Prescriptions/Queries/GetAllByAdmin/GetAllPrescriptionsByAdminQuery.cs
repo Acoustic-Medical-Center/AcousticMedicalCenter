@@ -1,6 +1,7 @@
 ﻿using Application.Features.Prescriptions.Queries.GetAllByPatient;
 using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,8 +12,9 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Prescriptions.Queries.GetAllByAdmin
 {
-    public class GetAllPrescriptionsByAdminQuery : IRequest<List<GetAllPrescriptionsByAdminQueryResponse>>
+    public class GetAllPrescriptionsByAdminQuery : IRequest<List<GetAllPrescriptionsByAdminQueryResponse>>, ISecuredRequest
     {
+        public string[] RequiredRoles => ["Admin"];
 
         public class GetAllPrescriptionsByAdminQueryHandler : IRequestHandler<GetAllPrescriptionsByAdminQuery, List<GetAllPrescriptionsByAdminQueryResponse>>
         {
