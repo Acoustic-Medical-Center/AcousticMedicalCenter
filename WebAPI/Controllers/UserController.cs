@@ -28,6 +28,13 @@ namespace WebAPI.Controllers
             return Ok(response);
         }
 
+        [HttpGet("/api/user/settings")]
+        public async Task<IActionResult> GetByIdSelf([FromQuery] GetByIdUserSelfQuery getByIdUserSelfQuery)
+        {
+            var response = await _mediator.Send(getByIdUserSelfQuery);
+            return Ok(response);
+        }
+
         [HttpGet("[action]")]
         public async Task<IActionResult> GetAll([FromQuery] GetAllUserQuery userGetAllQuery)
         {
@@ -42,14 +49,14 @@ namespace WebAPI.Controllers
             return Ok(response);
         }
 
-        [HttpPut()]  
+        [HttpPut()]
         public async Task<IActionResult> Update(UserUpdateCommand userUpdateCommand)
         {
             var response = await _mediator.Send(userUpdateCommand);
             return Ok(response);
         }
 
-        
+
 
     }
 }
