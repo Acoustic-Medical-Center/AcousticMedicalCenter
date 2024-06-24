@@ -29,10 +29,9 @@ namespace Persistence.Context
         public DbSet<Interest> Interests { get; set; }
         public DbSet<DoctorInterest> DoctorInterests { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
-
-
-
         public DbSet<Report> Reports { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
+
 
 
 

@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using Domain.Entities;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +34,7 @@ namespace Persistence
             services.AddScoped<IDoctorSpecializationRepository, DoctorSpecializationRepository>();
             services.AddScoped<IReportRepository, ReportRepository>();
             services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
+            services.AddScoped<IFeedbackRepository, FeedbackRepository>();
 
             return services;
         }
