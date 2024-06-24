@@ -1,5 +1,6 @@
 ﻿using Application.Features.Doctor.Commands.Update;
 using Application.Features.Doctor.Queries.GetById;
+using Application.Features.Doctor.Queries.GetByIdSelf;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ namespace Application.Features.Doctor.Profiles
             CreateMap<Domain.Entities.Doctor, GetByIdDoctorQueryResponse>()
                 .ForMember(dest => dest.DoctorInterests, opt => opt.MapFrom(src => src.DoctorInterest.Select(di => di.Interest.Name).ToList()));
 
+            CreateMap<Domain.Entities.Doctor, GetByIdDoctorSelfQueryResponse>()
+                .ForMember(dest => dest.DoctorInterests, opt => opt.MapFrom(src => src.DoctorInterest.Select(di => di.Interest.Name).ToList()));
+
             //CreateMap<Domain.Entities.Doctor, UpdateDoctorResponse>()
             //    .ForMember(dest => dest.DoctorId, opt => opt.MapFrom(src => src.Id))
             //    .ForMember(dest => dest.Experience, opt => opt.MapFrom(src => src.Experience))
@@ -25,4 +29,4 @@ namespace Application.Features.Doctor.Profiles
     }
 }
 
-       
+
