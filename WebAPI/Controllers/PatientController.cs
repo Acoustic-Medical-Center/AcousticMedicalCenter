@@ -36,14 +36,14 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("patient/settings")]
-        public async Task<IActionResult> GetPatientByIdSelfQuery([FromQuery]GetPatientByIdSelfQuery getPatientByIdSelfQuery)
+        public async Task<IActionResult> GetPatientByIdSelfQuery([FromQuery] GetPatientByIdSelfQuery getPatientByIdSelfQuery)
         {
             var response = await _mediator.Send(getPatientByIdSelfQuery);
             return Ok(response);
         }
 
         //Update
-        [HttpPut("patients")]
+        [HttpPut("patient/settings")]
         public async Task<IActionResult> UpdatePatient([FromBody] UpdatePatientCommand command)
         {
             var result = await _mediator.Send(command);

@@ -3,6 +3,7 @@ using Application.Features.Doctor.Commands.UpdateByAdmin;
 using Application.Features.Doctor.Queries.GetAll;
 using Application.Features.Doctor.Queries.GetById;
 using Application.Features.User.Queries.GetAll;
+using Application.Features.User.Queries.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,15 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var query = new GetByIdDoctorQuery { Id = id };
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
+
+
+        [HttpGet("doctor/settings")]
+        public async Task<IActionResult> GetByIdSelf()
+        {
+            var query = new GetByIdDoctorSelfQuery { };
             var response = await _mediator.Send(query);
             return Ok(response);
         }
