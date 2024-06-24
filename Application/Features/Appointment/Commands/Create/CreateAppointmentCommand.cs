@@ -46,7 +46,7 @@ namespace Application.Features.Appointment.Commands.Create
                     await _appointmentRepository.AddAsync(appointmentToAdd);
                     try
                     {
-                        await _mailService.SendEmailAsync(userMail, "Randevu Onayı", "Randevunuz Başarıyla Oluşturulmuştur.");
+                        //await _mailService.SendEmailAsync(userMail, "Randevu Onayı", "Randevunuz Başarıyla Oluşturulmuştur.");
 
                     }
                     catch (Exception)
