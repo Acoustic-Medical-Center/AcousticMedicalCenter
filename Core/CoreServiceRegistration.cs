@@ -1,4 +1,5 @@
-﻿using Core.Utilities.JWT;
+﻿using Core.Utilities.Hashing;
+using Core.Utilities.JWT;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Core
         public static IServiceCollection AddCoreServices(this IServiceCollection services, TokenOptions tokenOptions)
         {
             services.AddScoped<ITokenHelper, JwtHelper>(_ => new JwtHelper(tokenOptions));
-            services.AddScoped<IPasswordHelper,PasswordHelper>();
+          
             return services;
         }
     }

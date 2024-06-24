@@ -1,10 +1,12 @@
 ﻿using Application.Features.Auth.Commands.Login;
 using Application.Features.Doctor.Commands.CreateDoctorRole;
+using Application.Features.User.Commands.ChangePassword.Commands;
 using Application.Features.User.Commands.Delete;
 using Application.Features.User.Commands.Update;
 using Application.Features.User.Queries.GetAll;
 using Application.Features.User.Queries.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -56,6 +58,13 @@ namespace WebAPI.Controllers
             return Ok(response);
         }
 
+        [HttpPut("ChangePassword")]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result.Message);
+        }
 
 
     }
