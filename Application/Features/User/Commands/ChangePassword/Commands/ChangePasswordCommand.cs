@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using System.ComponentModel.DataAnnotations;
 using Core.Utilities.JWT;
+using Core.Utilities.Hashing;
 
-namespace Application.Features.User.ChangePassword.Commands
+namespace Application.Features.User.Commands.ChangePassword.Commands
 {
     public class ChangePasswordCommand : IRequest<ChangePasswordCommandResponse>
     {
@@ -23,14 +24,13 @@ namespace Application.Features.User.ChangePassword.Commands
         public class ChangePasswordHandler : IRequestHandler<ChangePasswordCommand, ChangePasswordCommandResponse>
         {
             private readonly IUserRepository _userRepository;
-            private readonly IPasswordHelper _passwordHelper;
+            
             private readonly IHttpContextAccessor _httpContextAccessor;
             private readonly ILogger<ChangePasswordHandler> _logger;
 
-            public ChangePasswordHandler(IUserRepository userRepository, IPasswordHelper passwordHelper, ILogger<ChangePasswordHandler> logger, IHttpContextAccessor httpContextAccessor)
+            public ChangePasswordHandler(IUserRepository userRepository, ILogger<ChangePasswordHandler> logger, IHttpContextAccessor httpContextAccessor)
             {
                 _userRepository = userRepository;
-                _passwordHelper = passwordHelper;
                 _httpContextAccessor = httpContextAccessor;
                 _logger = logger;
             }
@@ -57,7 +57,7 @@ namespace Application.Features.User.ChangePassword.Commands
                     };
                 }
 
-                if (!_passwordHelper.VerifyPasswordHash(request.CurrentPassword, user.PasswordHash, user.PasswordSalt))
+                if (!HashingHelper.VerifyPasswordHash(request.CurrentPassword, user.PasswordHash, user.PasswordSalt))
                 {
                     return new ChangePasswordCommandResponse
                     {
@@ -66,7 +66,7 @@ namespace Application.Features.User.ChangePassword.Commands
                     };
                 }
 
-                _passwordHelper.CreatePasswordHash(request.NewPassword, out byte[] newHash, out byte[] newSalt);
+                HashingHelper.CreatePasswordHash(request.NewPassword, out byte[] newHash, out byte[] newSalt);
                 user.PasswordHash = newHash;
                 user.PasswordSalt = newSalt;
 
