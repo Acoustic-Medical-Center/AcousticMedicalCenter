@@ -13,7 +13,7 @@ namespace Core
         public static IServiceCollection AddCoreServices(this IServiceCollection services, TokenOptions tokenOptions)
         {
             services.AddScoped<ITokenHelper, JwtHelper>(_ => new JwtHelper(tokenOptions));
-
+            services.AddScoped<IPasswordHelper,PasswordHelper>();
             return services;
         }
     }
