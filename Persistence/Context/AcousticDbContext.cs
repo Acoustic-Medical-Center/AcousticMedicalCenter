@@ -20,6 +20,7 @@ namespace Persistence.Migrations
                 .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
+
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Domain.Entities.Appointment", b =>
@@ -32,6 +33,19 @@ namespace Persistence.Migrations
 
                 b.Property<DateTime>("AppointmentTime")
                     .HasColumnType("datetime2");
+        public DbSet<User> Users { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<DoctorSpecialization> DoctorSpecializations { get; set; }
+        public DbSet<Interest> Interests { get; set; }
+        public DbSet<DoctorInterest> DoctorInterests { get; set; }
+        public DbSet<Prescription> Prescriptions { get; set; }
+        public DbSet<Report> Reports { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
+
 
                 b.Property<DateTime>("CreatedDate")
                     .HasColumnType("datetime2");
