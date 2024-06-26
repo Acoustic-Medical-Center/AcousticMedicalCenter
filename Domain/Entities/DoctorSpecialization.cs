@@ -9,6 +9,7 @@ namespace Domain.Entities
 {
     public class DoctorSpecialization : Entity
     {
-        public string Name { get; set; }
+        public string NameTR { get; set; }
+        public string NameEN { get; set; }
     }
 }

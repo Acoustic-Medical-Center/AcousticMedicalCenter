@@ -14,6 +14,7 @@ namespace Application.Features.Doctor.Queries.GetAll
     {
         public int Page { get; set; } = 0;
         public int PageSize { get; set; } = 0;
+        public int? DoctorSpecializationId { get; set; } = null;
 
         public class GetAllDoctorQueryHandler : IRequestHandler<GetAllDoctorQuery, GetAllDoctorQueryResponse>
         {
@@ -27,30 +28,40 @@ namespace Application.Features.Doctor.Queries.GetAll
 
             public async Task<GetAllDoctorQueryResponse> Handle(GetAllDoctorQuery request, CancellationToken cancellationToken)
             {
-                var totalCount = _doctorRepository.GetList().Count();
+                var query = _doctorRepository.GetList(include: q => q.Include(d => d.User));
+
+                // Apply filtering based on DoctorSpecializationId if provided
+                if (request.DoctorSpecializationId.HasValue)
+                {
+                    query = query.Where(d => d.DoctorSpecializationId == request.DoctorSpecializationId.Value).ToList();
+                }
+
+                var totalCount = query.Count();
+
                 if (request.PageSize == 0)
                 {
                     request.PageSize = totalCount;
                 }
 
-                var doctors = _doctorRepository.GetList(include: q => q.Include(d => d.User))
-                     .Skip((request.Page - 1) * request.PageSize)
-                     .Take(request.PageSize)
-                     .Select(d => new
-                     {
-                         d.Id,
-                         d.DoctorSpecializationId,
-                         d.Experience,
-                         d.User.FirstName,
-                         d.User.LastName,
-                     }).ToList();
 
-                return new()
+
+                var doctors = query
+                    .Skip((request.Page - 1) * request.PageSize)
+                    .Take(request.PageSize)
+                    .Select(d => new
+                    {
+                        d.Id,
+                        d.DoctorSpecializationId,
+                        d.Experience,
+                        d.User.FirstName,
+                        d.User.LastName,
+                    }).ToList();
+
+                return new GetAllDoctorQueryResponse
                 {
                     Doctors = doctors,
                     TotalCount = totalCount
                 };
-
             }
         }
     }

@@ -29,7 +29,7 @@ namespace Application.Features.Reports.Profiles
             CreateMap<Report, GetAllReportsByPatientQueryResponse>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.DoctorName, opt => opt.MapFrom(src => $"{src.Appointment.Doctor.User.FirstName} {src.Appointment.Doctor.User.LastName}"))
-            .ForMember(dest => dest.DoctorSpecialization, opt => opt.MapFrom(src => src.Appointment.Doctor.DoctorSpecialization.Name))
+            .ForMember(dest => dest.DoctorSpecialization, opt => opt.MapFrom(src => src.Appointment.Doctor.DoctorSpecialization.NameTR))
             .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => src.CreatedDate.ToString("yyyy-MM-dd")))
             .ForMember(dest => dest.Diagnosis, opt => opt.MapFrom(src => src.Diagnosis))
             .ReverseMap();
@@ -39,7 +39,7 @@ namespace Application.Features.Reports.Profiles
             CreateMap<Report, GetPatientReportByIdQueryResponse>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.DoctorName, opt => opt.MapFrom(src => $"{src.Appointment.Doctor.User.FirstName} {src.Appointment.Doctor.User.LastName}"))
-            .ForMember(dest => dest.DoctorSpecialization, opt => opt.MapFrom(src => src.Appointment.Doctor.DoctorSpecialization.Name))
+            .ForMember(dest => dest.DoctorSpecialization, opt => opt.MapFrom(src => src.Appointment.Doctor.DoctorSpecialization.NameTR))
             .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => src.CreatedDate.ToString("yyyy-MM-dd")))
             .ForMember(dest => dest.Diagnosis, opt => opt.MapFrom(src => src.Diagnosis))
             .ReverseMap();

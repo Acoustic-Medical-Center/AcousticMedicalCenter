@@ -8,6 +8,8 @@ using System.Runtime.CompilerServices;
 using Core.CrossCuttingConcerns.Exceptions.Extensions;
 using Microsoft.OpenApi.Models;
 using Infrastructure;
+using Microsoft.OpenApi.Any;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,6 +61,8 @@ builder.Services.AddSwaggerGen(c =>
             Array.Empty<string>()
         }
     });
+
+    c.OperationFilter<AddAcceptLanguageHeaderParameter>();
 });
 
 TokenOptions? tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
@@ -107,3 +111,23 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+public class AddAcceptLanguageHeaderParameter : IOperationFilter
+{
+    public void Apply(OpenApiOperation operation, OperationFilterContext context)
+    {
+        operation.Parameters.Add(new OpenApiParameter
+        {
+            Name = "Accept-Language",
+            In = ParameterLocation.Header,
+            Description = "Language preference",
+            Required = false,
+            Schema = new OpenApiSchema
+            {
+                Type = "string",
+                Default = new OpenApiString("en-US")
+            }
+        });
+    }
+}

@@ -1,4 +1,5 @@
 ﻿using Application.Features.Appointment.Queries.GelAllByDoctor;
+using Application.Features.Appointment.Queries.GetAllAvailableAppointments;
 using Application.Features.Appointment.Queries.GetAllByClaim;
 using Application.Features.Appointment.Queries.GetAllByPatient;
 using Application.Features.Appointment.Queries.GetByIdAdmin;
@@ -17,7 +18,7 @@ namespace Application.Features.Appointment.Profiles
         {
             CreateMap<Domain.Entities.Appointment, GetAllAppointmentsByPatientQueryResponse>()
            .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.Doctor.User.FirstName))
-           .ForMember(dest => dest.DoctorSpecialization, opt => opt.MapFrom(src => src.Doctor.DoctorSpecialization.Name));
+           .ForMember(dest => dest.DoctorSpecialization, opt => opt.MapFrom(src => src.Doctor.DoctorSpecialization.NameTR));
 
             CreateMap<Domain.Entities.Appointment, GetAllAppointmentsByDoctorQueryResponse>()
            .ForMember(dest => dest.PatientName, opt => opt.MapFrom(src => src.Patient.User.FirstName))
@@ -27,7 +28,7 @@ namespace Application.Features.Appointment.Profiles
             CreateMap<Domain.Entities.Appointment, GetAllAppointmentsByClaimQueryResponse>()
             .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Patient.User.FirstName))
             .ForMember(dest => dest.DoctorName, opt => opt.MapFrom(src => src.Doctor.User.FirstName))
-            .ForMember(dest => dest.DoctorSpecialization, opt => opt.MapFrom(src => src.Doctor.DoctorSpecialization.Name))
+            .ForMember(dest => dest.DoctorSpecialization, opt => opt.MapFrom(src => src.Doctor.DoctorSpecialization.NameTR))
             .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status));
 
             CreateMap<Domain.Entities.Appointment, GetAppointmentByIdAdminQueryResponse>()
@@ -41,6 +42,8 @@ namespace Application.Features.Appointment.Profiles
             .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
             .ForMember(dest => dest.Diagnosis, opt => opt.MapFrom(src => src.Report.Diagnosis))
             .ForMember(dest => dest.PatientGender, opt => opt.MapFrom(src => src.Patient.User.Gender));
+
+            CreateMap<Domain.Entities.Appointment, GetAllAvailableAppointmentsQueryResponse>();
         }
     }
 }
