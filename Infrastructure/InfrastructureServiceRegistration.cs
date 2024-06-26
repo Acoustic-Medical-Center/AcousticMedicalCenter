@@ -40,7 +40,7 @@ namespace Infrastructure
 
             // Quartz server ekle
             services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
-
+            services.AddSignalR();
             return services;
         }
     }

@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using Core.CrossCuttingConcerns.Exceptions.Extensions;
 using Microsoft.OpenApi.Models;
 using Infrastructure;
+using Infrastructure.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -103,7 +104,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.MapHub<ChatHub>("/chatHub");
 app.MapControllers();
 
 app.Run();
