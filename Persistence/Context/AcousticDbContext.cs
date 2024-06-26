@@ -882,7 +882,7 @@ namespace Persistence.Migrations
                 b.Navigation("Patient")
                     .IsRequired();
             });
-#pragma warning restore 612, 618
+
         }
     }
 }
