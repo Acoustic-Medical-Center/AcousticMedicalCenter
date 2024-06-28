@@ -15,7 +15,7 @@ namespace Application.Features.Appointment.Queries.GetAllByPatient
 {
     public class GetAllAppointmensByPatientQuery : IRequest<List<GetAllAppointmentsByPatientQueryResponse>>
     {
-
+        public string DateFilter { get; set; } = "";
 
         public class GetAllAppointmensByPatientQueryHandler : IRequestHandler<GetAllAppointmensByPatientQuery, List<GetAllAppointmentsByPatientQueryResponse>>
         {
@@ -30,10 +30,9 @@ namespace Application.Features.Appointment.Queries.GetAllByPatient
                 _contextAccessor = contextAccessor;
             }
 
-
-
             public async Task<List<GetAllAppointmentsByPatientQueryResponse>> Handle(GetAllAppointmensByPatientQuery request, CancellationToken cancellationToken)
             {
+
                 try
                 {
                     var patientIdClaim = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
@@ -57,7 +56,11 @@ namespace Application.Features.Appointment.Queries.GetAllByPatient
                             .ThenInclude(d => d.User)
                     );
 
-                    List<GetAllAppointmentsByPatientQueryResponse> response = _mapper.Map<List<GetAllAppointmentsByPatientQueryResponse>>(appointments);
+                    List<GetAllAppointmentsByPatientQueryResponse> response = new();
+
+                    if (request.DateFilter == "Prev") response = _mapper.Map<List<GetAllAppointmentsByPatientQueryResponse>>(appointments.Where(app => app.AppointmentTime < DateTime.Now));
+                    else if (request.DateFilter == "Upcoming") response = _mapper.Map<List<GetAllAppointmentsByPatientQueryResponse>>(appointments.Where(app => app.AppointmentTime > DateTime.Now));
+                    else response = _mapper.Map<List<GetAllAppointmentsByPatientQueryResponse>>(appointments);
 
                     return response;
                 }

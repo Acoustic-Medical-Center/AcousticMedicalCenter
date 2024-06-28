@@ -11,6 +11,7 @@ namespace Application.Features.Appointment.Queries.GelAllByDoctor
 {
     public class GetAllAppointmentsByDoctorQuery : IRequest<List<GetAllAppointmentsByDoctorQueryResponse>>, ISecuredRequest
     {
+        public string DateFilter { get; set; } = "";
         public string[] RequiredRoles => ["Doctor"];
 
         public class GetAllAppointmentsByDoctorQueryHandler : IRequestHandler<GetAllAppointmentsByDoctorQuery, List<GetAllAppointmentsByDoctorQueryResponse>>
@@ -36,7 +37,11 @@ namespace Application.Features.Appointment.Queries.GelAllByDoctor
                             .Include(appt => appt.Patient)
                             .ThenInclude(pat => pat.User));
 
-                var response = _mapper.Map<List<GetAllAppointmentsByDoctorQueryResponse>>(appointments);
+                var response = new List<GetAllAppointmentsByDoctorQueryResponse>();
+
+                if (request.DateFilter == "Prev") response = _mapper.Map<List<GetAllAppointmentsByDoctorQueryResponse>>(appointments.Where(app => app.AppointmentTime < DateTime.Now));
+                else if (request.DateFilter == "Upcoming") response = _mapper.Map<List<GetAllAppointmentsByDoctorQueryResponse>>(appointments.Where(app => app.AppointmentTime > DateTime.Now));
+                else response = _mapper.Map<List<GetAllAppointmentsByDoctorQueryResponse>>(appointments);
 
                 return response;
             }
