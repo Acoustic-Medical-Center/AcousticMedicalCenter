@@ -10,5 +10,6 @@ namespace Application.Repositories
 {
     public interface IAppointmentRepository : IRepository<Appointment>, IAsyncRepository<Appointment>
     {
+        Task<bool> IsAppointmentSlotAvailable(int doctorId, DateTime appointmentTime);
     }
 }

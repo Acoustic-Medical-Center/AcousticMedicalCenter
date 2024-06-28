@@ -40,6 +40,13 @@ namespace Application.Features.Appointment.Commands.Create
             {
                 var userId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 var userMail = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+
+                bool isAppAvailable = await _appointmentRepository.IsAppointmentSlotAvailable(request.DoctorId, request.AppointmentTime);
+                if (!isAppAvailable)
+                {
+                    throw new Exception("Bu saat diliminde zaten bir randevu mevcut.");
+                }
+
                 Domain.Entities.Appointment appointmentToAdd = new() { DoctorId = request.DoctorId, PatientId = userId, Status = AppointmentStatus.Scheduled, AppointmentTime = request.AppointmentTime };
                 try
                 {
