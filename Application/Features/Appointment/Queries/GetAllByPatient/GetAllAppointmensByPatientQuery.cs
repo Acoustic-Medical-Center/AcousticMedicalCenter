@@ -53,22 +53,23 @@ namespace Application.Features.Appointment.Queries.GetAllByPatient
                     {
                         request.PageSize = totalCount;
                     }
-                    var appointments = _appointmentsRepository.GetList(
-                        predicate: a => a.PatientId == patientId,
-                        include: a => a
-                            .Include(appt => appt.Doctor)
-                            .ThenInclude(doc => doc.DoctorSpecialization)
-                            .Include(appt => appt.Doctor)
-                            .ThenInclude(d => d.User)
-                    ).Skip((request.Page - 1) * request.PageSize)
-                     .Take(request.PageSize);
 
-                    List<GetAllAppointmentsByPatientQueryResponse> response = new();
+                    var filteredAppointments = _appointmentsRepository.GetList(
+                                            predicate: a => a.PatientId == patientId &&
+                                            (request.DateFilter == "Prev" ? a.AppointmentTime < DateTime.Now :
+                                            request.DateFilter == "Upcoming" ? a.AppointmentTime > DateTime.Now : true),
+                                            include: a => a
+                                            .Include(appt => appt.Doctor)
+                                            .ThenInclude(doc => doc.DoctorSpecialization)
+                                            .Include(appt => appt.Doctor)
+                                            .ThenInclude(d => d.User));
 
-                    if (request.DateFilter == "Prev") response = _mapper.Map<List<GetAllAppointmentsByPatientQueryResponse>>(appointments.Where(app => app.AppointmentTime < DateTime.Now));
-                    else if (request.DateFilter == "Upcoming") response = _mapper.Map<List<GetAllAppointmentsByPatientQueryResponse>>(appointments.Where(app => app.AppointmentTime > DateTime.Now));
-                    else response = _mapper.Map<List<GetAllAppointmentsByPatientQueryResponse>>(appointments);
+                    var paginatedAppointments = filteredAppointments
+                                            .Skip((request.Page - 1) * request.PageSize)
+                                            .Take(request.PageSize)
+                                            .ToList();
 
+                    List<GetAllAppointmentsByPatientQueryResponse> response = _mapper.Map<List<GetAllAppointmentsByPatientQueryResponse>>(paginatedAppointments);
                     return response;
                 }
                 catch (Exception ex)
