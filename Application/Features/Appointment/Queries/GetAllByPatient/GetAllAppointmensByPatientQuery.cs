@@ -65,6 +65,7 @@ namespace Application.Features.Appointment.Queries.GetAllByPatient
                                             .ThenInclude(d => d.User));
 
                     var paginatedAppointments = filteredAppointments
+                                            .OrderBy(appt => appt.AppointmentTime)
                                             .Skip((request.Page - 1) * request.PageSize)
                                             .Take(request.PageSize)
                                             .ToList();
@@ -79,7 +80,6 @@ namespace Application.Features.Appointment.Queries.GetAllByPatient
                     throw new BusinessException($"Bir hata oluştu: {ex.Message}");
                 }
             }
-
         }
     }
 }
