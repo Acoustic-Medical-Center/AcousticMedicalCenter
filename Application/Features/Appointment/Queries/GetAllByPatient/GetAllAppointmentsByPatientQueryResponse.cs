@@ -5,6 +5,7 @@
         public int id { get; set; }
         public string Status { get; set; }
         public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string DoctorSpecialization { get; set; }
         public DateTime AppointmentTime { get; set; }
     }

@@ -18,6 +18,7 @@ namespace Application.Features.Appointment.Profiles
         {
             CreateMap<Domain.Entities.Appointment, GetAllAppointmentsByPatientQueryResponse>()
            .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.Doctor.User.FirstName))
+           .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.Doctor.User.LastName))
            .ForMember(dest => dest.DoctorSpecialization, opt => opt.MapFrom(src => src.Doctor.DoctorSpecialization.NameTR));
 
             CreateMap<Domain.Entities.Appointment, GetAllAppointmentsByDoctorQueryResponse>()
@@ -27,7 +28,9 @@ namespace Application.Features.Appointment.Profiles
 
             CreateMap<Domain.Entities.Appointment, GetAllAppointmentsByClaimQueryResponse>()
             .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Patient.User.FirstName))
+            .ForMember(dest => dest.UserLastName, opt => opt.MapFrom(src => src.Patient.User.LastName))
             .ForMember(dest => dest.DoctorName, opt => opt.MapFrom(src => src.Doctor.User.FirstName))
+            .ForMember(dest => dest.DoctorLastName, opt => opt.MapFrom(src => src.Doctor.User.LastName))
             .ForMember(dest => dest.DoctorSpecialization, opt => opt.MapFrom(src => src.Doctor.DoctorSpecialization.NameTR))
             .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status));
 
