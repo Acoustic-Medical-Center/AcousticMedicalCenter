@@ -13,7 +13,7 @@ namespace Application.Features.Appointment.Queries.GetByIdAdmin
 {
     public class GetAppointmentByIdAdminQuery : IRequest<GetAppointmentByIdAdminQueryResponse>, ISecuredRequest
     {
-        public int AppointmentId { get; set; }
+        public int id { get; set; }
         public string[] RequiredRoles => ["Admin"];
 
         public class GetAppointmentByIdAdminQueryHandler : IRequestHandler<GetAppointmentByIdAdminQuery, GetAppointmentByIdAdminQueryResponse>
@@ -30,7 +30,7 @@ namespace Application.Features.Appointment.Queries.GetByIdAdmin
             public async Task<GetAppointmentByIdAdminQueryResponse> Handle(GetAppointmentByIdAdminQuery request, CancellationToken cancellationToken)
             {
                 var appointment = await _appointmentRepository.GetAsync
-                    (predicate: app => app.Id == request.AppointmentId,
+                    (predicate: app => app.Id == request.id,
                     include: a => a
                     .Include(appt => appt.Doctor)
                     .ThenInclude(d => d.User)
