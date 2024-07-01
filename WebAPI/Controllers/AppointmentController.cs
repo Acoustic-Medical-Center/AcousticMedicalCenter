@@ -1,4 +1,5 @@
 ﻿using Application.Features.Appointment.Commands.Cancel;
+using Application.Features.Appointment.Commands.Complete;
 using Application.Features.Appointment.Commands.Create;
 using Application.Features.Appointment.Commands.Delete;
 using Application.Features.Appointment.Commands.DeleteByClaim;
@@ -91,6 +92,13 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> CancelAppointment([FromQuery] CancelAppointmentCommand cancelAppointmentCommand)
         {
             var response = await _mediator.Send(cancelAppointmentCommand);
+            return Ok(response);
+        }
+
+        [HttpPut("appointmentComplete/{id}")]
+        public async Task<IActionResult> CompleteAppointment([FromRoute] CompleteAppointmentByDoctorCommand completeAppointmentByDoctorCommand)
+        {
+            var response = await _mediator.Send(completeAppointmentByDoctorCommand);
             return Ok(response);
         }
 
