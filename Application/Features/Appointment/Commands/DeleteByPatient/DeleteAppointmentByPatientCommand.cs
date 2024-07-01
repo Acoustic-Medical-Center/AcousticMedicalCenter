@@ -13,7 +13,7 @@ namespace Application.Features.Appointment.Commands.Delete
 {
     public class DeleteAppointmentByPatientCommand : IRequest<DeleteAppointmentByPatientCommandResponse>
     {
-        public int AppointmentId { get; set; }
+        public int id { get; set; }
 
         public class DeleteAppointmentByPatientCommandHandler : IRequestHandler<DeleteAppointmentByPatientCommand, DeleteAppointmentByPatientCommandResponse>
         {
@@ -29,7 +29,7 @@ namespace Application.Features.Appointment.Commands.Delete
             {
                 var userId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                var appointmentToDelete = await _appointmentRepository.GetAsync(app => app.Id == request.AppointmentId);
+                var appointmentToDelete = await _appointmentRepository.GetAsync(app => app.Id == request.id);
                 if (appointmentToDelete != null && appointmentToDelete.PatientId == userId)
                 {
                     await _appointmentRepository.DeleteAsync(appointmentToDelete);

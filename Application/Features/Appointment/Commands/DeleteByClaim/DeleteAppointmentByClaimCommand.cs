@@ -12,7 +12,7 @@ namespace Application.Features.Appointment.Commands.DeleteByClaim
 {
     public class DeleteAppointmentByClaimCommand : IRequest<DeleteAppointmentByClaimCommandResponse>, ISecuredRequest
     {
-        public int AppointmentId { get; set; }
+        public int id { get; set; }
 
         public string[] RequiredRoles => ["Admin", "DeleteAppointment"];
 
@@ -27,7 +27,7 @@ namespace Application.Features.Appointment.Commands.DeleteByClaim
 
             public async Task<DeleteAppointmentByClaimCommandResponse> Handle(DeleteAppointmentByClaimCommand request, CancellationToken cancellationToken)
             {
-                var appointmentToDelete = await _appointmentRepository.GetAsync(app => app.Id == request.AppointmentId);
+                var appointmentToDelete = await _appointmentRepository.GetAsync(app => app.Id == request.id);
                 await _appointmentRepository.DeleteAsync(appointmentToDelete);
                 return new();
             }

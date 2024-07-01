@@ -75,21 +75,21 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("patient/appointments/{id}")]
-        public async Task<IActionResult> Delete([FromQuery] DeleteAppointmentByPatientCommand deleteAppointmentByUserCommand)
+        public async Task<IActionResult> Delete([FromRoute] DeleteAppointmentByPatientCommand deleteAppointmentByUserCommand)
         {
             var response = await _mediator.Send(deleteAppointmentByUserCommand);
             return Ok(response);
         }
 
         [HttpDelete("admin/appointments/{id}")]
-        public async Task<IActionResult> DeleteByClaim([FromQuery] DeleteAppointmentByClaimCommand deleteAppointmentByClaimCommand)
+        public async Task<IActionResult> DeleteByClaim([FromRoute] DeleteAppointmentByClaimCommand deleteAppointmentByClaimCommand)
         {
             var response = await _mediator.Send(deleteAppointmentByClaimCommand);
             return Ok(response);
         }
 
         [HttpPut("appointmentCancel/{id}")]
-        public async Task<IActionResult> CancelAppointment([FromQuery] CancelAppointmentCommand cancelAppointmentCommand)
+        public async Task<IActionResult> CancelAppointment([FromRoute] CancelAppointmentCommand cancelAppointmentCommand)
         {
             var response = await _mediator.Send(cancelAppointmentCommand);
             return Ok(response);

@@ -13,7 +13,7 @@ namespace Application.Features.Appointment.Commands.Cancel
 {
     public class CancelAppointmentCommand : IRequest<CancelAppointmentCommandResponse>
     {
-        public int AppointmentId { get; set; }
+        public int id { get; set; }
 
         public class CancelAppointmentCommandHandler : IRequestHandler<CancelAppointmentCommand, CancelAppointmentCommandResponse>
         {
@@ -32,7 +32,7 @@ namespace Application.Features.Appointment.Commands.Cancel
 
                 if (userClaim == "Admin" || userClaim == "Doctor")
                 {
-                    var appToUpdate = await _appointmentRepository.GetAsync(predicate: a => a.Id == request.AppointmentId);
+                    var appToUpdate = await _appointmentRepository.GetAsync(predicate: a => a.Id == request.id);
                     appToUpdate.Status = Domain.Entities.AppointmentStatus.Canceled;
                     await _appointmentRepository.UpdateAsync(appToUpdate);
                     return new();
@@ -42,7 +42,7 @@ namespace Application.Features.Appointment.Commands.Cancel
 
                 if (userId == null) throw new BusinessException("Giriş yapmadınız");
 
-                var appointmentToUpdate = await _appointmentRepository.GetAsync(predicate: app => app.PatientId == int.Parse(userId) && app.Id == request.AppointmentId);
+                var appointmentToUpdate = await _appointmentRepository.GetAsync(predicate: app => app.PatientId == int.Parse(userId) && app.Id == request.id);
                 if (appointmentToUpdate == null) throw new BusinessException("Bu randevuda değişiklik yapamazsınız");
                 appointmentToUpdate.Status = Domain.Entities.AppointmentStatus.Canceled;
                 await _appointmentRepository.UpdateAsync(appointmentToUpdate);
