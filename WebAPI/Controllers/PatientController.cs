@@ -2,6 +2,7 @@
 using Application.Features.Doctor.Queries.GetById;
 using Application.Features.Patients.Commands.Update;
 using Application.Features.Patients.Queries.GetAll;
+using Application.Features.Patients.Queries.GetAllByAdmin;
 using Application.Features.Patients.Queries.GetById;
 using Application.Features.Patients.Queries.GetPatientById;
 using MediatR;
@@ -24,6 +25,13 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> GetAll([FromQuery] GetAllPatientQuery getAllPatientQuery)
         {
             var response = await _mediator.Send(getAllPatientQuery);
+            return Ok(response);
+        }
+
+        [HttpGet("admin/patients")]
+        public async Task<IActionResult> GetAllByAdmin([FromQuery] GetAllPatientByAdminQuery getAllPatientByAdminQuery)
+        {
+            var response = await _mediator.Send(getAllPatientByAdminQuery);
             return Ok(response);
         }
 

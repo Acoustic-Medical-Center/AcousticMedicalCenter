@@ -38,16 +38,6 @@ namespace Application.Features.Appointment.Queries.GetAllByClaim
             {
                 try
                 {
-                    var appointments = _appointmentsRepository.GetList(
-                        include: a => a
-                            .Include(appt => appt.Patient)
-                            .ThenInclude(p => p.User)
-                            .Include(appt => appt.Doctor)
-                            .ThenInclude(doc => doc.DoctorSpecialization)
-                            .Include(appt => appt.Doctor)
-                            .ThenInclude(d => d.User)
-                    );
-
                     var totalCount = _appointmentsRepository.GetList().Count();
                     if (request.PageSize == 0)
                     {
