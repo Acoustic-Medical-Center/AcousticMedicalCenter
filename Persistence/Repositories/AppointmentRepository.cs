@@ -20,12 +20,28 @@ namespace Persistence.Repositories
             _context = context;
         }
 
-        public async Task<bool> IsAppointmentSlotAvailable(int doctorId, DateTime appointmentTime)
+        public async Task<(bool isAvailable, DateTime roundedAppointmentTime)> CheckAndRoundAppointmentTimeAsync(int doctorId, DateTime appointmentTime)
         {
-            var startOfHour = new DateTime(appointmentTime.Year, appointmentTime.Month, appointmentTime.Day, appointmentTime.Hour, 0, 0);
-            var endOfHour = startOfHour.AddHours(1);
 
-            return !await _context.Appointments.AnyAsync(a => a.DoctorId == doctorId && a.AppointmentTime >= startOfHour && a.AppointmentTime < endOfHour && a.Status != AppointmentStatus.Canceled );
+            var roundedAppointmentTime = new DateTime(
+                appointmentTime.Year,
+                appointmentTime.Month,
+                appointmentTime.Day,
+                appointmentTime.Hour,
+                appointmentTime.Minute < 30 ? 0 : 30,
+                0
+            );
+
+            var startOfSlot = roundedAppointmentTime;
+            var endOfSlot = roundedAppointmentTime.AddMinutes(30);
+
+            bool isAvailable = !await _context.Appointments.AnyAsync(a =>
+                a.DoctorId == doctorId &&
+                a.AppointmentTime >= startOfSlot &&
+                a.AppointmentTime < endOfSlot &&
+                a.Status != AppointmentStatus.Canceled);
+
+            return (isAvailable, roundedAppointmentTime);
         }
     }
 }

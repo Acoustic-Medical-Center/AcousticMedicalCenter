@@ -1,6 +1,8 @@
 ﻿using Application.Repositories;
 using Application.Services;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
+using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -13,11 +15,12 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Appointment.Commands.Create
 {
-    public class CreateAppointmentCommand : IRequest<CreateAppointmentCommandResponse>
+    public class CreateAppointmentCommand : IRequest<CreateAppointmentCommandResponse>, ISecuredRequest
     {
         public int DoctorId { get; set; }
         public DateTime AppointmentTime { get; set; }
 
+        public string[] RequiredRoles => [];
 
         public class CreateAppointmentCommandHandler : IRequestHandler<CreateAppointmentCommand, CreateAppointmentCommandResponse>
         {
@@ -41,13 +44,13 @@ namespace Application.Features.Appointment.Commands.Create
                 var userId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 var userMail = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
 
-                bool isAppAvailable = await _appointmentRepository.IsAppointmentSlotAvailable(request.DoctorId, request.AppointmentTime);
-                if (!isAppAvailable)
+                var isAppAvailable = await _appointmentRepository.CheckAndRoundAppointmentTimeAsync(request.DoctorId, request.AppointmentTime);
+                if (!isAppAvailable.isAvailable)
                 {
                     throw new Exception("Bu saat diliminde zaten bir randevu mevcut.");
                 }
 
-                Domain.Entities.Appointment appointmentToAdd = new() { DoctorId = request.DoctorId, PatientId = userId, Status = AppointmentStatus.Scheduled, AppointmentTime = request.AppointmentTime };
+                Domain.Entities.Appointment appointmentToAdd = new() { DoctorId = request.DoctorId, PatientId = userId, Status = AppointmentStatus.Scheduled, AppointmentTime = isAppAvailable.roundedAppointmentTime };
                 try
                 {
                     await _appointmentRepository.AddAsync(appointmentToAdd);
