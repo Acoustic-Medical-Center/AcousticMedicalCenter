@@ -15,7 +15,7 @@ namespace Application.Features.User.Commands.Delete
 {
     public class DeleteUserCommand : IRequest<DeleteUserCommandResponse>
     {
-        public int UserId { get; set; }
+        public int id { get; set; }
 
         public class UserDeleteCommandHandler : IRequestHandler<DeleteUserCommand, DeleteUserCommandResponse>
         {
@@ -33,9 +33,9 @@ namespace Application.Features.User.Commands.Delete
             public async Task<DeleteUserCommandResponse> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
             {
                 var userId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
-                if (userId == request.UserId)
+                if (userId == request.id)
                 {
-                    var userToDelete = await _userRepository.GetAsync(u => u.Id == request.UserId);
+                    var userToDelete = await _userRepository.GetAsync(u => u.Id == request.id);
                     await _userRepository.SoftDeleteAsync(userToDelete);
                 }
                 throw new BusinessException("İşlem başarısız");

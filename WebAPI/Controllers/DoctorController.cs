@@ -1,4 +1,5 @@
-﻿using Application.Features.Doctor.Commands.Update;
+﻿using Application.Features.Doctor.Commands.DeleteByAdmin;
+using Application.Features.Doctor.Commands.Update;
 using Application.Features.Doctor.Commands.UpdateByAdmin;
 using Application.Features.Doctor.Queries.GetAll;
 using Application.Features.Doctor.Queries.GetById;
@@ -56,6 +57,13 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> UpdateDoctor([FromBody] UpdateDoctorByAdminCommand updateDoctorByAdminCommand)
         {
             var result = await _mediator.Send(updateDoctorByAdminCommand);
+            return Ok(result);
+        }
+
+        [HttpDelete("admin/doctors/{id}")]
+        public async Task<IActionResult> DeleteDoctorByAdmin([FromRoute] DeleteDoctorByAdminCommand deleteDoctorByAdminCommand)
+        {
+            var result = await _mediator.Send(deleteDoctorByAdminCommand);
             return Ok(result);
         }
     }

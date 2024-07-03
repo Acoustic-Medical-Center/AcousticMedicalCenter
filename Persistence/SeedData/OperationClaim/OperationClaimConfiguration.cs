@@ -49,7 +49,7 @@ namespace Persistence.SeedData.OperationClaim
                 new Domain.Entities.UserOperationClaim
                 {
                     Id = 1,
-                    UserId = 5,
+                    UserId = 99,
                     OperationClaimId = 1,
                     CreatedDate = DateTime.Now,
                 }

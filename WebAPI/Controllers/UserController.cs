@@ -45,8 +45,8 @@ namespace WebAPI.Controllers
             return Ok(response);
         }
 
-        [HttpGet("user/[action]")]
-        public async Task<IActionResult> Delete([FromQuery] DeleteUserCommand userDeleteCommand)
+        [HttpDelete("user/delete/{id}")]
+        public async Task<IActionResult> Delete([FromRoute] DeleteUserCommand userDeleteCommand)
         {
             var response = await _mediator.Send(userDeleteCommand);
             return Ok(response);

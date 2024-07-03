@@ -97,6 +97,7 @@ namespace Persistence.Context
             modelBuilder.Entity<User>().HasQueryFilter(e => !e.IsDeleted);
             modelBuilder.Entity<Appointment>().HasQueryFilter(e => !e.IsDeleted);
             modelBuilder.Entity<Prescription>().HasQueryFilter(e => !e.IsDeleted);
+            modelBuilder.Entity<Doctor>().HasQueryFilter(e => !e.IsDeleted);
 
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash("string", out passwordHash, out passwordSalt);
