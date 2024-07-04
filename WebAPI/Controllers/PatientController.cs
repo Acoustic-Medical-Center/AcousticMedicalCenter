@@ -35,7 +35,7 @@ namespace WebAPI.Controllers
             return Ok(response);
         }
 
-        [HttpGet("doctor/myPatients/{id}")]
+        [HttpGet("doctor/patients/{id}")]
         public async Task<IActionResult> GetById([FromRoute] GetPatientByIdQuery getPatientByIdQuery)
         {
             var response = await _mediator.Send(getPatientByIdQuery);

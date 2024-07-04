@@ -16,7 +16,7 @@ namespace Application.Features.Patients.Queries.GetById
 {
     public class GetPatientByIdQuery : IRequest<GetPatientByIdQueryResponse>, ISecuredRequest
     {
-        public int PatientId { get; set; }
+        public int id { get; set; }
 
         public string[] RequiredRoles => ["Doctor"];
 
@@ -44,12 +44,20 @@ namespace Application.Features.Patients.Queries.GetById
                     throw new BusinessException("Yetkisiz erişim.");
                 }
 
+                if (_httpContextAccessor?.HttpContext?.User?.FindFirst("UserType")?.Value == "Admin")
+                {
+                    var patient = await _patientRepository.GetAsync(p => p.Id == request.id, include: p => p.Include(p => p.User));
+                    if (patient == null) throw new BusinessException("Böyle bir hasta bulunamadı");
+                    var response = _mapper.Map<GetPatientByIdQueryResponse>(patient);
+                    return response;
+                }
+
                 var doctorId = int.Parse(userIdClaim);
 
-                var appointment = await _appointmentRepository.GetAsync(predicate: app => app.DoctorId == doctorId && app.PatientId == request.PatientId);
+                var appointment = await _appointmentRepository.GetAsync(predicate: app => app.DoctorId == doctorId && app.PatientId == request.id);
                 if (appointment != null)
                 {
-                    var patient = await _patientRepository.GetAsync(p => p.Id == request.PatientId, include: p => p.Include(p => p.User));
+                    var patient = await _patientRepository.GetAsync(p => p.Id == request.id, include: p => p.Include(p => p.User));
                     var response = _mapper.Map<GetPatientByIdQueryResponse>(patient);
                     return response;
                 }
