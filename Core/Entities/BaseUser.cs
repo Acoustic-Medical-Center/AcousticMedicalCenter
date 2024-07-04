@@ -12,8 +12,19 @@ namespace Core.Entities
         public string Email { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        private string? _firstName;
+        public string? FirstName
+        {
+            get => _firstName != null ? EncryptionHelper.DecryptString(_firstName) : null;
+            set => _firstName = value != null ? EncryptionHelper.EncryptString(value) : null;
+        }
+
+        private string? _lastName;
+        public string? LastName
+        {
+            get => _lastName != null ? EncryptionHelper.DecryptString(_lastName) : null;
+            set => _lastName = value != null ? EncryptionHelper.EncryptString(value) : null;
+        }
         public UserType UserType { get; set; }
     }
     public enum UserType
