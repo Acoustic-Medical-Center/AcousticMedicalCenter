@@ -6,7 +6,9 @@
         public string Status { get; set; }
         public string UserName { get; set; }
         public string UserLastName { get; set; }
-
+        public string PatientPhoneNumber { get; set; }
+        public string PatientGender { get; set; }
+        public string PatientEmail { get; set; }
         public string DoctorName { get; set; }
         public string DoctorLastName { get; set; }
         public string DoctorSpecialization { get; set; }
