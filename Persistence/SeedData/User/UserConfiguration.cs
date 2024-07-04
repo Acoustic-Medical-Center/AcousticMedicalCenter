@@ -23,8 +23,8 @@ namespace Persistence.SeedData.Patient
                 new User
                 {
                     Id = 1,
-                    FirstName = "John",
-                    LastName = "Doe",
+                    FirstName = ("John"),
+                    LastName = ("Doe"),
                     Email = "hasta1@example.com",
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,
@@ -39,8 +39,8 @@ namespace Persistence.SeedData.Patient
                 new User
                 {
                     Id = 2,
-                    FirstName = "Jonathan",
-                    LastName = "Corwin",
+                    FirstName = ("Jonathan"),
+                    LastName = ("Corwin"),
                     Email = "hasta2@example.com",
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,
@@ -55,8 +55,8 @@ namespace Persistence.SeedData.Patient
                 new User
                 {
                     Id = 3,
-                    FirstName = "batu",
-                    LastName = "cerrahlar",
+                    FirstName = ("batu"),
+                    LastName = ("cerrahlar"),
                     Email = "doktor1@example.com",
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,
@@ -68,38 +68,38 @@ namespace Persistence.SeedData.Patient
             );
 
             builder.HasData(
-            new User { Id = 4, FirstName = "Fatma", LastName = "Koç", Email = "doktor4@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500004", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 5, FirstName = "Mehmet", LastName = "Öz", Email = "doktor5@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500005", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 6, FirstName = "Canan", LastName = "Çelik", Email = "doktor6@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500006", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 7, FirstName = "Emre", LastName = "Arı", Email = "doktor7@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500007", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 8, FirstName = "Burak", LastName = "Temiz", Email = "doktor8@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500008", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 9, FirstName = "Seda", LastName = "Ak", Email = "doktor9@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500009", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 10, FirstName = "Murat", LastName = "Tez", Email = "doktor10@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500010", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 11, FirstName = "Zeynep", LastName = "Bal", Email = "doktor11@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500011", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 12, FirstName = "Kemal", LastName = "Sağ", Email = "doktor12@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500012", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 13, FirstName = "Cansu", LastName = "Dur", Email = "doktor13@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500013", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-             new User { Id = 14, FirstName = "Oğuz", LastName = "Kurt", Email = "doktor14@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500014", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 15, FirstName = "Esra", LastName = "Deniz", Email = "doktor15@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500015", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 16, FirstName = "Baran", LastName = "Gül", Email = "doktor16@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500016", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 17, FirstName = "Duygu", LastName = "Aydın", Email = "doktor17@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500017", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 18, FirstName = "Tarkan", LastName = "Kara", Email = "doktor18@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500018", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 19, FirstName = "Nil", LastName = "Koç", Email = "doktor19@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500019", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 20, FirstName = "Sami", LastName = "Öztürk", Email = "doktor20@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500020", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 21, FirstName = "Ece", LastName = "Uzun", Email = "doktor21@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500021", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 22, FirstName = "Levent", LastName = "Yıldız", Email = "doktor22@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500022", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 23, FirstName = "Selin", LastName = "Demirci", Email = "doktor23@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500023", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 24, FirstName = "Onur", LastName = "Akar", Email = "doktor24@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500024", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 25, FirstName = "İrem", LastName = "Dere", Email = "doktor25@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500025", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 26, FirstName = "Cenk", LastName = "Taş", Email = "doktor26@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500026", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
-            new User { Id = 27, FirstName = "Hande", LastName = "Yener", Email = "doktor27@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500027", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow }
+            new User { Id = 4, FirstName = ("Fatma"), LastName = ("Koç"), Email = "doktor4@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500004", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 5, FirstName = ("Mehmet"), LastName = ("Öz"), Email = "doktor5@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500005", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 6, FirstName = ("Canan"), LastName = ("Çelik"), Email = "doktor6@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500006", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 7, FirstName = ("Emre"), LastName = ("Arı"), Email = "doktor7@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500007", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 8, FirstName = ("Burak"), LastName = ("Temiz"), Email = "doktor8@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500008", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 9, FirstName = ("Seda"), LastName = ("Ak"), Email = "doktor9@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500009", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 10, FirstName = ("Murat"), LastName = ("Tez"), Email = "doktor10@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500010", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 11, FirstName = ("Zeynep"), LastName = ("Bal"), Email = "doktor11@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500011", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 12, FirstName = ("Kemal"), LastName = ("Sağ"), Email = "doktor12@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500012", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 13, FirstName = ("Cansu"), LastName = ("Dur"), Email = "doktor13@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500013", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 14, FirstName = ("Oğuz"), LastName = ("Kurt"), Email = "doktor14@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500014", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 15, FirstName = ("Esra"), LastName = ("Deniz"), Email = "doktor15@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500015", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 16, FirstName = ("Baran"), LastName = ("Gül"), Email = "doktor16@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500016", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 17, FirstName = ("Duygu"), LastName = ("Aydın"), Email = "doktor17@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500017", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 18, FirstName = ("Tarkan"), LastName = ("Kara"), Email = "doktor18@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500018", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 19, FirstName = ("Nil"), LastName = ("Koç"), Email = "doktor19@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500019", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 20, FirstName = ("Sami"), LastName = ("Öztürk"), Email = "doktor20@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500020", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 21, FirstName = ("Ece"), LastName = ("Uzun"), Email = "doktor21@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500021", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 22, FirstName = ("Levent"), LastName = ("Yıldız"), Email = "doktor22@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500022", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 23, FirstName = ("Selin"), LastName = ("Demirci"), Email = "doktor23@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500023", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 24, FirstName = ("Onur"), LastName = ("Akar"), Email = "doktor24@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500024", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 25, FirstName = ("İrem"), LastName = ("Dere"), Email = "doktor25@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500025", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 26, FirstName = ("Cenk"), LastName = ("Taş"), Email = "doktor26@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500026", Gender = "Male", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow },
+            new User { Id = 27, FirstName = ("Hande"), LastName = ("Yener"), Email = "doktor27@example.com", PasswordHash = passwordHash, PasswordSalt = passwordSalt, PhoneNumber = "1234500027", Gender = "Female", UserType = UserType.Doctor, CreatedDate = DateTime.UtcNow }
             );
 
             builder.HasData(
                new User
                {
                    Id = 99,
-                   FirstName = "Admin",
-                   LastName = "Yöneticioğlu",
+                   FirstName = ("Admin"),
+                   LastName = ("Yöneticioğlu"),
                    Email = "admin@example.com",
                    PasswordHash = passwordHash,
                    PasswordSalt = passwordSalt,

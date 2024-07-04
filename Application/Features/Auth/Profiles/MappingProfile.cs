@@ -13,7 +13,9 @@ namespace Application.Features.Auth.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<Domain.Entities.User, RegisterCommand>().ReverseMap();
+            CreateMap<Domain.Entities.User, RegisterCommand>().ReverseMap()
+                .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
+            .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName));;
         }
     }
 }
