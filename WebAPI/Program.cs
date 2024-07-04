@@ -10,18 +10,20 @@ using Microsoft.OpenApi.Models;
 using Infrastructure;
 using Microsoft.OpenApi.Any;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using Infrastructure.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: "AllowAllOrigins",
-                      policy =>
-                      {
-                          policy.AllowAnyOrigin()
-                                .AllowAnyMethod()
-                                .AllowAnyHeader();
-                      });
+    options.AddPolicy("AllowSpecificOrigins",
+         builder =>
+         {
+             builder.WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+         });
 });
 
 // Add services to the container.
@@ -100,17 +102,20 @@ if (app.Environment.IsDevelopment())
 
 //app.ConfigureExceptionMiddlewareExtensions();
 
-app.UseCors("AllowAllOrigins");
+app.UseCors("AllowSpecificOrigins");
 
 app.UseHttpsRedirection();
 
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapHub<ChatHub>("/chatHub");
 
 app.MapControllers();
 
 app.Run();
+
+
 
 
 public class AddAcceptLanguageHeaderParameter : IOperationFilter
