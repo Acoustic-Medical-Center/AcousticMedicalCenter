@@ -1,6 +1,7 @@
 ﻿using Application.Features.Patients.Queries.GetById;
 using Application.Features.Reports.Commands.Create;
 using Application.Features.Reports.Queries.GetAllByPatient;
+using Application.Features.Reports.Queries.GetByIdByDoctor;
 using Application.Features.Reports.Queries.GetByIdByPatient;
 using AutoMapper;
 using Domain.Entities;
@@ -44,6 +45,12 @@ namespace Application.Features.Reports.Profiles
             .ForMember(dest => dest.Diagnosis, opt => opt.MapFrom(src => src.Diagnosis))
             .ReverseMap();
 
+            CreateMap<Report, GetReportByIdByDoctorQueryResponse>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.PatientName, opt => opt.MapFrom(src => $"{src.Appointment.Patient.User.FirstName} {src.Appointment.Patient.User.LastName}"))
+            .ForMember(dest => dest.PatientBloodType, opt => opt.MapFrom(src => src.Appointment.Patient.BloodType))
+            .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => src.CreatedDate.ToString("yyyy-MM-dd")))
+            .ForMember(dest => dest.Diagnosis, opt => opt.MapFrom(src => src.Diagnosis));
         }
 
     }

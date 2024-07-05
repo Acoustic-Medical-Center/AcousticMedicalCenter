@@ -1,6 +1,7 @@
 ﻿using Application.Features.Prescriptions.Queries.GetAllByPatient;
 using Application.Features.Reports.Commands.Create;
 using Application.Features.Reports.Queries.GetAllByPatient;
+using Application.Features.Reports.Queries.GetByIdByDoctor;
 using Application.Features.Reports.Queries.GetByIdByPatient;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -9,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/reports")]
+    [Route("api/")]
     [ApiController]
     public class ReportController : ControllerBase
     {
@@ -22,7 +23,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("reports")]
         public async Task<IActionResult> Add([FromBody] CreateReportCommand command)
         {
             var response = await _mediator.Send(command);
@@ -30,7 +31,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet()]
+        [HttpGet("patient/reports")]
         public async Task<IActionResult> GetAllReportsByPatient([FromQuery] GetAllReportsByPatientQuery getAllReportsByPatientQuery)
         {
             var response = await _mediator.Send(getAllReportsByPatientQuery);
@@ -38,7 +39,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("patient/reports/{id}")]
         public async Task<IActionResult> GetReportById([FromRoute] int id)
         {
             var query = new GetPatientReportByIdQuery { ReportId = id };
@@ -46,6 +47,12 @@ namespace WebAPI.Controllers
             return Ok(response);
         }
 
+        [HttpGet("doctor/reports/{id}")]
+        public async Task<IActionResult> GetReportByIdByDoctor([FromRoute] GetReportByIdByDoctorQuery getReportByIdByDoctorQuery)
+        {
+            var response = await _mediator.Send(getReportByIdByDoctorQuery);
+            return Ok(response);
+        }
 
 
     }
