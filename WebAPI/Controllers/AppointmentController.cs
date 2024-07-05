@@ -8,6 +8,7 @@ using Application.Features.Appointment.Queries.GetAllAvailableAppointments;
 using Application.Features.Appointment.Queries.GetAllByClaim;
 using Application.Features.Appointment.Queries.GetAllByPatient;
 using Application.Features.Appointment.Queries.GetByIdAdmin;
+using Application.Features.Appointment.Queries.GetPatientAppointments;
 using Application.Features.Auth.Commands.Login;
 using Application.Features.User.Commands.Delete;
 using Application.Services;
@@ -69,6 +70,13 @@ namespace WebAPI.Controllers
 
         [HttpGet("doctor/availableAppointments")]
         public async Task<IActionResult> GetAllAvailableAppointments([FromQuery] GetAllAvailableAppointmentsQuery query)
+        {
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
+
+        [HttpGet("doctor/patientAppointments")]
+        public async Task<IActionResult> GetPatientAppointments([FromQuery] GetPatientAppointmentsQuery query)
         {
             var response = await _mediator.Send(query);
             return Ok(response);
