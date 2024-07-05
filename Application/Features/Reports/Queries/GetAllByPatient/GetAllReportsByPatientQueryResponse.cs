@@ -19,12 +19,5 @@ namespace Application.Features.Reports.Queries.GetAllByPatient
         public string Diagnosis { get; set; }
 
 
-
-
-
-
-
-
-
     }
 }

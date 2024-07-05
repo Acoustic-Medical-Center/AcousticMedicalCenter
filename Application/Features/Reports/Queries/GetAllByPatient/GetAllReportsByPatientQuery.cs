@@ -15,10 +15,11 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Reports.Queries.GetAllByPatient
 {
-    public class GetAllReportsByPatientQuery : IRequest<List<GetAllReportsByPatientQueryResponse>>
+    public class GetAllReportsByPatientQuery : IRequest<GetAllReportsByPatientQueryPaginatedResponse>
     {
-
-        public class GetAllReportsByPatientQueryHandler : IRequestHandler<GetAllReportsByPatientQuery, List<GetAllReportsByPatientQueryResponse>>
+        public int Page { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
+        public class GetAllReportsByPatientQueryHandler : IRequestHandler<GetAllReportsByPatientQuery, GetAllReportsByPatientQueryPaginatedResponse>
         {
             private readonly IReportRepository _reportRepository;
             private readonly IMapper _mapper;
@@ -31,7 +32,7 @@ namespace Application.Features.Reports.Queries.GetAllByPatient
                 _contextAccessor = contextAccessor;
             }
 
-            public async Task<List<GetAllReportsByPatientQueryResponse>> Handle(GetAllReportsByPatientQuery request, CancellationToken cancellationToken)
+            public async Task<GetAllReportsByPatientQueryPaginatedResponse> Handle(GetAllReportsByPatientQuery request, CancellationToken cancellationToken)
             {
                 var patientIdClaim = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
 
@@ -44,7 +45,7 @@ namespace Application.Features.Reports.Queries.GetAllByPatient
                 {
                     throw new BusinessException("Geçersiz hasta kimliği.");
                 }
-                var reports = await _reportRepository.GetListAsync
+                var filteredReports = await _reportRepository.GetListAsync
                     (
                         predicate: a => a.Appointment.PatientId == patientId,
                         include: r => r
@@ -60,9 +61,25 @@ namespace Application.Features.Reports.Queries.GetAllByPatient
 
                     );
 
-                List<GetAllReportsByPatientQueryResponse> response = _mapper.Map<List<GetAllReportsByPatientQueryResponse>>(reports);
+                var totalCount = filteredReports.Count;
 
-                return response;
+                if (request.PageSize == 0)
+                {
+                    request.PageSize = totalCount;
+                }
+
+                var paginatedReports = filteredReports
+                                            .Skip((request.Page - 1) * request.PageSize)
+                                            .Take(request.PageSize)
+                                            .ToList();
+
+                List<GetAllReportsByPatientQueryResponse> response = _mapper.Map<List<GetAllReportsByPatientQueryResponse>>(paginatedReports);
+
+                return new GetAllReportsByPatientQueryPaginatedResponse()
+                {
+                    TotalCount = totalCount,
+                    Items = response
+                };
             }
         }
     }
