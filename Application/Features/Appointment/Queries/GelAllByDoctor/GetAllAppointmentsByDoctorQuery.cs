@@ -9,12 +9,14 @@ using System.Security.Claims;
 
 namespace Application.Features.Appointment.Queries.GelAllByDoctor
 {
-    public class GetAllAppointmentsByDoctorQuery : IRequest<List<GetAllAppointmentsByDoctorQueryResponse>>, ISecuredRequest
+    public class GetAllAppointmentsByDoctorQuery : IRequest<GetAllAppointmentsByDoctorQueryPaginatedResponse>, ISecuredRequest
     {
+        public int Page { get; set; } = 0;
+        public int PageSize { get; set; } = 0;
         public string DateFilter { get; set; } = "";
         public string[] RequiredRoles => ["Doctor"];
 
-        public class GetAllAppointmentsByDoctorQueryHandler : IRequestHandler<GetAllAppointmentsByDoctorQuery, List<GetAllAppointmentsByDoctorQueryResponse>>
+        public class GetAllAppointmentsByDoctorQueryHandler : IRequestHandler<GetAllAppointmentsByDoctorQuery, GetAllAppointmentsByDoctorQueryPaginatedResponse>
         {
             private readonly IAppointmentRepository _appointmentsRepository;
             private readonly IHttpContextAccessor _contextAccessor;
@@ -27,23 +29,38 @@ namespace Application.Features.Appointment.Queries.GelAllByDoctor
                 _mapper = mapper;
             }
 
-            public async Task<List<GetAllAppointmentsByDoctorQueryResponse>> Handle(GetAllAppointmentsByDoctorQuery request, CancellationToken cancellationToken)
+            public async Task<GetAllAppointmentsByDoctorQueryPaginatedResponse> Handle(GetAllAppointmentsByDoctorQuery request, CancellationToken cancellationToken)
             {
 
                 var doctorId = int.Parse(_contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-                var appointments = await _appointmentsRepository.GetListAsync(predicate: app => app.DoctorId == doctorId,
-                    include: a => a
-                            .Include(appt => appt.Patient)
-                            .ThenInclude(pat => pat.User));
+                var filteredAppointments = await _appointmentsRepository.GetListAsync(
+                predicate: app => app.DoctorId == doctorId &&
+                      (request.DateFilter == "Prev" ? app.AppointmentTime < DateTime.Now :
+                      request.DateFilter == "Upcoming" ? app.AppointmentTime > DateTime.Now : true),
+                include: a => a
+                      .Include(appt => appt.Patient)
+                      .ThenInclude(pat => pat.User));
 
-                var response = new List<GetAllAppointmentsByDoctorQueryResponse>();
+                var totalCount = filteredAppointments.Count;
+                if (request.PageSize == 0)
+                {
+                    request.PageSize = totalCount;
+                }
 
-                if (request.DateFilter == "Prev") response = _mapper.Map<List<GetAllAppointmentsByDoctorQueryResponse>>(appointments.Where(app => app.AppointmentTime < DateTime.Now));
-                else if (request.DateFilter == "Upcoming") response = _mapper.Map<List<GetAllAppointmentsByDoctorQueryResponse>>(appointments.Where(app => app.AppointmentTime > DateTime.Now));
-                else response = _mapper.Map<List<GetAllAppointmentsByDoctorQueryResponse>>(appointments);
+                var paginatedAppointments = filteredAppointments
+                        .OrderBy(appt => appt.AppointmentTime)
+                        .Skip((request.Page - 1) * request.PageSize)
+                        .Take(request.PageSize)
+                        .ToList();
 
-                return response;
+                List<GetAllAppointmentsByDoctorQueryResponse> response = _mapper.Map<List<GetAllAppointmentsByDoctorQueryResponse>>(paginatedAppointments);
+
+                return new()
+                {
+                    Items = response,
+                    TotalCount = totalCount,
+                };
             }
         }
     }
