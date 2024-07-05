@@ -13,6 +13,7 @@ namespace Application.Features.Prescriptions.Queries.GetAllByPatient
         //public string PatientName { get; set; }
 
         public string DoctorName { get; set; }
+        public string DoctorLastName { get; set; }
 
         public string MedicationDetails { get; set; }
         public string DosageInstructions { get; set; }

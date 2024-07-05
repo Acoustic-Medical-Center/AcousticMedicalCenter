@@ -48,7 +48,8 @@ namespace Application.Features.Prescriptions.Profiles
             .ReverseMap();
 
             CreateMap<Prescription, GetAllPrescriptionsByPatientQueryResponse>()
-                .ForMember(dest => dest.DoctorName, opt => opt.MapFrom(src => src.Appointment.Doctor.User.FirstName));
+                .ForMember(dest => dest.DoctorName, opt => opt.MapFrom(src => src.Appointment.Doctor.User.FirstName))
+                .ForMember(dest => dest.DoctorLastName, opt => opt.MapFrom(src => src.Appointment.Doctor.User.LastName));
 
 
 
