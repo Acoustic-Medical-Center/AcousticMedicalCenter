@@ -4,22 +4,24 @@ using Core.CrossCuttingConcerns.Exceptions.Types;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Claims;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Application.Features.Appointment.Queries.GetAllByPatient
 {
-    public class GetAllAppointmensByPatientQuery : IRequest<List<GetAllAppointmentsByPatientQueryResponse>>
+    public class GetAllAppointmensByPatientQuery : IRequest<GetAllAppointmentsByPatientQueryPaginatedResponse>
     {
-        public int Page { get; set; } = 0;
-        public int PageSize { get; set; } = 0;
+        public int Page { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
         public string DateFilter { get; set; } = "";
 
-        public class GetAllAppointmensByPatientQueryHandler : IRequestHandler<GetAllAppointmensByPatientQuery, List<GetAllAppointmentsByPatientQueryResponse>>
+        public class GetAllAppointmensByPatientQueryHandler : IRequestHandler<GetAllAppointmensByPatientQuery, GetAllAppointmentsByPatientQueryPaginatedResponse>
         {
             private readonly IAppointmentRepository _appointmentsRepository;
             private readonly IMapper _mapper;
@@ -32,9 +34,8 @@ namespace Application.Features.Appointment.Queries.GetAllByPatient
                 _contextAccessor = contextAccessor;
             }
 
-            public async Task<List<GetAllAppointmentsByPatientQueryResponse>> Handle(GetAllAppointmensByPatientQuery request, CancellationToken cancellationToken)
+            public async Task<GetAllAppointmentsByPatientQueryPaginatedResponse> Handle(GetAllAppointmensByPatientQuery request, CancellationToken cancellationToken)
             {
-
                 try
                 {
                     var patientIdClaim = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
@@ -48,21 +49,24 @@ namespace Application.Features.Appointment.Queries.GetAllByPatient
                     {
                         throw new BusinessException("Geçersiz hasta kimliği.");
                     }
-                    var totalCount = _appointmentsRepository.GetList().Count();
+
+                    Expression<Func<Domain.Entities.Appointment, bool>> predicate = a => a.PatientId == patientId &&
+                        (request.DateFilter == "Prev" ? a.AppointmentTime < DateTime.Now :
+                        request.DateFilter == "Upcoming" ? a.AppointmentTime > DateTime.Now : true);
+
+                    Func<IQueryable<Domain.Entities.Appointment>, IIncludableQueryable<Domain.Entities.Appointment, object>> include = a =>
+                        a.Include(appt => appt.Doctor)
+                         .ThenInclude(doc => doc.DoctorSpecialization)
+                         .Include(appt => appt.Doctor)
+                         .ThenInclude(d => d.User);
+
+                    var filteredAppointments = await _appointmentsRepository.GetListAsync(predicate, include);
+                    var totalCount = filteredAppointments.Count;
+
                     if (request.PageSize == 0)
                     {
                         request.PageSize = totalCount;
                     }
-
-                    var filteredAppointments = _appointmentsRepository.GetList(
-                                            predicate: a => a.PatientId == patientId &&
-                                            (request.DateFilter == "Prev" ? a.AppointmentTime < DateTime.Now :
-                                            request.DateFilter == "Upcoming" ? a.AppointmentTime > DateTime.Now : true),
-                                            include: a => a
-                                            .Include(appt => appt.Doctor)
-                                            .ThenInclude(doc => doc.DoctorSpecialization)
-                                            .Include(appt => appt.Doctor)
-                                            .ThenInclude(d => d.User));
 
                     var paginatedAppointments = filteredAppointments
                                             .OrderBy(appt => appt.AppointmentTime)
@@ -70,8 +74,13 @@ namespace Application.Features.Appointment.Queries.GetAllByPatient
                                             .Take(request.PageSize)
                                             .ToList();
 
-                    List<GetAllAppointmentsByPatientQueryResponse> response = _mapper.Map<List<GetAllAppointmentsByPatientQueryResponse>>(paginatedAppointments);
-                    return response;
+                    List<GetAllAppointmentsByPatientQueryResponse> responseItems = _mapper.Map<List<GetAllAppointmentsByPatientQueryResponse>>(paginatedAppointments);
+
+                    return new GetAllAppointmentsByPatientQueryPaginatedResponse
+                    {
+                        Items = responseItems,
+                        TotalCount = totalCount
+                    };
                 }
                 catch (Exception ex)
                 {
