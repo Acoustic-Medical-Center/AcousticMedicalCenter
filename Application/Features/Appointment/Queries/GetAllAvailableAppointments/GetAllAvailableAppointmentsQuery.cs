@@ -38,6 +38,7 @@ namespace Application.Features.Appointment.Queries.GetAllAvailableAppointments
 
                     availableAppointments = await _appointmentRepository.GetListAsync(
                         predicate: d => d.DoctorId == request.DoctorId &&
+                                        d.Status != Domain.Entities.AppointmentStatus.Canceled &&
                                         d.AppointmentTime >= dayStart &&
                                         d.AppointmentTime < dayEnd);
                 }

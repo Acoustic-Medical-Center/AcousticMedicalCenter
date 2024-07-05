@@ -13,12 +13,23 @@ namespace Persistence.SeedData.Prescription
         public void Configure(EntityTypeBuilder<Domain.Entities.Prescription> builder)
         {
             builder.HasData(
+   new Domain.Entities.Prescription
+   {
+       Id = 1,
+       AppointmentId = 1,
+       DosageInstructions = "Her 8 saatte bir ağızdan bir tablet alın.",
+       MedicationDetails = "Amoksisilin 500mg",
+       IsDeleted = false,
+       CreatedDate = DateTime.Now,
+   });
+
+            builder.HasData(
                new Domain.Entities.Prescription
                {
-                   Id = 1,
+                   Id = 2,
                    AppointmentId = 1,
-                   DosageInstructions = "Take one tablet by mouth every 8 hours.",
-                   MedicationDetails = "Amoxicillin 500mg",
+                   DosageInstructions = "Her 12 saatte bir ağızdan iki tablet alın.",
+                   MedicationDetails = "İbuprofen 200mg",
                    IsDeleted = false,
                    CreatedDate = DateTime.Now,
                });
@@ -26,90 +37,87 @@ namespace Persistence.SeedData.Prescription
             builder.HasData(
                new Domain.Entities.Prescription
                {
-                   Id = 2,
-                   AppointmentId = 1,
-                   DosageInstructions = "Take two tablets by mouth every 12 hours.",
-                   MedicationDetails = "Ibuprofen 200mg",
-                   IsDeleted = false,
-                   CreatedDate = DateTime.Now,
-               });
-            builder.HasData(
-               new Domain.Entities.Prescription
-               {
                    Id = 3,
                    AppointmentId = 1,
-                   DosageInstructions = "Apply cream to the affected area twice daily.",
-                   MedicationDetails = "Hydrocortisone Cream 1%",
+                   DosageInstructions = "Etkilenen bölgeye günde iki kez krem uygulayın.",
+                   MedicationDetails = "Hidrokortizon Kremi %1",
                    IsDeleted = false,
                    CreatedDate = DateTime.Now,
                });
+
             builder.HasData(
                new Domain.Entities.Prescription
                {
                    Id = 4,
                    AppointmentId = 1,
-                   DosageInstructions = "Take one capsule by mouth every morning.",
-                   MedicationDetails = "Omeprazole 20mg",
+                   DosageInstructions = "Her sabah ağızdan bir kapsül alın.",
+                   MedicationDetails = "Omeprazol 20mg",
                    IsDeleted = false,
                    CreatedDate = DateTime.Now,
                });
+
             builder.HasData(
                new Domain.Entities.Prescription
                {
                    Id = 5,
                    AppointmentId = 1,
-                   DosageInstructions = "Inhale two puffs every 4-6 hours as needed.",
-                   MedicationDetails = "Albuterol Inhaler",
+                   DosageInstructions = "İhtiyaç duyulduğunda her 4-6 saatte bir iki püskürtme yapın.",
+                   MedicationDetails = "Albuterol İnhalatörü",
                    IsDeleted = false,
                    CreatedDate = DateTime.Now,
                });
+
             builder.HasData(
                new Domain.Entities.Prescription
                {
                    Id = 6,
                    AppointmentId = 1,
-                   DosageInstructions = "Take one tablet by mouth every night before bed.",
+                   DosageInstructions = "Her gece yatmadan önce ağızdan bir tablet alın.",
                    MedicationDetails = "Metformin 500mg",
                    IsDeleted = false,
                    CreatedDate = DateTime.Now,
                });
+
             builder.HasData(
                new Domain.Entities.Prescription
                {
                    Id = 7,
                    AppointmentId = 1,
-                   DosageInstructions = "Take one tablet by mouth once daily.",
+                   DosageInstructions = "Günde bir kez ağızdan bir tablet alın.",
                    MedicationDetails = "Lisinopril 10mg",
                    IsDeleted = false,
                    CreatedDate = DateTime.Now,
                });
+
             builder.HasData(
                new Domain.Entities.Prescription
                {
                    Id = 8,
                    AppointmentId = 1,
-                   DosageInstructions = "Take one tablet by mouth every 6 hours as needed for pain.",
-                   MedicationDetails = "Acetaminophen 500mg",
+                   DosageInstructions = "Ağrı için gerektiğinde her 6 saatte bir ağızdan bir tablet alın.",
+                   MedicationDetails = "Asetaminofen 500mg",
                    IsDeleted = false,
                    CreatedDate = DateTime.Now,
                });
+
             builder.HasData(
                new Domain.Entities.Prescription
                {
                    Id = 9,
                    AppointmentId = 1,
-                   DosageInstructions = "Take one tablet by mouth twice daily.",
+                   DosageInstructions = "Günde iki kez ağızdan bir tablet alın.",
                    MedicationDetails = "Atenolol 50mg",
                    IsDeleted = false,
                    CreatedDate = DateTime.Now,
                });
+
             builder.HasData(
                new Domain.Entities.Prescription
                {
                    Id = 10,
                    AppointmentId = 1,
-                   DosageInstructions = "Apply drops in the affected eye(s) twice daily.",
-                   MedicationDetails = "Timolol Eye Drops",
+                   DosageInstructions = "Etkilenen göze/gözlere günde iki kez damla uygulayın.",
+                   MedicationDetails = "Timolol Göz Damlası",
                    IsDeleted = false,
                    CreatedDate = DateTime.Now,
                });

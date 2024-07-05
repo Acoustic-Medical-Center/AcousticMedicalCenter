@@ -55,8 +55,8 @@ namespace Persistence.SeedData.Patient
                 new User
                 {
                     Id = 3,
-                    FirstName = ("batu"),
-                    LastName = ("cerrahlar"),
+                    FirstName = ("Batu"),
+                    LastName = ("Cerrahlar"),
                     Email = "doktor1@example.com",
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,

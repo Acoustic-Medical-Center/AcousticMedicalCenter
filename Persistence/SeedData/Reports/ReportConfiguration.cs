@@ -17,11 +17,8 @@ namespace Persistence.SeedData.Reports
                {
                    Id = 1,
                    AppointmentId = 1,
-
                    CreatedDate = DateTime.Now,
-
                    Diagnosis = " Hipertansiyon",
-
                    ExaminationFindings = "Yüksek kan basıncı",
                }
            );
@@ -45,12 +42,9 @@ namespace Persistence.SeedData.Reports
                {
                    Id = 3,
                    AppointmentId = 3,
-
                    CreatedDate = DateTime.Now,
-
-                   Diagnosis = "Diabetes Mellitus",
-
-                   ExaminationFindings = "Fasting blood sugar level of 140 mg/dL",
+                   Diagnosis = "Diyabet Mellitus",
+                   ExaminationFindings = "Açlık kan şekeri düzeyi 140 mg/dL",
                }
            );
 
@@ -59,12 +53,9 @@ namespace Persistence.SeedData.Reports
                {
                    Id = 4,
                    AppointmentId = 4,
-
                    CreatedDate = DateTime.Now,
-
-                   Diagnosis = "Chronic Obstructive Pulmonary Disease (COPD)",
-
-                   ExaminationFindings = "Reduced lung function on spirometry",
+                   Diagnosis = "Kronik Obstrüktif Akciğer Hastalığı (KOAH)",
+                   ExaminationFindings = "Spirometri ile azalmış akciğer fonksiyonu",
                }
            );
         }
