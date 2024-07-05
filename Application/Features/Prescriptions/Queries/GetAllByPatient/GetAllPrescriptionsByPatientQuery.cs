@@ -15,10 +15,11 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Prescriptions.Queries.GetAllByPatient
 {
-    public class GetAllPrescriptionsByPatientQuery : IRequest<List<GetAllPrescriptionsByPatientQueryResponse>>
+    public class GetAllPrescriptionsByPatientQuery : IRequest<GetAllPrescriptionsByPatientQueryPaginatedResponse>
     {
-
-        public class GetAllPrescriptionsByPatientQueryHandler : IRequestHandler<GetAllPrescriptionsByPatientQuery, List<GetAllPrescriptionsByPatientQueryResponse>>
+        public int Page { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
+        public class GetAllPrescriptionsByPatientQueryHandler : IRequestHandler<GetAllPrescriptionsByPatientQuery, GetAllPrescriptionsByPatientQueryPaginatedResponse>
         {
 
             private readonly IPrescriptionRepository _prescriptionRepository;
@@ -32,7 +33,7 @@ namespace Application.Features.Prescriptions.Queries.GetAllByPatient
                 _contextAccessor = contextAccessor;
             }
 
-            public async Task<List<GetAllPrescriptionsByPatientQueryResponse>> Handle(GetAllPrescriptionsByPatientQuery request, CancellationToken cancellationToken)
+            public async Task<GetAllPrescriptionsByPatientQueryPaginatedResponse> Handle(GetAllPrescriptionsByPatientQuery request, CancellationToken cancellationToken)
             {
 
                 var patientIdClaim = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
@@ -46,7 +47,7 @@ namespace Application.Features.Prescriptions.Queries.GetAllByPatient
                 {
                     throw new BusinessException("Geçersiz hasta kimliği.");
                 }
-                var prescriptions = await _prescriptionRepository.GetListAsync
+                var filteredPrescriptions = await _prescriptionRepository.GetListAsync
                     (
                    predicate: a => a.Appointment.PatientId == patientId,
                         include: p => p
@@ -58,9 +59,25 @@ namespace Application.Features.Prescriptions.Queries.GetAllByPatient
                     .ThenInclude(d => d.User)
                     );
 
-                List<GetAllPrescriptionsByPatientQueryResponse> response = _mapper.Map<List<GetAllPrescriptionsByPatientQueryResponse>>(prescriptions);
+                var totalCount = filteredPrescriptions.Count;
 
-                return response;
+                if (request.PageSize == 0)
+                {
+                    request.PageSize = totalCount;
+                }
+
+                var paginatedPrescriptions = filteredPrescriptions
+                                            .Skip((request.Page - 1) * request.PageSize)
+                                            .Take(request.PageSize)
+                                            .ToList();
+
+                List<GetAllPrescriptionsByPatientQueryResponse> response = _mapper.Map<List<GetAllPrescriptionsByPatientQueryResponse>>(paginatedPrescriptions);
+
+                return new()
+                {
+                    Items = response,
+                    TotalCount = totalCount,
+                };
             }
         }
     }

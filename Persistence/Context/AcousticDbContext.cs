@@ -8,6 +8,7 @@ using Persistence.SeedData.DoctorSpecialization;
 using Persistence.SeedData.Interests;
 using Persistence.SeedData.OperationClaim;
 using Persistence.SeedData.Patient;
+using Persistence.SeedData.Prescription;
 using Persistence.SeedData.Reports;
 using static Persistence.SeedData.Interests.InterestsConfiguration;
 
@@ -92,6 +93,7 @@ namespace Persistence.Context
             modelBuilder.ApplyConfiguration(new InterestsConfiguration());
             modelBuilder.ApplyConfiguration(new DoctorInterestConfiguration());
             modelBuilder.ApplyConfiguration(new ReportConfiguration());
+            modelBuilder.ApplyConfiguration(new PrescriptionConfiguration());
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>().HasQueryFilter(e => !e.IsDeleted);
