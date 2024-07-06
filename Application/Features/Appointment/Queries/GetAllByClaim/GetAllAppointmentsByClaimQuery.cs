@@ -14,14 +14,14 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Appointment.Queries.GetAllByClaim
 {
-    public class GetAllAppointmentsByClaimQuery : IRequest<List<GetAllAppointmentsByClaimQueryResponse>>, ISecuredRequest
+    public class GetAllAppointmentsByClaimQuery : IRequest<GetAllAppointmentsByClaimQueryPaginatedResponse>, ISecuredRequest
     {
         public int Page { get; set; } = 0;
         public int PageSize { get; set; } = 0;
         public string DateFilter { get; set; } = "";
         public string[] RequiredRoles => ["Admin"];
 
-        public class GetAllAppointmentsByClaimQueryHandler : IRequestHandler<GetAllAppointmentsByClaimQuery, List<GetAllAppointmentsByClaimQueryResponse>>
+        public class GetAllAppointmentsByClaimQueryHandler : IRequestHandler<GetAllAppointmentsByClaimQuery, GetAllAppointmentsByClaimQueryPaginatedResponse>
         {
             private readonly IAppointmentRepository _appointmentsRepository;
             private readonly IMapper _mapper;
@@ -34,27 +34,32 @@ namespace Application.Features.Appointment.Queries.GetAllByClaim
                 _contextAccessor = contextAccessor;
             }
 
-            public async Task<List<GetAllAppointmentsByClaimQueryResponse>> Handle(GetAllAppointmentsByClaimQuery request, CancellationToken cancellationToken)
+            public async Task<GetAllAppointmentsByClaimQueryPaginatedResponse> Handle(GetAllAppointmentsByClaimQuery request, CancellationToken cancellationToken)
             {
                 try
                 {
-                    var totalCount = _appointmentsRepository.GetList().Count();
+                    var totalCount = _appointmentsRepository.GetList(
+    predicate: a =>
+    (request.DateFilter == "Prev" ? a.AppointmentTime < DateTime.Now :
+    request.DateFilter == "Upcoming" ? a.AppointmentTime > DateTime.Now : true)).Count();
+
                     if (request.PageSize == 0)
                     {
                         request.PageSize = totalCount;
                     }
 
+                    // Get the filtered and paginated list of appointments
                     var filteredAppointments = _appointmentsRepository.GetList(
-                           predicate: a =>
-                           (request.DateFilter == "Prev" ? a.AppointmentTime < DateTime.Now :
-                           request.DateFilter == "Upcoming" ? a.AppointmentTime > DateTime.Now : true),
-                           include: a => a
-                           .Include(appt => appt.Patient)
-                           .ThenInclude(p => p.User)
-                           .Include(appt => appt.Doctor)
-                           .ThenInclude(doc => doc.DoctorSpecialization)
-                           .Include(appt => appt.Doctor)
-                           .ThenInclude(d => d.User));
+                        predicate: a =>
+                        (request.DateFilter == "Prev" ? a.AppointmentTime < DateTime.Now :
+                        request.DateFilter == "Upcoming" ? a.AppointmentTime > DateTime.Now : true),
+                        include: a => a
+                            .Include(appt => appt.Patient)
+                            .ThenInclude(p => p.User)
+                            .Include(appt => appt.Doctor)
+                            .ThenInclude(doc => doc.DoctorSpecialization)
+                            .Include(appt => appt.Doctor)
+                            .ThenInclude(d => d.User));
 
                     var paginatedAppointments = filteredAppointments
                         .OrderBy(appt => appt.AppointmentTime)
@@ -64,7 +69,11 @@ namespace Application.Features.Appointment.Queries.GetAllByClaim
 
                     List<GetAllAppointmentsByClaimQueryResponse> response = _mapper.Map<List<GetAllAppointmentsByClaimQueryResponse>>(paginatedAppointments);
 
-                    return response;
+                    return new()
+                    {
+                        TotalCount = totalCount,
+                        Items = response
+                    };
                 }
                 catch (Exception ex)
                 {
