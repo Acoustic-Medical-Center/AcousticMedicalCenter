@@ -28,7 +28,7 @@ namespace Application.Features.Doctor.Queries.GetAll
 
             public async Task<GetAllDoctorQueryResponse> Handle(GetAllDoctorQuery request, CancellationToken cancellationToken)
             {
-                var query = _doctorRepository.GetList(include: q => q.Include(d => d.User));
+                var query = _doctorRepository.GetList(include: q => q.Include(d => d.User).Include(d => d.DoctorSpecialization));
 
                 // Apply filtering based on DoctorSpecializationId if provided
                 if (request.DoctorSpecializationId.HasValue)
@@ -43,15 +43,13 @@ namespace Application.Features.Doctor.Queries.GetAll
                     request.PageSize = totalCount;
                 }
 
-
-
                 var doctors = query
                     .Skip((request.Page - 1) * request.PageSize)
                     .Take(request.PageSize)
                     .Select(d => new
                     {
                         d.Id,
-                        d.DoctorSpecializationId,
+                        d.DoctorSpecialization.NameTR,
                         d.Experience,
                         d.User.FirstName,
                         d.User.LastName,
